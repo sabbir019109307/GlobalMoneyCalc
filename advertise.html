@@ -19,7 +19,8 @@
 <section class="panel"><h2 data-i18n="networkTitle">Advertising networks</h2><p data-i18n="networkText">Third-party ad networks are not connected yet. Network ads will only be added after the website meets the provider’s requirements and the account and site are approved. An advertising placeholder on this website is not a live ad.</p></section>
 <section class="panel"><h2 data-i18n="contactTitle">Discuss a partnership</h2><p data-i18n="contactText">There is no published business email yet. You can open an inquiry on the project’s GitHub page. Please remember that GitHub issues are public; do not post private contact details, account information or confidential business documents there.</p><p class="note" data-i18n="pricingNote">No fixed price list is available yet. Placement, duration and pricing should be discussed after actual audience and traffic data are available.</p><a class="cta" href="https://github.com/sabbir019109307/GlobalMoneyCalc/issues/new?title=Advertising%20or%20sponsorship%20inquiry" target="_blank" rel="noopener" data-i18n="contactButton">Open sponsorship inquiry ↗</a><a class="secondary" href="index.html" data-i18n="home">Back to website</a></section>
 </main>
-<footer>© <span id="year"></span> GlobalMoneyCalc · <a href="index.html" data-i18n="home">Home</a><a href="guides.html" data-i18n="guides">Guides</a><a href="privacy.html" data-i18n="privacy">Privacy</a><a href="terms.html" data-i18n="terms">Terms</a><div class="visitor-local-clock" style="margin-top:12px;font-size:13px;line-height:1.6;color:inherit;opacity:.82"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><br><span id="visitorTimeZone"></span></div>
+<footer>
+<div class="visitor-local-clock" style="margin:0 auto 14px;max-width:1100px;text-align:center;font-size:13px;line-height:1.6;color:inherit;opacity:.82"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><br><span id="visitorTimeZone"></span></div>© <span id="year"></span> GlobalMoneyCalc · <a href="index.html" data-i18n="home">Home</a><a href="guides.html" data-i18n="guides">Guides</a><a href="privacy.html" data-i18n="privacy">Privacy</a><a href="terms.html" data-i18n="terms">Terms</a>
 <div class="site-credit" style="margin-top:10px;font-size:13px;line-height:1.6;color:inherit;opacity:.82">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></div>
 </footer>
 <script>
@@ -47,7 +48,7 @@ let lang="en";function setLang(){document.documentElement.lang=lang;document.que
     zoneNode.textContent=(language==="bn"?"সময় অঞ্চল: ":"Time zone: ")+zone;
   }
   updateVisitorClock();
-  window.setInterval(updateVisitorClock,30000);
+  window.setInterval(updateVisitorClock,1000);
   const languageButton=document.getElementById("langBtn");
   if(languageButton)languageButton.addEventListener("click",updateVisitorClock);
 })();
