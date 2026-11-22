@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#10152b">
+<title>Page not found | GlobalMoneyCalc</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:#f4f6fb;color:#172039;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}.card{width:min(100%,560px);background:white;border:1px solid #e5e9f2;border-radius:22px;padding:30px;text-align:center;box-shadow:0 14px 40px rgba(26,35,72,.08)}.mark{font-size:12px;font-weight:800;letter-spacing:.1em;color:#7157f2}.code{font-size:clamp(64px,18vw,100px);line-height:1;font-weight:900;margin:18px 0;color:#10152b}.card h1{font-size:27px;margin:12px 0}.card p{color:#65708a}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}a,button{font:inherit;border-radius:11px;padding:11px 16px;text-decoration:none;font-weight:750;cursor:pointer}.home{background:#7157f2;color:white}.back{background:#f0edff;color:#5542ca;border:0}.lang{position:absolute;top:18px;right:18px;background:#1b2240;color:white;border:1px solid #555b78;border-radius:10px;padding:8px 12px}.card a:focus-visible,.lang:focus-visible{outline:3px solid #998cff;outline-offset:3px}
+</style>
+</head>
+<body>
+<button class="lang" id="langBtn" type="button">বাংলা</button>
+<main class="card">
+<div class="mark">✦ GLOBALMONEYCALC</div>
+<div class="code">404</div>
+<h1 id="title">This page could not be found.</h1>
+<p id="message">The address may be incorrect, or the page may have moved. Use the home page to continue.</p>
+<div class="actions"><a class="home" id="homeLink" href="./">Go to homepage</a><button class="back" id="backBtn" type="button">Go back</button></div>
+</main>
+<script>
+let lang="en";
+const strings={
+en:{title:"This page could not be found.",message:"The address may be incorrect, or the page may have moved. Use the home page to continue.",home:"Go to homepage",back:"Go back"},
+bn:{title:"এই পেজটি খুঁজে পাওয়া যায়নি।",message:"ঠিকানায় ভুল থাকতে পারে, অথবা পেজটি সরানো হয়েছে। চালিয়ে যেতে হোমপেজে যান।",home:"হোমপেজে যান",back:"আগের পেজে ফিরুন"}
+};
+const btn=document.getElementById("langBtn");
+function setLang(next){
+ lang=next;document.documentElement.lang=lang;
+ document.getElementById("title").textContent=strings[lang].title;
+ document.getElementById("message").textContent=strings[lang].message;
+ document.getElementById("homeLink").textContent=strings[lang].home;
+ document.getElementById("backBtn").textContent=strings[lang].back;
+ btn.textContent=lang==="en"?"বাংলা":"English";
+}
+btn.addEventListener("click",()=>setLang(lang==="en"?"bn":"en"));
+document.getElementById("backBtn").addEventListener("click",()=>history.length>1?history.back():location.assign("./"));
+setLang("en");
+</script>
+</body>
+</html>
