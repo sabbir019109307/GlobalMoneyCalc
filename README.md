@@ -19,6 +19,9 @@ Free, mobile-friendly money calculators in English and Bengali.
 - A bilingual custom 404 page with a direct route back to the homepage
 - XML sitemap, robots.txt, favicon and basic search-engine metadata
 
+## Launch checklist
+See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for the Bengali launch, deployment, troubleshooting, ads, privacy and mobile testing checklist.
+
 ## Publish with GitHub Pages
 1. Open this repository's **Settings**.
 2. Select **Pages**.
