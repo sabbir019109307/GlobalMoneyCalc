@@ -8,7 +8,8 @@ Free, mobile-friendly money calculators and currency tools in English and Bengal
 - A visual currency-rate chart page with a searchable list of the provider's supported currencies
 - Currency chart selector that can use any base currency returned by the API
 - Rate observation time and market-session status displayed with the data
-- Browser-side rate caching to reduce API requests
+- A shared USD-based browser cache across the homepage converter and currency chart, normally refreshed every 15 minutes
+- Stale-rate warnings and saved-rate fallback when a refresh cannot complete
 - Salary, budget and savings calculators
 - Salary calculator with deductions, daily and hourly estimates
 - Monthly income and expense budget calculator

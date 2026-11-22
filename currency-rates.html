@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Explore supported currencies with a visual exchange-rate chart, searchable currency list and updated market observations.">
+<meta name="description" content="Compare supported international currencies with a visual exchange-rate chart, searchable rate table and bilingual controls.">
 <meta name="theme-color" content="#a9c8c7">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://sabbir019109307.github.io/GlobalMoneyCalc/currency-rates.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Currency Rate Scale | GlobalMoneyCalc">
+<meta property="og:description" content="Compare international currencies in a visual chart and searchable rate table.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sabbir019109307.github.io/GlobalMoneyCalc/currency-rates.html">
 <title>Currency Rate Scale | GlobalMoneyCalc</title>
 <style>
 :root{--ink:#10172e;--muted:#58647b;--paper:#e7f1ef;--panel:#fff;--line:#d5e1df;--red:#ed1717}
@@ -34,7 +41,7 @@ let lang="en",data=null,activeRequest=0;
 const $=id=>document.getElementById(id);
 const names={KWD:["Kuwaiti Dinar","دينار كويتي","🇰🇼"],USD:["US Dollar","ডলার","🇺🇸"],EUR:["Euro","ইউরো","🇪🇺"],BDT:["Bangladeshi Taka","বাংলাদেশি টাকা","🇧🇩"],SAR:["Saudi Riyal","সৌদি রিয়াল","🇸🇦"],AED:["UAE Dirham","আমিরাতি দিরহাম","🇦🇪"],GBP:["British Pound","ব্রিটিশ পাউন্ড","🇬🇧"],INR:["Indian Rupee","ভারতীয় রুপি","🇮🇳"],JPY:["Japanese Yen","জাপানি ইয়েন","🇯🇵"],OMR:["Omani Rial","ওমানি রিয়াল","🇴🇲"],QAR:["Qatari Riyal","কাতারি রিয়াল","🇶🇦"],BHD:["Bahraini Dinar","বাহরাইনি দিনার","🇧🇭"],CAD:["Canadian Dollar","কানাডিয়ান ডলার","🇨🇦"],AUD:["Australian Dollar","অস্ট্রেলিয়ান ডলার","🇦🇺"],CHF:["Swiss Franc","সুইস ফ্রাঁ","🇨🇭"],CNY:["Chinese Yuan","চীনা ইউয়ান","🇨🇳"],PKR:["Pakistani Rupee","পাকিস্তানি রুপি","🇵🇰"],LKR:["Sri Lankan Rupee","শ্রীলঙ্কান রুপি","🇱🇰"],NPR:["Nepalese Rupee","নেপালি রুপি","🇳🇵"],MYR:["Malaysian Ringgit","মালয়েশিয়ান রিঙ্গিত","🇲🇾"],SGD:["Singapore Dollar","সিঙ্গাপুর ডলার","🇸🇬"],THB:["Thai Baht","থাই বাত","🇹🇭"],TRY:["Turkish Lira","তুর্কি লিরা","🇹🇷"],IDR:["Indonesian Rupiah","ইন্দোনেশীয় রুপিয়া","🇮🇩"],PHP:["Philippine Peso","ফিলিপাইন পেসো","🇵🇭"],ZAR:["South African Rand","দক্ষিণ আফ্রিকান র‍্যান্ড","🇿🇦"],NZD:["New Zealand Dollar","নিউজিল্যান্ড ডলার","🇳🇿"],KRW:["South Korean Won","দক্ষিণ কোরীয় ওন","🇰🇷"],MXN:["Mexican Peso","মেক্সিকান পেসো","🇲🇽"],NOK:["Norwegian Krone","নরওয়েজিয়ান ক্রোন","🇳🇴"],SEK:["Swedish Krona","সুইডিশ ক্রোনা","🇸🇪"],DKK:["Danish Krone","ড্যানিশ ক্রোন","🇩🇰"]};
 const colors=["#f47732","#4e64db","#079b2b","#e0cf12","#a218aa","#ef1684","#168fa5","#7b55c9"];
-const CACHE_PREFIX="globalmoneycalc_visual_rates_v2_";
+const CACHE_PREFIX="globalmoneycalc_shared_rates_";
 function clock(){const z=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local";$("visitorLocalLabel").textContent=lang==="bn"?"আপনার স্থানীয় তারিখ ও সময়":"Your local date & time";$("visitorLocalTime").dateTime=new Date().toISOString();$("visitorLocalTime").textContent=new Intl.DateTimeFormat(lang==="bn"?"bn-BD":"en-US",{dateStyle:"full",timeStyle:"medium"}).format(new Date());$("visitorTimeZone").textContent=(lang==="bn"?"সময় অঞ্চল: ":"Time zone: ")+z}
 function displayName(code){const known=names[code];if(known)return lang==="bn"?known[1]:known[0];try{return new Intl.DisplayNames([lang==="bn"?"bn":"en"],{type:"currency"}).of(code)||code}catch(e){return code}}
 function flag(code){return names[code]?.[2]||""}
@@ -76,16 +83,23 @@ function render(){
 function readCache(){try{const cached=JSON.parse(localStorage.getItem(CACHE_PREFIX+"USD")||"null");return cached&&cached.result==="success"&&cached.base==="USD"&&cached.rates?cached:null}catch(e){return null}}
 async function load(){
  const request=++activeRequest,cached=readCache();
- if(cached){data=cached;setBaseOptions(cached);render();showStatus(cached,true,false)}
- else if(!data){$("bars").innerHTML="";$("rows").innerHTML='<tr><td colspan="2">'+(lang==="bn"?"রেট লোড হচ্ছে…":"Loading…")+'</td></tr>';setStatus(lang==="bn"?"রেট লোড হচ্ছে…":"Loading exchange rates…")}
+ if(cached){
+  data=cached;setBaseOptions(cached);render();showStatus(cached,true,false);
+  const nextUpdate=Number(cached.time_next_update_unix||0);
+  if(nextUpdate>0&&Date.now()<nextUpdate*1000)return;
+ }else if(!data){
+  $("bars").innerHTML="";$("rows").innerHTML='<tr><td colspan="2">'+(lang==="bn"?"রেট লোড হচ্ছে…":"Loading…")+'</td></tr>';
+  setStatus(lang==="bn"?"রেট লোড হচ্ছে…":"Loading exchange rates…");
+ }
  try{
   const response=await fetch("https://api.exchangerate.dev/v1/latest/USD",{cache:"no-store"});
   if(!response.ok)throw new Error("HTTP "+response.status);
   const json=await response.json();
   if(request!==activeRequest)return;
   if(json.result!=="success"||json.base!=="USD"||!json.rates||!json.timestamp||!json.data_updated_at)throw new Error(json.message||"Invalid exchange-rate response");
-  data=json;try{localStorage.setItem(CACHE_PREFIX+"USD",JSON.stringify(json))}catch(e){}
-  setBaseOptions(json);render();showStatus(json,false,false);
+  data={...json,time_next_update_unix:Math.floor(Date.now()/1000)+900};
+  try{localStorage.setItem(CACHE_PREFIX+"USD",JSON.stringify(data))}catch(e){}
+  setBaseOptions(data);render();showStatus(data,false,false);
  }catch(error){
   if(request!==activeRequest)return;
   if(data)showStatus(data,true,true);
