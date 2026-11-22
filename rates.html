@@ -28,7 +28,8 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:13px}footer a
 <section class="panel"><h2 data-i18n="privacyTitle">5. What information is sent?</h2><p data-i18n="privacyText">The browser requests the shared USD-based reference-rate dataset. It does not include the amount you typed or the currency pair you selected. The multiplication and currency-pair calculation happen on your device. The API provider may still receive ordinary technical request information, such as the request's network address and browser-related metadata, under its own privacy practices.</p><p><a href="privacy.html" data-i18n="privacyPolicy">Read the GlobalMoneyCalc Privacy Policy</a>.</p></section>
 <section class="panel"><h2 data-i18n="redistributionTitle">6. Use of provider data</h2><p data-i18n="redistributionText">The provider permits caching for your own end-use and use in currency-conversion tools, including commercial use, subject to its terms. Its terms prohibit redistribution of the raw rate data. GlobalMoneyCalc therefore presents calculated conversion results and does not offer a downloadable raw-rate feed. Review the provider's current documentation and terms before relying on the service.</p><a class="home" href="index.html" data-i18n="backHome">← Back to GlobalMoneyCalc</a></section>
 </main>
-<footer>© <span id="year"></span> GlobalMoneyCalc · <a href="guides.html" data-i18n="guidesLink">Guides</a><a href="advertise.html" data-i18n="advertiseLink">Advertise</a><a href="terms.html" data-i18n="termsLink">Terms</a><a href="privacy.html" data-i18n="privacyLink">Privacy</a><div class="visitor-local-clock" style="margin-top:12px;font-size:13px;line-height:1.6;color:inherit;opacity:.82"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><br><span id="visitorTimeZone"></span></div>
+<footer>
+<div class="visitor-local-clock" style="margin:0 auto 14px;max-width:1100px;text-align:center;font-size:13px;line-height:1.6;color:inherit;opacity:.82"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><br><span id="visitorTimeZone"></span></div>© <span id="year"></span> GlobalMoneyCalc · <a href="guides.html" data-i18n="guidesLink">Guides</a><a href="advertise.html" data-i18n="advertiseLink">Advertise</a><a href="terms.html" data-i18n="termsLink">Terms</a><a href="privacy.html" data-i18n="privacyLink">Privacy</a>
 <div class="site-credit" style="margin-top:10px;font-size:13px;line-height:1.6;color:inherit;opacity:.82">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></div>
 </footer>
 <script>
@@ -121,7 +122,7 @@ setLang("en");
     zoneNode.textContent=(language==="bn"?"সময় অঞ্চল: ":"Time zone: ")+zone;
   }
   updateVisitorClock();
-  window.setInterval(updateVisitorClock,30000);
+  window.setInterval(updateVisitorClock,1000);
   const languageButton=document.getElementById("langBtn");
   if(languageButton)languageButton.addEventListener("click",updateVisitorClock);
 })();
