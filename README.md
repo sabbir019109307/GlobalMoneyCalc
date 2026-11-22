@@ -13,6 +13,7 @@ Free, mobile-friendly money calculators in English and Bengali.
 - Advertising / sponsorship placeholder (no ad network connected yet)
 - SEO metadata, FAQ content, sitemap, robots.txt and favicon
 - Bilingual money calculator guides and FAQ content
+- Bilingual exchange-rate methodology, source, calculation and privacy explanation page
 - Advertising and direct sponsorship information page
 - Privacy Policy and Terms of Use pages
 - XML sitemap, robots.txt, favicon and basic search-engine metadata
@@ -27,7 +28,8 @@ Free, mobile-friendly money calculators in English and Bengali.
 
 ## Important
 - Automatic currency conversion uses indicative reference rates from ExchangeRate-API and refreshes once per day. It is not a live bank or cash-exchange quote. Users can switch to manual entry for their provider’s rate.
-- The automatic conversion is calculated in the visitor’s browser. The amount entered is not sent to the rates API. The daily API response is cached locally until its next scheduled update.
+- The automatic conversion is calculated in the visitor’s browser. The amount entered is not sent to the rates API. The daily API response is cached locally until its next scheduled update; expired cached rates are now clearly labelled if a refresh fails.
+- The converter now offers a broader selection of 58 currencies. See `rates.html` for the source, calculation formula, update behavior and data limitations.
 - The ExchangeRate-API Open Access endpoint requires a visible attribution link, permits caching and commercial currency conversion, and does not permit redistribution of its raw rate data. The site credits the provider and displays calculated amounts rather than a downloadable rate feed.
 - No ad network is connected yet. The ad area is only a placeholder. Do not add AdSense scripts or an ads.txt publisher record until an account is approved and the real publisher ID is available.
 - Direct sponsorship information is in `advertise.html`. The current inquiry route is a public GitHub issue; a private business email/contact channel must be supplied before public sponsor outreach.
