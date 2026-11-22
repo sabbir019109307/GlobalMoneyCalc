@@ -59,7 +59,7 @@ setLang("en");
     zoneNode.textContent=(language==="bn"?"সময় অঞ্চল: ":"Time zone: ")+zone;
   }
   updateVisitorClock();
-  window.setInterval(updateVisitorClock,30000);
+  window.setInterval(updateVisitorClock,1000);
   const languageButton=document.getElementById("langBtn");
   if(languageButton)languageButton.addEventListener("click",updateVisitorClock);
 })();
