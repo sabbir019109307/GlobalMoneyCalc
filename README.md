@@ -1,42 +1,44 @@
 # GlobalMoneyCalc
 
-Free, mobile-friendly money calculators in English and Bengali.
+Free, mobile-friendly money calculators and currency tools in English and Bengali.
 
 ## Included
 - English / বাংলা language toggle
-- Currency converter with daily indicative reference rates, plus manual provider-rate entry
-- Salary, budget and savings results with selectable currencies
-- A browser-side daily rate cache and required ExchangeRate-API attribution
+- Currency converter with indicative market rates from ExchangeRate.dev and manual provider-rate entry
+- A visual currency-rate chart page with a searchable list of the provider's supported currencies
+- Currency chart selector that can use any base currency returned by the API
+- Rate observation time and market-session status displayed with the data
+- Browser-side rate caching to reduce API requests
+- Salary, budget and savings calculators
 - Salary calculator with deductions, daily and hourly estimates
 - Monthly income and expense budget calculator
 - Monthly savings projection
-- Advertising / sponsorship placeholder (no ad network connected yet)
-- SEO metadata, FAQ content, sitemap, robots.txt and favicon
-- Bilingual money calculator guides and FAQ content
-- Bilingual exchange-rate methodology, source, calculation and privacy explanation page
 - Advertising and direct sponsorship information page
-- Privacy Policy and Terms of Use pages
-- A bilingual custom 404 page with a direct route back to the homepage
-- XML sitemap, robots.txt, favicon and basic search-engine metadata
+- Privacy Policy, Terms of Use, money calculator guides and a bilingual exchange-rate methodology page
+- Custom 404 page, SEO metadata, XML sitemap, robots.txt and favicon
+- Live local date and time at the top of every page
+- Footer credit: SABBIR AHMED TAHIR
+
+## Currency-rate data
+The website uses the ExchangeRate.dev API. Its free and keyless feed is delayed by 15 minutes; this is indicative market information, not a live bank quote, cash-exchange rate or settlement price. The API documents support for 144 currencies. The visual chart refreshes its rates periodically and caches the most recent successful response in the visitor's browser.
+
+The free plan lists 5,000 requests per month and 10 requests per minute; anonymous callers are also rate-limited by IP. Free-plan display requires a visible link reading **Rates by Exchangerate.dev** on each page or screen showing rate data. The provider's terms prohibit redistribution of raw or derived rate data through another API, SDK, feed, export or dataset. See the [API documentation](https://exchangerate.dev/docs), [pricing](https://exchangerate.dev/pricing) and [Terms of Service](https://exchangerate.dev/terms).
 
 ## Launch checklist
-See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for the Bengali launch, deployment, troubleshooting, ads, privacy and mobile testing checklist.
+See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for deployment, troubleshooting, ads, privacy and mobile testing.
 
 ## Publish with GitHub Pages
 1. Open this repository's **Settings**.
 2. Select **Pages**.
 3. Under **Build and deployment**, choose **Deploy from a branch**.
 4. Select branch **main** and folder **/(root)**, then press **Save**.
-5. GitHub will display the published Pages URL on that page. Expected URL:
+5. GitHub will display the published Pages URL. Expected URL:
    https://sabbir019109307.github.io/GlobalMoneyCalc/
 
 ## Important
-- Automatic currency conversion uses indicative reference rates from ExchangeRate-API and refreshes once per day. It is not a live bank or cash-exchange quote. Users can switch to manual entry for their provider’s rate.
-- The automatic conversion is calculated in the visitor’s browser. The amount entered is not sent to the rates API. The daily API response is cached locally until its next scheduled update; expired cached rates are now clearly labelled if a refresh fails.
-- The converter now offers a broader selection of 58 currencies. See `rates.html` for the source, calculation formula, update behavior and data limitations.
-- The ExchangeRate-API Open Access endpoint requires a visible attribution link, permits caching and commercial currency conversion, and does not permit redistribution of its raw rate data. The site credits the provider and displays calculated amounts rather than a downloadable rate feed.
-- No ad network is connected yet. The ad area is only a placeholder. Do not add AdSense scripts or an ads.txt publisher record until an account is approved and the real publisher ID is available.
-- Direct sponsorship information is in `advertise.html`. The current inquiry route is a public GitHub issue; a private business email/contact channel must be supplied before public sponsor outreach.
-- The current GitHub Pages project URL contains a path. Google AdSense sign-up requires a standard domain URL without a path, so a separately owned domain is likely needed before applying. See Google’s official URL rules: https://support.google.com/adsense/answer/2784438.
-- The partnership link opens a GitHub issue form until a public business email or contact form is configured.
+- Calculator input amounts are processed in the visitor's browser and are not sent to GlobalMoneyCalc or included in currency-rate API requests.
+- Exchange rates can differ from a bank, card provider, cash exchange or remittance service. Always check the amount actually offered after fees and spreads.
+- No ad network is connected yet. The advertising area is a placeholder; do not add AdSense scripts or an ads.txt publisher record until an account is approved and the real publisher ID is available.
+- Direct sponsorship information is in `advertise.html`. The current inquiry route is a public GitHub issue; do not post private information there.
+- The GitHub Pages project URL contains a path. A separate domain may be useful for some advertising services, but do not assume a domain is available or buy one without authorization.
 - This website is informational and does not provide professional financial, tax, legal or investment advice.

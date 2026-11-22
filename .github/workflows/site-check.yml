@@ -26,6 +26,7 @@ jobs:
 
           const required = [
             'index.html',
+            'currency-rates.html',
             'rates.html',
             'guides.html',
             'advertise.html',
