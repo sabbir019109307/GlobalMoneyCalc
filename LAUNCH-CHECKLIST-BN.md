@@ -13,6 +13,7 @@
 - [x] ছবির আদলে রঙিন বার-চার্ট ও লাল তীরসহ currency-rates.html
 - [x] API-তে পাওয়া মুদ্রা থেকে base currency নির্বাচন, প্রথম ৮টি বার এবং সব রেটের searchable table
 - [x] একবার USD-ভিত্তিক ডেটা এনে browser-এ সব currency pair হিসাব; base বদলালে নতুন API request লাগে না
+- [x] হোমপেজ ও চার্ট খোলা থাকলে প্রতি ১৫ মিনিট পর নতুন রেট আনার চেষ্টা করে
 - [x] হোমপেজ ও চার্ট একই browser cache ভাগ করে, তাই পেজ বদলালে অপ্রয়োজনীয় duplicate API call কমে
 - [x] রেট পর্যবেক্ষণের সময়, market session এবং provider attribution link
 - [x] Rate methodology, Guides, Privacy Policy, Terms, Advertise এবং bilingual 404 pages

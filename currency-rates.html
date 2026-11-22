@@ -127,5 +127,5 @@ $("base").addEventListener("change",()=>{render();if(data)showStatus(data,false,
 $("search").addEventListener("input",render);
 $("langBtn").addEventListener("click",()=>{lang=lang==="en"?"bn":"en";document.documentElement.lang=lang;setText();if(data){setBaseOptions(data);render();showStatus(data,true,false)}});
 $("year").textContent=new Date().getFullYear();
-clock();setText();window.setInterval(clock,1000);load();window.setInterval(load,15*60*1000);
+clock();setText();window.setInterval(clock,1000);load();window.setInterval(load,15*60*1000+5000);
 </script></body></html>
