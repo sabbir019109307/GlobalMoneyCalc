@@ -16,6 +16,7 @@ Free, mobile-friendly money calculators in English and Bengali.
 - Bilingual exchange-rate methodology, source, calculation and privacy explanation page
 - Advertising and direct sponsorship information page
 - Privacy Policy and Terms of Use pages
+- A bilingual custom 404 page with a direct route back to the homepage
 - XML sitemap, robots.txt, favicon and basic search-engine metadata
 
 ## Publish with GitHub Pages
