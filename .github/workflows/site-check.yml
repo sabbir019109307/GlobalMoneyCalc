@@ -90,6 +90,7 @@ jobs:
           if (!home.includes('Rates by Exchangerate.dev') || !home.includes('https://exchangerate.dev')) {
             errors.push('index.html: missing required visible provider credit link');
           }
+          if (!chart.includes('function setText()')) errors.push('currency-rates.html: missing language text function');
           if (!chart.includes('https://api.exchangerate.dev/v1/latest/USD')) {
             errors.push('currency-rates.html: missing USD-based rate endpoint');
           }

@@ -26,7 +26,7 @@ main{max-width:1120px;margin:0 auto;padding:34px 18px 52px}.intro{text-align:cen
 <div class="chart"><div class="bars" id="bars" aria-live="polite"></div><svg class="arrow" viewBox="0 0 900 190" preserveAspectRatio="none" aria-hidden="true"><path d="M850 145 L755 105 L685 106 L625 75 L550 77 L495 48 L405 50 L350 24 L255 30 L195 5"></path><polygon points="180,0 215,0 195,28"></polygon></svg></div>
 <div class="legend" id="legend">Bar heights are scaled to the largest value shown.</div>
 <div class="searchControl"><label id="searchLabel" for="search">Search all currencies</label><input id="search" type="search" autocomplete="off" placeholder="Type a currency code or name"></div><div class="tableWrap"><table><thead><tr><th id="currencyHead">Currency</th><th id="rateHead">Rate for 1 base unit</th></tr></thead><tbody id="rows"><tr><td colspan="2">Loading…</td></tr></tbody></table></div>
-<p class="note" id="note">Indicative exchange rates, not bank cash or remittance quotes. Free rates are delayed by 15 minutes. Refreshes are limited to protect the free API quota. Source: <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">ExchangeRate.dev</a>.</p>
+<p class="note" id="note">Indicative rates, not bank or cash-exchange quotes. Free and keyless rates are delayed by 15 minutes. Credit: <a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">API documentation</a>.</p>
 </section></main>
 <footer><div>© <span id="year"></span> GlobalMoneyCalc. All rights reserved. <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="advertise.html">Advertise</a><a href="rates.html">Rate details</a></div><div class="credit">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></div></footer>
 <script>
@@ -44,8 +44,14 @@ function showStatus(json,cached=false,failed=false){
  const observed=rateTime(json.data_updated_at||json.timestamp),session=json.market_session||"unknown";
  const sessions=lang==="bn"?{open:"বাজার খোলা",weekend:"সাপ্তাহিক ছুটি",interbank_closed:"আন্তঃব্যাংক বাজার বন্ধ",unknown:"বাজারের অবস্থা অজানা"}:{open:"Market open",weekend:"Weekend",interbank_closed:"Interbank market closed",unknown:"Market session unknown"};
  const stale=Object.values(json.stale||{}).some(Boolean);
- const prefix=lang==="bn"?(failed?"নতুন রেট আনা যায়নি; সংরক্ষিত রেট দেখানো হচ্ছে":cached?"সংরক্ষিত রেট; নতুন রেট যাচাই হচ্ছে":"রেট আপডেট হয়েছে"):(failed?"Could not refresh; showing saved rates":cached?"Saved rates; checking for updates":"Rates updated");
- const staleText=stale?(lang==="bn"?" · কিছু রেট পুরোনো":" · Some sources are stale"):"";
+ const served=Date.parse(json.timestamp||"");
+ const cacheOld=Number.isFinite(served)&&Date.now()-served>30*60*1000;
+ let prefix;
+ if(failed&&(cacheOld||stale))prefix=lang==="bn"?"নতুন রেট আনা যায়নি; সংরক্ষিত রেট পুরোনো হতে পারে":"Refresh failed; saved rates may be out of date";
+ else if(failed)prefix=lang==="bn"?"নতুন রেট আনা যায়নি; সংরক্ষিত রেট দেখানো হচ্ছে":"Could not refresh; showing saved rates";
+ else if(cached)prefix=lang==="bn"?"সংরক্ষিত রেট; নতুন রেট যাচাই হচ্ছে":"Saved rates; checking for updates";
+ else prefix=lang==="bn"?"রেট আপডেট হয়েছে":"Rates updated";
+ const staleText=stale?(lang==="bn"?" · কিছু উৎসের রেট পুরোনো":" · Some sources are stale"):"";
  setStatus(prefix+" · "+(lang==="bn"?"পর্যবেক্ষণ: ":"Observed: ")+observed+" · "+(sessions[session]||session)+staleText);
 }
 function setBaseOptions(json){
@@ -85,6 +91,23 @@ async function load(){
   if(data)showStatus(data,true,true);
   else setStatus(lang==="bn"?"রেট পাওয়া যায়নি। একটু পরে আবার চেষ্টা করুন।":"Rates unavailable. Please try again later.");
  }
+}
+function setText(){
+ const bn=lang==="bn";
+ $("eyebrow").textContent=bn?"আন্তর্জাতিক মুদ্রা বোর্ড":"INTERNATIONAL CURRENCY BOARD";
+ $("title").textContent=bn?"বিভিন্ন দেশের মুদ্রার রেট":"Currency Rate Scale";
+ $("subtitle").textContent=bn?"সমর্থিত বিভিন্ন মুদ্রার বিনিময় হার চার্টে ও তালিকায় দেখুন।":"Explore supported currencies in a visual chart and searchable list.";
+ $("baseLabel").textContent=bn?"মূল মুদ্রা · ১ একক":"BASE CURRENCY · 1 UNIT";
+ $("chartTitle").textContent=bn?"মুদ্রার রেট তুলনা":"Currency rate comparison";
+ $("chartSub").textContent=bn?"মূল মুদ্রার ১ এককে কত ইউনিট পাওয়া যায়, সেই অনুযায়ী প্রথম ৮টি মুদ্রা।":"Top eight currencies by units received for 1 unit of the selected base currency.";
+ $("legend").textContent=bn?"এটি সংখ্যাগত এককের তুলনা; মুদ্রার শক্তি বা ক্রয়ক্ষমতার র‍্যাঙ্কিং নয়।":"This compares numeric units only; it is not a ranking of currency strength or purchasing power.";
+ $("searchLabel").textContent=bn?"সব সমর্থিত মুদ্রা খুঁজুন":"Search all supported currencies";
+ $("search").placeholder=bn?"মুদ্রার কোড বা নাম লিখুন":"Type a currency code or name";
+ $("currencyHead").textContent=bn?"মুদ্রা":"Currency";
+ $("rateHead").textContent=bn?"১ এককের বিনিময় হার":"Rate for 1 base unit";
+ $("langBtn").textContent=bn?"English":"বাংলা";
+ $("note").innerHTML=(bn?"এগুলো ইন্ডিকেটিভ রেট; ব্যাংক বা মানি এক্সচেঞ্জের লেনদেনের কোট নয়। ফ্রি ও keyless রেট ১৫ মিনিট বিলম্বিত। Credit: ":"Indicative rates, not bank or cash-exchange quotes. Free and keyless rates are delayed by 15 minutes. Credit: ")+'<a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">'+(bn?"ডকুমেন্টেশন":"API documentation")+'</a>.';
+ clock();
 }
 $("base").addEventListener("change",()=>{render();if(data)showStatus(data,false,false)});
 $("search").addEventListener("input",render);
