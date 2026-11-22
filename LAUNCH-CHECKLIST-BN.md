@@ -73,7 +73,8 @@ Open Access endpoint attribution চায়, দৈনিক আপডেট হ�
 - [x] বর্তমান সংস্করণে ad script বা analytics tracker নেই বলে Privacy Policy-তে উল্লেখ আছে।
 - [x] Calculator-এর amount browser-এ হিসাব হয়; currency API-তে amount পাঠানো হয় না।
 - [ ] Analytics যোগ করলে Privacy Policy ও cookie/consent disclosure আগে আপডেট করুন।
-- [ ] EEA/UK/Switzerland-এর ব্যবহারকারীকে personalised ads দেখালে Google-এর বর্তমান consent requirements ও certified CMP নিয়ম যাচাই করুন।
+- [ ] ভবিষ্যতে বিনা খরচে basic traffic/performance insight চাইলে Cloudflare Web Analytics বিবেচনা করা যায়; এর জন্য Cloudflare account ও JavaScript beacon লাগবে, DNS Cloudflare-এ বদলানো বাধ্যতামূলক নয়। চালুর আগে privacy text আপডেট করুন: https://developers.cloudflare.com/web-analytics/about/
+- [ ] EEA/UK/Switzerland-এ personalised ads দেখালে Google-certified CMP এবং IAB TCF integration-এর নিয়ম যাচাই করুন: https://support.google.com/adsense/answer/13554116
 - [ ] কোনো API key, private email, password বা account ID HTML/JavaScript-এ রাখবেন না।
 - [ ] বিজ্ঞাপন বা third-party script যুক্ত করার আগে privacy, performance এবং mobile layout পুনরায় পরীক্ষা করুন।
 
