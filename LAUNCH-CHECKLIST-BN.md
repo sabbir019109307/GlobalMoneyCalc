@@ -24,18 +24,20 @@ GitHub মোবাইল অ্যাপে বা ব্রাউজারে 
 
 1. রিপোজিটরি খুলুন: https://github.com/sabbir019109307/GlobalMoneyCalc
 2. **Settings → Pages** খুলুন।
-3. **Build and deployment**-এ source যদি **Deploy from a branch** হয়, branch **main** এবং folder **/(root)** নির্বাচন করে Save করুন।
-4. রিপোজিটরির **Actions** ট্যাব খুলুন।
-5. **pages-build-deployment** বা Pages-এর build/deployment workflow-এর সর্বশেষ run খুলুন।
-6. run-এর অবস্থা **Success** না হওয়া পর্যন্ত live হয়েছে ধরে নেবেন না। **Failure** হলে failed step খুলে error message কপি করে রাখুন।
-7. সফল হওয়ার পর নিচের URL-গুলো ফোনের Chrome-এ আলাদা করে খুলুন:
+3. GitHub account-এর **Settings → Emails**-এ অন্তত একটি email **Verified** আছে কি না দেখুন।
+4. **Settings → Pages**-এ source যদি **Deploy from a branch** হয়, branch **main** এবং folder **/(root)** নির্বাচন করে Save করুন।
+5. publishing source-এ পরিবর্তন করা account-এর repository-তে admin permission থাকতে হবে। এই রিপোজিটরিতে সংযুক্ত GitHub account-এর admin permission আছে; email verification আলাদাভাবে পরীক্ষা করুন।
+6. রিপোজিটরির **Actions** ট্যাব খুলুন।
+7. **pages-build-deployment** বা Pages-এর build/deployment workflow-এর সর্বশেষ run খুলুন।
+8. run-এর অবস্থা **Success** না হওয়া পর্যন্ত live হয়েছে ধরে নেবেন না। **Failure** হলে failed step খুলে error message কপি করে রাখুন।
+9. সফল হওয়ার পর নিচের URL-গুলো ফোনের Chrome-এ আলাদা করে খুলুন:
    - https://sabbir019109307.github.io/GlobalMoneyCalc/
    - https://sabbir019109307.github.io/GlobalMoneyCalc/rates.html
    - https://sabbir019109307.github.io/GlobalMoneyCalc/guides.html
    - https://sabbir019109307.github.io/GlobalMoneyCalc/privacy.html
    - https://sabbir019109307.github.io/GlobalMoneyCalc/terms.html
    - https://sabbir019109307.github.io/GlobalMoneyCalc/advertise.html
-8. পেজ না বদলালে Chrome-এর Incognito tab-এ খুলুন বা site data/cache পরিষ্কার করে আবার পরীক্ষা করুন।
+10. পেজ না বদলালে Chrome-এর Incognito tab-এ খুলুন বা site data/cache পরিষ্কার করে আবার পরীক্ষা করুন।
 
 **404 হলে আগে যাচাই করুন:** `index.html` অবশ্যই `main` branch-এর root-এ থাকতে হবে; নামের বড়-ছোট অক্ষরও হুবহু ঠিক হতে হবে। GitHub Pages-এর official troubleshooting: https://docs.github.com/en/pages/getting-started-with-github-pages/troubleshooting-404-errors-for-github-pages-sites
 
