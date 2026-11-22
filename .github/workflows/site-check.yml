@@ -82,6 +82,32 @@ jobs:
             }
           }
 
+          const home = fs.readFileSync('index.html', 'utf8');
+          const chart = fs.readFileSync('currency-rates.html', 'utf8');
+          const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
+
+          if (!home.includes('currency-rates.html')) errors.push('index.html: missing currency-rate chart link');
+          if (!home.includes('Rates by Exchangerate.dev') || !home.includes('https://exchangerate.dev')) {
+            errors.push('index.html: missing required visible provider credit link');
+          }
+          if (!chart.includes('https://api.exchangerate.dev/v1/latest/USD')) {
+            errors.push('currency-rates.html: missing USD-based rate endpoint');
+          }
+          if (!chart.includes('Rates by Exchangerate.dev') || !chart.includes('https://exchangerate.dev')) {
+            errors.push('currency-rates.html: missing required visible provider credit link');
+          }
+          if (!chart.includes('id="search"') || !chart.includes('id="bars"') || !chart.includes('id="visitorLocalTime"')) {
+            errors.push('currency-rates.html: missing search, chart, or local clock element');
+          }
+          if (!sitemap.includes('https://sabbir019109307.github.io/GlobalMoneyCalc/currency-rates.html')) {
+            errors.push('sitemap.xml: missing currency-rates.html');
+          }
+          for (const file of required.filter((name) => name.endsWith('.html'))) {
+            if (fs.existsSync(file) && !fs.readFileSync(file, 'utf8').includes('SABBIR AHMED TAHIR')) {
+              errors.push(file + ': missing footer author credit');
+            }
+          }
+
           if (errors.length) {
             console.error(errors.join('\n'));
             process.exit(1);

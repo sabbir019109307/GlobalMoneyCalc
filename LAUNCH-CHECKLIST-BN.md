@@ -1,97 +1,86 @@
 # GlobalMoneyCalc — Launch Checklist (বাংলা)
 
-এই নথিতে কোন কাজ শেষ, কোনটি বাকি এবং GitHub Pages-এ 404 হলে কীভাবে পরীক্ষা করতে হবে তা দেওয়া হলো।
+এই নথিতে সম্পন্ন কাজ, ফোনে হাতে-কলমে পরীক্ষা এবং যে কাজের জন্য অ্যাকাউন্ট বা মালিকের সিদ্ধান্ত প্রয়োজন—সেগুলো আলাদা রাখা হয়েছে।
 
-## 1. ইতিমধ্যে রিপোজিটরিতে সম্পন্ন
+## 1. রিপোজিটরিতে সম্পন্ন
 
 - [x] ইংরেজি ও বাংলা ইন্টারফেস
 - [x] মুদ্রা কনভার্টার, বেতন, বাজেট ও সঞ্চয় ক্যালকুলেটর
-- [x] ৫৮টি মুদ্রার নির্বাচন; দৈনিক USD-ভিত্তিক রেফারেন্স রেট
-- [x] নিজস্ব rate entry এবং cache মেয়াদ শেষ হলে সতর্কতা
-- [x] Rate source/methodology page: `rates.html`
-- [x] Guides, privacy policy, terms এবং sponsorship তথ্য পেজ
-- [x] কাস্টম bilingual 404 পেজ
-- [x] `robots.txt` এবং `sitemap.xml`
-- [x] Homepage-এ keyboard skip link এবং calculator button type নির্দিষ্ট করা
+- [x] হোমপেজ কনভার্টারে ৫৮টি বাছাই করা মুদ্রা
+- [x] ExchangeRate.dev-এর USD-ভিত্তিক ইন্ডিকেটিভ রেট; ফ্রি/keyless feed ১৫ মিনিট বিলম্বিত
+- [x] নিজের bank/exchange rate লিখে হিসাব করার বিকল্প
+- [x] browser cache, stale-rate warning এবং manual fallback
+- [x] ছবির আদলে রঙিন বার-চার্ট ও লাল তীরসহ currency-rates.html
+- [x] API-তে পাওয়া মুদ্রা থেকে base currency নির্বাচন, প্রথম ৮টি বার এবং সব রেটের searchable table
+- [x] একবার USD-ভিত্তিক ডেটা এনে browser-এ সব currency pair হিসাব; base বদলালে নতুন API request লাগে না
+- [x] রেট পর্যবেক্ষণের সময়, market session এবং provider attribution link
+- [x] Rate methodology, Guides, Privacy Policy, Terms, Advertise এবং bilingual 404 pages
+- [x] প্রতিটি পেজের একেবারে উপরে চলমান স্থানীয় তারিখ/সময়; নিচে SABBIR AHMED TAHIR credit
+- [x] robots.txt, sitemap.xml (currency-rates page-সহ), favicon
+- [x] GitHub Actions-এ প্রয়োজনীয় পেজ, local links, metadata, JavaScript syntax ও sitemap validation
 
-## 2. GitHub Pages প্রকাশনা নিশ্চিত করা — সবচেয়ে জরুরি
+## 2. প্রকাশনা
 
-এই রিপোজিটরির Pages URL:
-
+মূল ওয়েবসাইট:
 https://sabbir019109307.github.io/GlobalMoneyCalc/
 
-GitHub মোবাইল অ্যাপে বা ব্রাউজারে এই ধাপগুলো অনুসরণ করুন:
+মুদ্রার চার্ট:
+https://sabbir019109307.github.io/GlobalMoneyCalc/currency-rates.html
 
-1. রিপোজিটরি খুলুন: https://github.com/sabbir019109307/GlobalMoneyCalc
-2. **Settings → Pages** খুলুন।
-3. GitHub account-এর **Settings → Emails**-এ অন্তত একটি email **Verified** আছে কি না দেখুন।
-4. **Settings → Pages**-এ source যদি **Deploy from a branch** হয়, branch **main** এবং folder **/(root)** নির্বাচন করে Save করুন।
-5. publishing source-এ পরিবর্তন করা account-এর repository-তে admin permission থাকতে হবে। এই রিপোজিটরিতে সংযুক্ত GitHub account-এর admin permission আছে; email verification আলাদাভাবে পরীক্ষা করুন।
-6. রিপোজিটরির **Actions** ট্যাব খুলুন।
-7. **pages-build-deployment** বা Pages-এর build/deployment workflow-এর সর্বশেষ run খুলুন।
-8. run-এর অবস্থা **Success** না হওয়া পর্যন্ত live হয়েছে ধরে নেবেন না। **Failure** হলে failed step খুলে error message কপি করে রাখুন।
-9. সফল হওয়ার পর নিচের URL-গুলো ফোনের Chrome-এ আলাদা করে খুলুন:
-   - https://sabbir019109307.github.io/GlobalMoneyCalc/
-   - https://sabbir019109307.github.io/GlobalMoneyCalc/rates.html
-   - https://sabbir019109307.github.io/GlobalMoneyCalc/guides.html
-   - https://sabbir019109307.github.io/GlobalMoneyCalc/privacy.html
-   - https://sabbir019109307.github.io/GlobalMoneyCalc/terms.html
-   - https://sabbir019109307.github.io/GlobalMoneyCalc/advertise.html
-10. পেজ না বদলালে Chrome-এর Incognito tab-এ খুলুন বা site data/cache পরিষ্কার করে আবার পরীক্ষা করুন।
+GitHub Pages-এর সর্বশেষ build/deploy run Success না হওয়া পর্যন্ত নতুন commit live হয়েছে ধরে নেবেন না। Actions:
+https://github.com/sabbir019109307/GlobalMoneyCalc/actions
 
-**404 হলে আগে যাচাই করুন:** `index.html` অবশ্যই `main` branch-এর root-এ থাকতে হবে; নামের বড়-ছোট অক্ষরও হুবহু ঠিক হতে হবে। GitHub Pages-এর official troubleshooting: https://docs.github.com/en/pages/getting-started-with-github-pages/troubleshooting-404-errors-for-github-pages-sites
+ফোনে পেজ পুরোনো দেখালে Chrome Incognito tab খুলুন অথবা সাইটের cache/site data পরিষ্কার করে reload করুন।
 
-**গুরুত্বপূর্ণ:** এই রিপোজিটরিতে `index.html` root-এ আছে এবং repository public। তবে GitHub Pages deployment-এর সর্বশেষ run-এর সবুজ Success status এখনো এই নথিতে যাচাই করা হয়নি। কাস্টম 404 পেজ deployment failure ঠিক করে না; সেটি কেবল live site-এর মধ্যে ভুল URL হলে সাহায্য করে।
+## 3. মুদ্রার রেটের নিয়ম
 
-## 3. মুদ্রার রেট সংক্রান্ত নিয়ম
+- Free/keyless feed ১৫ মিনিট বিলম্বিত; এটি প্রতি সেকেন্ডের live bank FX quote নয়।
+- ExchangeRate.dev API ১৪৪টি মুদ্রা সমর্থন করে; API-তে না থাকা মুদ্রা চার্টে দেখানো যাবে না।
+- Free plan: ৫,০০০ request/মাস ও ১০ request/মিনিট। Keyless caller: প্রতি IP-তে ১০ request/মিনিট এবং ১০০ request/ঘণ্টা।
+- Free-plan data দেখানো প্রতিটি পেজ/স্ক্রিনে দৃশ্যমান Rates by Exchangerate.dev link থাকতে হবে।
+- Raw বা derived rate data অন্য API, SDK, feed, file export বা dataset হিসেবে পুনর্বিতরণ করা যাবে না। এই সাইটে rate-data download নেই।
+- রেট indicative; ব্যাংক, cash exchange, card বা remittance provider-এর buy/sell rate ও fee আলাদা হতে পারে।
 
-- [x] API credit link কনভার্টারের পাশে রাখা হয়েছে।
-- [x] API response browser local storage-এ next update time পর্যন্ত cache হয়।
-- [x] API ব্যর্থ হলে manual provider rate ব্যবহার করা যায়।
-- [x] Expired cached rate সতর্কতা দিয়ে চিহ্নিত হয়।
-- [ ] Launch-এর আগে কয়েকটি currency pair (KWD/BDT, USD/BDT, USD/EUR, USD/INR) হাতে-কলমে পরীক্ষা করুন।
-- [ ] বাস্তব ব্যাংক/এক্সচেঞ্জের final quote-এর সঙ্গে ফল মিলিয়ে দেখুন; fees/spread এই টুলে যোগ হয় না।
+Provider-এর বর্তমান নির্দেশিকা:
+- API docs: https://exchangerate.dev/docs
+- Latest endpoint: https://exchangerate.dev/docs/endpoints/latest
+- Free limits: https://exchangerate.dev/free-plan-limits
+- Pricing: https://exchangerate.dev/pricing
+- Terms: https://exchangerate.dev/terms
 
-Provider terms ও documentation:
-- https://www.exchangerate-api.com/docs/free
-- https://www.exchangerate-api.com/terms
+## 4. আপনার ফোনে এখনো যে পরীক্ষা দরকার
 
-Open Access endpoint attribution চায়, দৈনিক আপডেট হয়, caching অনুমোদন করে এবং raw rate data পুনরায় বিতরণ নিষিদ্ধ করে। তাই raw-rate download বা public API feed হিসেবে এই তথ্য প্রকাশ করবেন না।
+- [ ] বাংলা/English toggle সব পেজে ব্যবহার করে দেখুন।
+- [ ] KWD→BDT, USD→BDT, USD→EUR এবং USD→INR রূপান্তর পরীক্ষা করুন।
+- [ ] Manual provider rate দিয়ে conversion পরীক্ষা করুন।
+- [ ] চার্টে KWD, USD, EUR ও BDT base বেছে দেখুন; search-এ BDT, Euro, Rupee লিখে দেখুন।
+- [ ] Salary, budget ও savings calculator-এ খালি, শূন্য ও অস্বাভাবিক input দিয়ে পরীক্ষা করুন।
+- [ ] 360px-প্রস্থ ফোনে লেখা কাটা বা অপ্রয়োজনীয় horizontal scroll হচ্ছে কি না দেখুন।
+- [ ] Privacy, Terms, Guides, Rates, Currency Rates ও Advertise links খুলে দেখুন।
 
-## 4. বিজ্ঞাপন ও আয়
+## 5. বিজ্ঞাপন ও sponsor — অ্যাকাউন্ট মালিকের কাজ বাকি
 
-- [ ] কোনো বিজ্ঞাপন নেটওয়ার্ক এখনো সংযুক্ত নয়।
-- [ ] Publisher ID ও account approval না পাওয়া পর্যন্ত AdSense script বা `ads.txt` publisher record যোগ করবেন না।
-- [ ] Google AdSense-এ site submit করার আগে domain strategy ঠিক করুন। বর্তমান GitHub Pages URL-এ path রয়েছে; Google-এর site URL নিয়ম অনুযায়ী AdSense registration-এ standard domain লাগবে, path নয়: https://support.google.com/adsense/answer/2784438
-- [ ] AdSense-এর জন্য সাইটের HTML/source access এবং site ownership verification লাগবে: https://support.google.com/adsense/answer/91205
-- [ ] বিজ্ঞাপন বসানোর আগে privacy policy, consent এবং audience geography অনুযায়ী আইন/Google policy যাচাই করুন।
-- [ ] Direct sponsorship-এর জন্য ব্যক্তিগত তথ্য না প্রকাশ করে একটি public business email বা private contact form স্থাপন করুন। এখনকার GitHub Issues inquiry public; সেখানে পাসওয়ার্ড, ফোন নম্বর, account number বা confidential documents দেবেন না।
-- [ ] Visitor, traffic, country বা earnings-এর সংখ্যা বাস্তব analytics ছাড়া sponsor-কে জানাবেন না।
+- [ ] কোনো ad network এখনো সংযুক্ত নয়; placeholder-কে live বিজ্ঞাপন বলা যাবে না।
+- [ ] AdSense account, publisher ID ও Google approval প্রয়োজন। ID না পাওয়া পর্যন্ত AdSense script বা ads.txt publisher record বসানো যাবে না।
+- [ ] AdSense sign-up URL-এ path দেওয়া যায় না; standard domain প্রয়োজন। GitHub Pages-এর বর্তমান URL-এ /GlobalMoneyCalc path আছে। Google-এর URL rules দেখুন: https://support.google.com/adsense/answer/2784438
+- [ ] GitHub Pages-এর default github.io subdomain সাধারণ AdSense subdomain rule-এ পড়ে না; custom top-level domain লাগতে পারে। Domain কেনা এখনো হয়নি।
+- [ ] Site ownership verification ও Google policy review শেষে Ready status না পাওয়া পর্যন্ত বিজ্ঞাপন দেখানো যাবে না: https://support.google.com/adsense/answer/12169212
+- [ ] Direct sponsor যোগাযোগের জন্য প্রকাশযোগ্য business email বা private contact form দরকার। বর্তমান GitHub Issues inquiry public; সেখানে ব্যক্তিগত তথ্য দেবেন না।
+- [ ] বাস্তব analytics ছাড়া visitor, traffic বা earnings-এর সংখ্যা sponsor-কে জানাবেন না।
 
-## 5. Privacy, analytics ও security
+## 6. Privacy ও security
 
-- [x] বর্তমান সংস্করণে ad script বা analytics tracker নেই বলে Privacy Policy-তে উল্লেখ আছে।
-- [x] Calculator-এর amount browser-এ হিসাব হয়; currency API-তে amount পাঠানো হয় না।
-- [ ] Analytics যোগ করলে Privacy Policy ও cookie/consent disclosure আগে আপডেট করুন।
-- [ ] ভবিষ্যতে বিনা খরচে basic traffic/performance insight চাইলে Cloudflare Web Analytics বিবেচনা করা যায়; এর জন্য Cloudflare account ও JavaScript beacon লাগবে, DNS Cloudflare-এ বদলানো বাধ্যতামূলক নয়। চালুর আগে privacy text আপডেট করুন: https://developers.cloudflare.com/web-analytics/about/
-- [ ] EEA/UK/Switzerland-এ personalised ads দেখালে Google-certified CMP এবং IAB TCF integration-এর নিয়ম যাচাই করুন: https://support.google.com/adsense/answer/13554116
-- [ ] কোনো API key, private email, password বা account ID HTML/JavaScript-এ রাখবেন না।
-- [ ] বিজ্ঞাপন বা third-party script যুক্ত করার আগে privacy, performance এবং mobile layout পুনরায় পরীক্ষা করুন।
+- [x] বর্তমানে ad script বা analytics tracker নেই।
+- [x] Calculator amount browser-এ হিসাব হয়; API-তে পাঠানো হয় না।
+- [x] API key বা private secret public JavaScript-এ রাখা হয়নি।
+- [ ] Analytics বা advertising tracker যোগ করার আগে Privacy Policy ও প্রয়োজনীয় consent disclosure আপডেট করতে হবে।
+- [ ] ভবিষ্যতে API key লাগলে browser JavaScript-এ নয়—server-side proxy/secret manager দরকার।
 
-## 6. Launch-এর আগে নিজের ফোনে পরীক্ষা
+## 7. মালিকের সিদ্ধান্ত ছাড়া করা হয়নি
 
-- [ ] বাংলা/English toggle সব পেজে কাজ করে।
-- [ ] ৫৮টি currency selector থেকে নির্বাচন করা যায়।
-- [ ] Manual rate দিয়ে হিসাব হয়।
-- [ ] Salary, budget ও savings calculator-এ ভুল/খালি ইনপুট দিলে নিরাপদ error দেখায়।
-- [ ] 360px-প্রস্থ ফোনেও horizontal scroll বা কাটা লেখা নেই।
-- [ ] Privacy, Terms, Guides, Rates ও Advertise footer links সঠিক পেজ খোলে।
-- [ ] কোনো বাস্তব বিজ্ঞাপন বা sponsor result না থাকলে placeholder-কে live ad বলা হয় না।
+- Domain কেনা বা DNS পরিবর্তন
+- AdSense account খোলা, publisher ID বসানো বা paid plan নেওয়া
+- Public business email প্রকাশ
+- Analytics/third-party visitor tracking চালু করা
 
-## 7. এখনও ব্যবহারকারীর সিদ্ধান্ত বা তথ্য দরকার
-
-- নিজস্ব domain কিনবেন কি না — এখনই কেনা বাধ্যতামূলক নয়; বাজেট শূন্য রাখলে GitHub Pages URL দিয়েই সাইট পরীক্ষা চালানো যায়।
-- Sponsors-এর জন্য কোন public business email প্রকাশ করা যাবে।
-- ভবিষ্যতে analytics ব্যবহার করতে চান কি না।
-
-**কোনো ডোমেইন, বিজ্ঞাপন অ্যাকাউন্ট, analytics service বা paid plan এই নথি থেকে স্বয়ংক্রিয়ভাবে চালু করা হয়নি।**
+এসবের জন্য আপনার নিজের account, অনুমোদন বা সিদ্ধান্ত প্রয়োজন।
