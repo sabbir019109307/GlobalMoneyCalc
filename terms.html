@@ -19,7 +19,8 @@
 <h2 data-i18n="externalHead">External services and changes</h2><p data-i18n="externalText">Exchange-rate data and other external services are provided by third parties and are governed by their own terms. GlobalMoneyCalc does not control their availability or accuracy. These terms may be updated as the website develops.</p>
 <p><a href="index.html" data-i18n="home">← Return to GlobalMoneyCalc</a></p>
 </main>
-<footer class="foot">© <span id="year"></span> GlobalMoneyCalc · <a href="guides.html" data-i18n="guides">Guides</a><a href="advertise.html" data-i18n="advertise">Advertise</a><a href="privacy.html" data-i18n="privacy">Privacy</a><div class="visitor-local-clock" style="margin-top:12px;font-size:13px;line-height:1.6;color:inherit;opacity:.82"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><br><span id="visitorTimeZone"></span></div>
+<footer class="foot">
+<div class="visitor-local-clock" style="margin:0 auto 14px;max-width:1100px;text-align:center;font-size:13px;line-height:1.6;color:inherit;opacity:.82"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><br><span id="visitorTimeZone"></span></div>© <span id="year"></span> GlobalMoneyCalc · <a href="guides.html" data-i18n="guides">Guides</a><a href="advertise.html" data-i18n="advertise">Advertise</a><a href="privacy.html" data-i18n="privacy">Privacy</a>
 <div class="site-credit" style="margin-top:10px;font-size:13px;line-height:1.6;color:inherit;opacity:.82">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></div>
 </footer>
 <script>
@@ -47,7 +48,7 @@ let lang="en";function setLang(){document.documentElement.lang=lang;document.que
     zoneNode.textContent=(language==="bn"?"সময় অঞ্চল: ":"Time zone: ")+zone;
   }
   updateVisitorClock();
-  window.setInterval(updateVisitorClock,30000);
+  window.setInterval(updateVisitorClock,1000);
   const languageButton=document.getElementById("langBtn");
   if(languageButton)languageButton.addEventListener("click",updateVisitorClock);
 })();
