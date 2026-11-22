@@ -17,6 +17,7 @@
 <div class="code">404</div>
 <h1 id="title">This page could not be found.</h1>
 <p id="message">The address may be incorrect, or the page may have moved. Use the home page to continue.</p>
+<div class="visitor-local-clock" style="margin-top:12px;font-size:13px;line-height:1.6;color:inherit;opacity:.82"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><br><span id="visitorTimeZone"></span></div>
 <div class="actions"><a class="home" id="homeLink" href="./">Go to homepage</a><button class="back" id="backBtn" type="button">Go back</button></div>
 </main>
 <script>
@@ -37,6 +38,30 @@ function setLang(next){
 btn.addEventListener("click",()=>setLang(lang==="en"?"bn":"en"));
 document.getElementById("backBtn").addEventListener("click",()=>history.length>1?history.back():location.assign("./"));
 setLang("en");
+</script>
+<script>
+(function(){
+  const timeNode=document.getElementById("visitorLocalTime");
+  const labelNode=document.getElementById("visitorLocalLabel");
+  const zoneNode=document.getElementById("visitorTimeZone");
+  if(!timeNode||!labelNode||!zoneNode)return;
+  function updateVisitorClock(){
+    const language=(document.documentElement.lang||"en").toLowerCase().startsWith("bn")?"bn":"en";
+    const locale=language==="bn"?"bn-BD":"en-US";
+    const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local device time";
+    const now=new Date();
+    timeNode.dateTime=now.toISOString();
+    timeNode.textContent=new Intl.DateTimeFormat(locale,{
+      dateStyle:"full",timeStyle:"medium"
+    }).format(now);
+    labelNode.textContent=language==="bn"?"আপনার স্থানীয় তারিখ ও সময়":"Your local date & time";
+    zoneNode.textContent=(language==="bn"?"সময় অঞ্চল: ":"Time zone: ")+zone;
+  }
+  updateVisitorClock();
+  window.setInterval(updateVisitorClock,30000);
+  const languageButton=document.getElementById("langBtn");
+  if(languageButton)languageButton.addEventListener("click",updateVisitorClock);
+})();
 </script>
 </body>
 </html>
