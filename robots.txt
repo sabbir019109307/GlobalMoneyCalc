@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sabbir019109307.github.io/GlobalMoneyCalc/sitemap.xml
