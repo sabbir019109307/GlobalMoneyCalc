@@ -16,7 +16,9 @@
 - [x] হোমপেজ ও চার্ট খোলা থাকলে প্রতি ১৫ মিনিট পর নতুন রেট আনার চেষ্টা করে
 - [x] হোমপেজ ও চার্ট একই browser cache ভাগ করে, তাই পেজ বদলালে অপ্রয়োজনীয় duplicate API call কমে
 - [x] রেট পর্যবেক্ষণের সময়, market session এবং provider attribution link
-- [x] Rate methodology, Guides, Privacy Policy, Terms, Advertise এবং bilingual 404 pages
+- [x] Rate methodology, Guides, Privacy Policy, Terms, Advertise এবং ১০ ভাষার 404 পেজ
+- [x] সব public page-এ ১০ ভাষার selector, পছন্দ সংরক্ষণ ও Arabic RTL
+- [x] account.html-এ Supabase email Auth এবং cloud personal finance dashboard
 - [x] প্রতিটি পেজের একেবারে উপরে চলমান স্থানীয় তারিখ/সময়; নিচে SABBIR AHMED TAHIR credit
 - [x] robots.txt, sitemap.xml (currency-rates page-সহ), favicon
 - [x] সব পেজে ঐচ্ছিক GA4 integration প্রস্তুত; আসল Measurement ID না দেওয়া পর্যন্ত সম্পূর্ণ বন্ধ
@@ -31,6 +33,9 @@ https://sabbir019109307.github.io/GlobalMoneyCalc/
 
 মুদ্রার চার্ট:
 https://sabbir019109307.github.io/GlobalMoneyCalc/currency-rates.html
+
+ব্যক্তিগত অ্যাকাউন্ট:
+https://sabbir019109307.github.io/GlobalMoneyCalc/account.html
 
 GitHub Pages-এর সর্বশেষ build/deploy run Success না হওয়া পর্যন্ত নতুন commit live হয়েছে ধরে নেবেন না। Actions:
 https://github.com/sabbir019109307/GlobalMoneyCalc/actions
