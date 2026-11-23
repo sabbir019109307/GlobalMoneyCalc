@@ -3,13 +3,7 @@ window.GMC_EXTRA_WORDS = {"zh":{"skipContent":"跳至正文","navTools":"计算�
 window.GMC_LANGUAGE_LABELS = {"en":{"name":"English","time":"Your local date & time","zone":"Time zone: "},"zh":{"name":"中文","time":"您的当地日期和时间","zone":"时区："},"hi":{"name":"हिन्दी","time":"आपकी स्थानीय तारीख और समय","zone":"समय क्षेत्र: "},"es":{"name":"Español","time":"Fecha y hora local","zone":"Zona horaria: "},"ar":{"name":"العربية","time":"التاريخ والوقت المحلي","zone":"المنطقة الزمنية: "},"fr":{"name":"Français","time":"Date et heure locales","zone":"Fuseau horaire : "},"bn":{"name":"বাংলা","time":"আপনার স্থানীয় তারিখ ও সময়","zone":"সময় অঞ্চল: "},"pt":{"name":"Português","time":"Data e hora locais","zone":"Fuso horário: "},"ru":{"name":"Русский","time":"Местные дата и время","zone":"Часовой пояс: "},"id":{"name":"Bahasa Indonesia","time":"Tanggal dan waktu lokal Anda","zone":"Zona waktu: "}};
 window.GMC_LOCALES = {en:"en-US",zh:"zh-CN",hi:"hi-IN",es:"es-ES",ar:"ar",fr:"fr-FR",bn:"bn-BD",pt:"pt-BR",ru:"ru-RU",id:"id-ID"};
 
-Object.assign(window.GMC_EXTRA_WORDS.en,{navAccount:"My account"});
-Object.assign(window.GMC_EXTRA_WORDS.bn,{navAccount:"আমার অ্যাকাউন্ট"});
-Object.assign(window.GMC_EXTRA_WORDS.zh,{navAccount:"我的账户"});
-Object.assign(window.GMC_EXTRA_WORDS.hi,{navAccount:"मेरा खाता"});
-Object.assign(window.GMC_EXTRA_WORDS.es,{navAccount:"Mi cuenta"});
-Object.assign(window.GMC_EXTRA_WORDS.ar,{navAccount:"حسابي"});
-Object.assign(window.GMC_EXTRA_WORDS.fr,{navAccount:"Mon compte"});
-Object.assign(window.GMC_EXTRA_WORDS.pt,{navAccount:"Minha conta"});
-Object.assign(window.GMC_EXTRA_WORDS.ru,{navAccount:"Мой аккаунт"});
-Object.assign(window.GMC_EXTRA_WORDS.id,{navAccount:"Akun saya"});
+const accountNavLabels={en:"My account",bn:"আমার অ্যাকাউন্ট",zh:"我的账户",hi:"मेरा खाता",es:"Mi cuenta",ar:"حسابي",fr:"Mon compte",pt:"Minha conta",ru:"Мой аккаунт",id:"Akun saya"};
+for (const [language, label] of Object.entries(accountNavLabels)) {
+  window.GMC_EXTRA_WORDS[language] = {...(window.GMC_EXTRA_WORDS[language]||{}), navAccount: label};
+}
