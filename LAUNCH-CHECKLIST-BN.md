@@ -86,7 +86,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 ## 6. Privacy ও security
 
 - [x] বর্তমানে ad script বা analytics tracker নেই।
-- [x] Public calculator input এবং guest local ledger browser-এ থাকে; exchange-rate API-তে টাকার পরিমাণ পাঠানো হয় না।
+- [x] Public calculator input ও save করা calculation browser local storage-এ থাকে; exchange-rate API-তে টাকার পরিমাণ পাঠানো হয় না।
 - [x] অ্যাকাউন্টে ব্যবহারকারী ইচ্ছাকৃতভাবে যে profile, income/expense, debt ও budget রেকর্ড save করেন তা Supabase-এ সংরক্ষিত হয়; Privacy Policy-তে জানানো হয়েছে।
 - [x] চারটি ব্যক্তিগত টেবিলেই RLS চালু; প্রত্যেক authenticated user শুধু নিজের রেকর্ডে প্রবেশ করতে পারে।
 - [x] anon role থেকে ব্যক্তিগত টেবিলের access revoke করা; authenticated role-এ প্রয়োজনীয় CRUD grant আছে।
