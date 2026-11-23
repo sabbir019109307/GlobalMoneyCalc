@@ -16,3 +16,19 @@ const emailPrompt={en:"Enter your email address first.",bn:"আগে আপন�
 for (const [language, message] of Object.entries(emailPrompt)) {
   Object.assign(window.GMC_ACCOUNT_WORDS[language], {enterEmail: message});
 }
+
+const accountNavigationCopy={
+en:{navHome:"Home",rights:"All rights reserved."},
+bn:{navHome:"হোম",rights:"সর্বস্বত্ব সংরক্ষিত।"},
+zh:{navHome:"首页",rights:"版权所有。"},
+hi:{navHome:"होम",rights:"सर्वाधिकार सुरक्षित।"},
+es:{navHome:"Inicio",rights:"Todos los derechos reservados."},
+ar:{navHome:"الرئيسية",rights:"جميع الحقوق محفوظة."},
+fr:{navHome:"Accueil",rights:"Tous droits réservés."},
+pt:{navHome:"Início",rights:"Todos os direitos reservados."},
+ru:{navHome:"Главная",rights:"Все права защищены."},
+id:{navHome:"Beranda",rights:"Hak cipta dilindungi."}
+};
+for (const [language, words] of Object.entries(accountNavigationCopy)) {
+  Object.assign(window.GMC_ACCOUNT_WORDS[language], words);
+}
