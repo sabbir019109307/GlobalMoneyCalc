@@ -32,3 +32,19 @@ id:{navHome:"Beranda",rights:"Hak cipta dilindungi."}
 for (const [language, words] of Object.entries(accountNavigationCopy)) {
   Object.assign(window.GMC_ACCOUNT_WORDS[language], words);
 }
+
+const accountSecurityNotice={
+en:"Supabase Auth handles your password. GlobalMoneyCalc does not receive or store your plain-text password. Your records are protected by database access policies.",
+bn:"আপনার পাসওয়ার্ড Supabase Auth পরিচালনা করে। GlobalMoneyCalc আপনার plain-text পাসওয়ার্ড পায় না বা সংরক্ষণ করে না। ডেটাবেসের নিরাপত্তা নীতিতে আপনার হিসাব সুরক্ষিত।",
+zh:"您的密码由 Supabase Auth 处理。GlobalMoneyCalc 不会接收或存储明文密码。数据库访问策略会保护您的记录。",
+hi:"आपका पासवर्ड Supabase Auth संभालता है। GlobalMoneyCalc आपका plain-text पासवर्ड प्राप्त या संग्रहीत नहीं करता। डेटाबेस की सुरक्षा नीतियाँ आपके रिकॉर्ड की रक्षा करती हैं।",
+es:"Supabase Auth gestiona tu contraseña. GlobalMoneyCalc no recibe ni almacena tu contraseña en texto plano. Las políticas de acceso a la base de datos protegen tus registros.",
+ar:"تتولى Supabase Auth إدارة كلمة المرور. لا يتلقى GlobalMoneyCalc كلمة مرورك بنصها الصريح ولا يخزنها. تحمي سياسات الوصول إلى قاعدة البيانات سجلاتك.",
+fr:"Supabase Auth gère votre mot de passe. GlobalMoneyCalc ne reçoit ni ne stocke votre mot de passe en clair. Les règles d’accès à la base de données protègent vos données.",
+pt:"O Supabase Auth gerencia sua senha. O GlobalMoneyCalc não recebe nem armazena sua senha em texto simples. As políticas de acesso ao banco de dados protegem seus registros.",
+ru:"Пароль обрабатывает Supabase Auth. GlobalMoneyCalc не получает и не хранит пароль в открытом виде. Политики доступа к базе данных защищают ваши записи.",
+id:"Supabase Auth menangani kata sandi Anda. GlobalMoneyCalc tidak menerima atau menyimpan kata sandi teks biasa Anda. Kebijakan akses basis data melindungi catatan Anda."
+};
+for (const [language, message] of Object.entries(accountSecurityNotice)) {
+  Object.assign(window.GMC_ACCOUNT_WORDS[language], {securityNotice: message});
+}
