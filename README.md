@@ -33,28 +33,33 @@ The free plan lists 5,000 requests per month and 10 requests per minute; anonymo
 ## Launch checklist
 See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for deployment, troubleshooting, ads, privacy and mobile testing.
 
-## Publish with GitHub Pages
-1. Open this repository's **Settings**.
-2. Select **Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select branch **main** and folder **/(root)**, then press **Save**.
-5. GitHub will display the published Pages URL. Expected URL:
-   https://sabbir019109307.github.io/GlobalMoneyCalc/
+## Publish with Cloudflare Pages
+The production site is deployed from this repository through the Cloudflare Pages Git integration.
+
+- Production URL: https://globalmoneycalc.pages.dev/
+- Account dashboard: https://globalmoneycalc.pages.dev/account.html
+- Source repository: https://github.com/sabbir019109307/GlobalMoneyCalc
+- Production branch: `main`
+- Framework preset: `None`
+- Build command: leave blank (plain static HTML/CSS/JavaScript)
+- Repository root: use the repository root; do not set a nested root directory.
+
+Cloudflare Pages automatically builds and deploys new commits pushed to the connected `main` branch. Confirm the latest production deployment is successful in the Cloudflare dashboard before treating a commit as live.
 
 ## Account data and privacy
 - Public calculator inputs and saved calculation snapshots are processed/stored in the visitor's browser and are not included in currency-rate API requests.
 - When a visitor intentionally creates an account and saves records in `account.html`, profile, income/expense, debt and monthly budget records are sent to Supabase and stored with that account.
 - Row Level Security policies restrict each authenticated account to its own records. Supabase Auth handles passwords; no service-role key is placed in public JavaScript.
 - Account use is optional; the regular calculators do not require registration.
-- Account dashboard: https://sabbir019109307.github.io/GlobalMoneyCalc/account.html
-- Before email confirmation and password recovery can return correctly, add the GitHub Pages account URL to Supabase Authentication → URL Configuration. See `LAUNCH-CHECKLIST-BN.md`.
+- Account dashboard: https://globalmoneycalc.pages.dev/account.html
+- Before email confirmation and password recovery can return correctly, add the Cloudflare Pages account URL to Supabase Authentication → URL Configuration. See `LAUNCH-CHECKLIST-BN.md`.
 
 ## Important
 - Public calculator input amounts are processed in the visitor's browser and are not sent to GlobalMoneyCalc or included in currency-rate API requests.
 - Exchange rates can differ from a bank, card provider, cash exchange or remittance service. Always check the amount actually offered after fees and spreads.
 - No ad network is connected yet. The advertising area is a placeholder; do not add AdSense scripts or an ads.txt publisher record until an account is approved and the real publisher ID is available.
 - Direct sponsorship information is in `advertise.html`. The current inquiry route is a public GitHub issue; do not post private information there.
-- The GitHub Pages project URL contains a path. A separate domain may be useful for some advertising services, but do not assume a domain is available or buy one without authorization.
+- The free Cloudflare Pages address uses a shared `pages.dev` subdomain. Advertising services may have their own site/domain eligibility requirements; check their current rules before expecting approval or buying a custom domain.
 - This website is informational and does not provide professional financial, tax, legal or investment advice.
 
 
