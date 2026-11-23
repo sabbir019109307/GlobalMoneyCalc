@@ -59,26 +59,17 @@ document.getElementById("languageSelect").addEventListener("change",event=>{if(s
 document.getElementById("year").textContent=new Date().getFullYear();setLang();</script>
 <script>
 (function(){
-  const timeNode=document.getElementById("visitorLocalTime");
-  const labelNode=document.getElementById("visitorLocalLabel");
-  const zoneNode=document.getElementById("visitorTimeZone");
-  if(!timeNode||!labelNode||!zoneNode)return;
-  function updateVisitorClock(){
-    const language=(document.documentElement.lang||"en").toLowerCase().startsWith("bn")?"bn":"en";
-    const locale=language==="bn"?"bn-BD":"en-US";
-    const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local device time";
-    const now=new Date();
-    timeNode.dateTime=now.toISOString();
-    timeNode.textContent=new Intl.DateTimeFormat(locale,{
-      dateStyle:"full",timeStyle:"medium"
-    }).format(now);
-    labelNode.textContent=language==="bn"?"আপনার স্থানীয় তারিখ ও সময়":"Your local date & time";
-    zoneNode.textContent=(language==="bn"?"সময় অঞ্চল: ":"Time zone: ")+zone;
-  }
-  updateVisitorClock();
-  window.setInterval(updateVisitorClock,1000);
-  const languageButton=document.getElementById("langBtn");
-  if(languageButton)languageButton.addEventListener("click",updateVisitorClock);
+ const timeNode=document.getElementById("visitorLocalTime"),labelNode=document.getElementById("visitorLocalLabel"),zoneNode=document.getElementById("visitorTimeZone");
+ if(!timeNode||!labelNode||!zoneNode)return;
+ function updateVisitorClock(){
+  const language=(document.documentElement.lang||"en").toLowerCase(),locale=(window.GMC_LOCALES||{})[language]||"en-US";
+  const label=((window.GMC_LANGUAGE_LABELS||{})[language]||(window.GMC_LANGUAGE_LABELS||{}).en);
+  const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local device time",now=new Date();
+  timeNode.dateTime=now.toISOString();timeNode.textContent=new Intl.DateTimeFormat(locale,{dateStyle:"full",timeStyle:"medium"}).format(now);
+  labelNode.textContent=label.time;zoneNode.textContent=label.zone+zone;
+ }
+ updateVisitorClock();window.setInterval(updateVisitorClock,1000);
+ const selector=document.getElementById("languageSelect");if(selector)selector.addEventListener("change",updateVisitorClock);
 })();
 </script>
   <script src="analytics.js" defer></script>
