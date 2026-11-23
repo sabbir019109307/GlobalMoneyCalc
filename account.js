@@ -43,6 +43,11 @@ function applyLanguage(){
   if(selector){selector.value=lang;const labels=window.GMC_LANGUAGE_LABELS||{};selector.setAttribute("aria-label",labels[lang]?.name||t("language"));}
   document.title=t("title")+" | GlobalMoneyCalc";
   try{localStorage.setItem("gmc_language",lang);}catch{}
+  const txType=$("transactionType");
+  if(txType){Array.from(txType.options).forEach(o=>{o.textContent=o.value==="income"?t("income"):t("expense");});}
+  const debtDirection=$("debtDirection");
+  if(debtDirection){Array.from(debtDirection.options).forEach(o=>{o.textContent=o.value==="i_owe"?t("iOweDirection"):t("owedDirection");});}
+  buildCategoryOptions();
   if(currentUser){renderDashboard();}
   renderLists();
 }
