@@ -110,6 +110,9 @@ Provider-এর বর্তমান নির্দেশিকা:
 
 
 
+## 8. Analytics ও Search Console সেটআপ
+বাংলা নির্দেশনা: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md)। Measurement ID ও Search Console verification Google Account মালিককেই তৈরি করতে হবে।
+
 ## 9. Supabase Account — শেষ owner setup
 
 কোড ও ডাটাবেসের সংযোগ তৈরি করা হয়েছে। তবে email confirmation/password recovery-এর redirect চালাতে Supabase Auth-এ সাইটের URL একবার allowlist করতে হবে।
@@ -140,7 +143,3 @@ Supabase Custom SMTP guide: https://supabase.com/docs/guides/auth/auth-smtp
 - [ ] একই account অন্য browser/device-এ login করলে একই data দেখা যায় কি না
 - [ ] আলাদা account দিয়ে অন্যের তথ্য দেখা যায় না—RLS isolation পরীক্ষা
 - [ ] ১০ ভাষায় account form এবং Arabic RTL layout পরীক্ষা
-
-
-## 8. Analytics ও Search Console সেটআপ
-বাংলা নির্দেশনা: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md)। Measurement ID ও Search Console verification Google Account মালিককেই তৈরি করতে হবে।
