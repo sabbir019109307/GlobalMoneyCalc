@@ -7,9 +7,11 @@
 <style>
 :root{--bg:#f4f6fb;--ink:#172039;--muted:#65708a;--navy:#10152b;--line:#e5e9f2;--purple:#7157f2}
 *{box-sizing:border-box}body{font:16px/1.75 system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;background:var(--bg);color:var(--ink)}header{background:var(--navy);color:white}.nav{max-width:850px;margin:auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}.nav a{color:white;text-decoration:none;font-weight:850}.lang{background:#1b2240;border:1px solid #555b78;color:white;border-radius:10px;padding:8px 12px;font-weight:750}.wrap{max-width:850px;margin:30px auto;padding:28px;background:white;border:1px solid var(--line);border-radius:18px}.wrap h1{font-size:30px;margin:5px 0}.wrap h2{font-size:19px;margin:24px 0 5px}.wrap p{color:#53607a;margin:8px 0}.wrap a{color:var(--purple)}.muted{color:var(--muted);font-size:13px}.foot{text-align:center;padding:20px;color:var(--muted);font-size:13px}.foot a{color:var(--purple);margin:0 8px}@media(max-width:600px){.wrap{margin:15px 12px;padding:19px}.wrap h1{font-size:26px}}
-</style></head><body>
+html[dir="rtl"]{direction:rtl}html[dir="rtl"] body{text-align:right}html[dir="rtl"] .nav{direction:rtl}.lang{max-width:165px;cursor:pointer}
+</style><script src="translations.js"></script><script src="legal-translations.js"></script>
+</head><body>
 <div class="visitor-local-clock" style="display:block;width:100%;box-sizing:border-box;margin:0;padding:8px 12px;background:#090e22;color:#eef0ff;text-align:center;font-size:12px;line-height:1.55;opacity:1"><span id="visitorLocalLabel" style="font-weight:750">Your local date &amp; time</span>: <time id="visitorLocalTime" style="font-variant-numeric:tabular-nums"></time><span id="visitorTimeZone" style="margin-left:9px;color:#bdc5e4"></span></div>
-<header><nav class="nav"><a href="index.html">✦ GlobalMoneyCalc</a><button id="langBtn" class="lang" type="button">বাংলা</button></nav></header>
+<header><nav class="nav"><a href="index.html">✦ GlobalMoneyCalc</a><select id="languageSelect" class="lang" aria-label="Select language"><option value="en">English</option><option value="zh">中文</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="fr">Français</option><option value="bn">বাংলা</option><option value="pt">Português</option><option value="ru">Русский</option><option value="id">Bahasa Indonesia</option></select></nav></header>
 <main class="wrap">
 <h1 data-i18n="title">Terms of Use</h1><p class="muted" data-i18n="updated">Last updated: November 23, 2026</p>
 <p data-i18n="intro">Use GlobalMoneyCalc lawfully and at your own discretion.</p>
@@ -29,29 +31,32 @@ const copy={
 en:{title:"Terms of Use",updated:"Last updated: November 23, 2026",intro:"Use GlobalMoneyCalc lawfully and at your own discretion.",estimatesHead:"Estimates only",estimatesText:"Calculations are general estimates and may not include bank fees, taxes, employer rules, local regulations or other individual circumstances. Savings projections are mathematical illustrations, not guaranteed returns.",ratesHead:"Exchange-rate information",ratesText:"The automatic converter and visual rate chart use third-party indicative exchange rates. Free and keyless feed responses are delayed by 15 minutes and may pause outside market hours. They are not bank transfer quotes, cash-exchange buy/sell prices or settlement rates. Fees, spreads and provider-specific charges are not included. You may enter a rate supplied directly by your bank or exchange provider. The service may be unavailable or change its coverage and terms.",adviceHead:"No professional advice",adviceText:"Nothing on this website is financial, investment, tax, accounting or legal advice. Check important figures with your bank, employer or a qualified professional before making decisions.",availabilityHead:"Availability and accuracy",availabilityText:"The website is provided on an “as is” and “as available” basis. We do not guarantee uninterrupted access, error-free operation or suitability for a particular purpose.",externalHead:"External services and changes",externalText:"Exchange-rate data and other external services are provided by third parties and are governed by their own terms. GlobalMoneyCalc does not control their availability or accuracy. These terms may be updated as the website develops.",home:"← Return to GlobalMoneyCalc",guides:"Guides",advertise:"Advertise",privacy:"Privacy"},
 bn:{title:"ব্যবহারের শর্তাবলি",updated:"সর্বশেষ হালনাগাদ: ২৩ নভেম্বর ২০২৬",intro:"GlobalMoneyCalc আইন মেনে এবং নিজ দায়িত্বে ব্যবহার করুন।",estimatesHead:"শুধু আনুমানিক হিসাব",estimatesText:"এই হিসাবগুলো সাধারণ অনুমান; ব্যাংক ফি, কর, নিয়োগকর্তার নিয়ম, স্থানীয় আইন বা ব্যক্তিগত পরিস্থিতি এতে অন্তর্ভুক্ত নাও থাকতে পারে। সঞ্চয়ের প্রক্ষেপণ গাণিতিক উদাহরণ, নিশ্চিত রিটার্ন নয়।",ratesHead:"বিনিময় হারের তথ্য",ratesText:"স্বয়ংক্রিয় কনভার্টার ও ভিজ্যুয়াল রেট চার্ট তৃতীয় পক্ষের আনুমানিক বিনিময় হার ব্যবহার করে। ফ্রি ও API key ছাড়া ফিডের রেট ১৫ মিনিট বিলম্বিত থাকে এবং বাজার বন্ধ থাকলে আপডেট থামতে পারে। এগুলো ব্যাংক ট্রান্সফারের কোট, নগদ মুদ্রা কেনা-বেচার রেট বা লেনদেন নিষ্পত্তির রেট নয়। ফি, spread বা প্রতিষ্ঠানের নির্দিষ্ট চার্জ এতে অন্তর্ভুক্ত নয়। আপনি আপনার ব্যাংক বা এক্সচেঞ্জ প্রতিষ্ঠানের দেওয়া রেট লিখতে পারেন। সেবা অনুপলব্ধ হতে পারে বা এর মুদ্রা-পরিধি ও শর্ত পরিবর্তিত হতে পারে।",adviceHead:"পেশাদার পরামর্শ নয়",adviceText:"এই ওয়েবসাইটের কোনো তথ্য আর্থিক, বিনিয়োগ, কর, হিসাবরক্ষণ বা আইনি পরামর্শ নয়। গুরুত্বপূর্ণ সিদ্ধান্তের আগে ব্যাংক, নিয়োগকর্তা বা যোগ্য পেশাজীবীর সঙ্গে হিসাব যাচাই করুন।",availabilityHead:"সেবা ও নির্ভুলতা",availabilityText:"ওয়েবসাইটটি “যেমন আছে” এবং “যখন উপলব্ধ” ভিত্তিতে দেওয়া হচ্ছে। নিরবচ্ছিন্ন প্রবেশ, ত্রুটিমুক্ত কার্যক্রম বা নির্দিষ্ট উদ্দেশ্যে উপযোগিতার নিশ্চয়তা দেওয়া হয় না।",externalHead:"বাহ্যিক সেবা ও পরিবর্তন",externalText:"বিনিময় হারের তথ্য ও অন্যান্য বাহ্যিক সেবা তৃতীয় পক্ষ সরবরাহ করে এবং তাদের নিজস্ব শর্তের অধীন। GlobalMoneyCalc তাদের প্রাপ্যতা বা নির্ভুলতা নিয়ন্ত্রণ করে না। ওয়েবসাইটের উন্নয়নের সঙ্গে এই শর্তাবলি পরিবর্তিত হতে পারে।",home:"← GlobalMoneyCalc-এ ফিরে যান",guides:"নির্দেশিকা",advertise:"বিজ্ঞাপন",privacy:"গোপনীয়তা"}
 };
-let lang="en";function setLang(){document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(node=>{const key=node.dataset.i18n;if(copy[lang][key])node.innerHTML=copy[lang][key]});document.getElementById("langBtn").textContent=lang==="en"?"বাংলা":"English";document.title=lang==="en"?"Terms of Use | GlobalMoneyCalc":"ব্যবহারের শর্তাবলি | GlobalMoneyCalc"}document.getElementById("langBtn").onclick=()=>{lang=lang==="en"?"bn":"en";setLang()};document.getElementById("year").textContent=new Date().getFullYear();setLang();
+Object.assign(copy,((window.GMC_LEGAL_WORDS||{})["terms"])||{});
+const supportedLanguages=["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
+let lang=(function(){try{const saved=localStorage.getItem("gmc_language");return supportedLanguages.includes(saved)?saved:"en"}catch(e){return "en"}})();
+function setLang(){
+ document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ const words=copy[lang]||copy.en;
+ document.querySelectorAll("[data-i18n]").forEach(node=>{const value=words[node.dataset.i18n];if(value!==undefined)node.innerHTML=value});
+ const selector=document.getElementById("languageSelect");if(selector)selector.value=lang;
+ try{localStorage.setItem("gmc_language",lang)}catch(e){}
+ document.title=(words.title||"GlobalMoneyCalc")+" | GlobalMoneyCalc";
+}
+document.getElementById("languageSelect").addEventListener("change",event=>{if(supportedLanguages.includes(event.target.value)){lang=event.target.value;setLang()}});
+document.getElementById("year").textContent=new Date().getFullYear();setLang();
 </script><script>
 (function(){
-  const timeNode=document.getElementById("visitorLocalTime");
-  const labelNode=document.getElementById("visitorLocalLabel");
-  const zoneNode=document.getElementById("visitorTimeZone");
-  if(!timeNode||!labelNode||!zoneNode)return;
-  function updateVisitorClock(){
-    const language=(document.documentElement.lang||"en").toLowerCase().startsWith("bn")?"bn":"en";
-    const locale=language==="bn"?"bn-BD":"en-US";
-    const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local device time";
-    const now=new Date();
-    timeNode.dateTime=now.toISOString();
-    timeNode.textContent=new Intl.DateTimeFormat(locale,{
-      dateStyle:"full",timeStyle:"medium"
-    }).format(now);
-    labelNode.textContent=language==="bn"?"আপনার স্থানীয় তারিখ ও সময়":"Your local date & time";
-    zoneNode.textContent=(language==="bn"?"সময় অঞ্চল: ":"Time zone: ")+zone;
-  }
-  updateVisitorClock();
-  window.setInterval(updateVisitorClock,1000);
-  const languageButton=document.getElementById("langBtn");
-  if(languageButton)languageButton.addEventListener("click",updateVisitorClock);
+ const timeNode=document.getElementById("visitorLocalTime"),labelNode=document.getElementById("visitorLocalLabel"),zoneNode=document.getElementById("visitorTimeZone");
+ if(!timeNode||!labelNode||!zoneNode)return;
+ function updateVisitorClock(){
+  const language=(document.documentElement.lang||"en").toLowerCase(),locale=(window.GMC_LOCALES||{})[language]||"en-US";
+  const label=((window.GMC_LANGUAGE_LABELS||{})[language]||(window.GMC_LANGUAGE_LABELS||{}).en);
+  const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local device time",now=new Date();
+  timeNode.dateTime=now.toISOString();timeNode.textContent=new Intl.DateTimeFormat(locale,{dateStyle:"full",timeStyle:"medium"}).format(now);
+  labelNode.textContent=label.time;zoneNode.textContent=label.zone+zone;
+ }
+ updateVisitorClock();window.setInterval(updateVisitorClock,1000);
+ const selector=document.getElementById("languageSelect");if(selector)selector.addEventListener("change",updateVisitorClock);
 })();
 </script>
   <script src="analytics.js" defer></script>
