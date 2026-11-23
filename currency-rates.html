@@ -21,10 +21,12 @@ main{max-width:1120px;margin:0 auto;padding:34px 18px 52px}.intro{text-align:cen
 .chartTitle{font-size:20px;font-weight:850;margin:25px 0 3px}.chartSub{font-size:13px;color:var(--muted);margin:0}.chart{position:relative;margin-top:18px;min-height:350px;border-radius:16px;background:#edf6f4;padding:25px 14px 14px;overflow:hidden}.bars{height:290px;display:flex;align-items:flex-end;justify-content:space-around;gap:10px;position:relative;z-index:1}.barItem{flex:1;min-width:0;max-width:112px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px}.barValue{font-size:11px;font-weight:800;color:#29364c;white-space:nowrap}.bar{width:min(72%,76px);min-height:12px;border-radius:7px 7px 0 0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:850;box-shadow:inset 0 1px #ffffff55}.barCode{font-size:12px;font-weight:900;letter-spacing:.04em}.arrow{position:absolute;inset:15px 5% 85px;width:90%;height:190px;z-index:2;pointer-events:none;overflow:visible}.arrow path{fill:none;stroke:var(--red);stroke-width:10;stroke-linecap:square;stroke-linejoin:bevel}.arrow polygon{fill:var(--red)}.legend{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
 .searchControl{margin:22px 0 0;max-width:420px}.searchControl label{display:block;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:7px}.searchControl input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:inherit}.tableWrap{margin-top:12px;overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:420px}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #e8eeee;font-size:13px}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums}.currency{font-weight:800}.flag{font-size:20px;margin-right:8px}.note{font-size:12px;color:var(--muted);line-height:1.6;margin:17px 0 0}footer{background:#10142e;color:#dce2f7;padding:22px 5%;text-align:center;font-size:12px}footer a{color:#dce2f7;margin:0 7px}.credit{margin-top:9px;opacity:.8}
 @media(max-width:600px){header{align-items:flex-start}nav{gap:10px}.brand{font-size:17px}.panel{padding:15px}.chart{padding:20px 7px 10px;min-height:310px}.bars{height:245px;gap:3px}.bar{width:75%;font-size:10px}.barValue{font-size:9px}.barCode{font-size:10px}.arrow{top:8px;height:160px;stroke-width:7}.chartTitle{font-size:18px}}
-</style></head>
+html[dir="rtl"]{direction:rtl}html[dir="rtl"] body{text-align:right}html[dir="rtl"] header nav{direction:rtl}.lang{max-width:165px;cursor:pointer}
+</style><script src="translations.js"></script><script src="rate-translations.js"></script>
+</head>
 <body>
 <div class="clock"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><span id="visitorTimeZone"></span></div>
-<header><a class="brand" href="index.html">✦ GlobalMoneyCalc</a><nav><a href="index.html">Home</a><a href="rates.html">Rate method</a><a href="guides.html">Guides</a><button class="lang" id="langBtn">বাংলা</button></nav></header>
+<header><a class="brand" href="index.html">✦ GlobalMoneyCalc</a><nav><a id="homeLink" href="index.html">Home</a><a id="rateMethodLink" href="rates.html">Rate method</a><a id="guidesLink" href="guides.html">Guides</a><select class="lang" id="languageSelect" aria-label="Select language"><option value="en">English</option><option value="zh">中文</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="fr">Français</option><option value="bn">বাংলা</option><option value="pt">Português</option><option value="ru">Русский</option><option value="id">Bahasa Indonesia</option></select></nav></header>
 <main>
 <section class="intro"><div class="eyebrow" id="eyebrow">INTERNATIONAL CURRENCY BOARD</div><h1 id="title">Currency Rate Scale</h1><p id="subtitle">Compare currencies around the world with an easy-to-read visual rate chart.</p></section>
 <section class="panel">
@@ -35,31 +37,42 @@ main{max-width:1120px;margin:0 auto;padding:34px 18px 52px}.intro{text-align:cen
 <div class="searchControl"><label id="searchLabel" for="search">Search all currencies</label><input id="search" type="search" autocomplete="off" placeholder="Type a currency code or name"></div><div class="tableWrap"><table><thead><tr><th id="currencyHead">Currency</th><th id="rateHead">Rate for 1 base unit</th></tr></thead><tbody id="rows"><tr><td colspan="2">Loading…</td></tr></tbody></table></div>
 <p class="note" id="note">Indicative rates, not bank or cash-exchange quotes. Free and keyless rates are delayed by 15 minutes. Credit: <a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">API documentation</a>.</p>
 </section></main>
-<footer><div>© <span id="year"></span> GlobalMoneyCalc. All rights reserved. <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="advertise.html">Advertise</a><a href="rates.html">Rate details</a></div><div class="credit">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></div></footer>
+<footer><div>© <span id="year"></span> GlobalMoneyCalc. <span id="rightsText">All rights reserved.</span> <a id="privacyLink" href="privacy.html">Privacy</a><a id="termsLink" href="terms.html">Terms</a><a id="advertiseLink" href="advertise.html">Advertise</a><a id="rateDetailsLink" href="rates.html">Rate details</a></div><div class="credit">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></div></footer>
 <script>
-let lang="en",data=null,activeRequest=0;
-const $=id=>document.getElementById(id);
-const names={KWD:["Kuwaiti Dinar","دينار كويتي","🇰🇼"],USD:["US Dollar","ডলার","🇺🇸"],EUR:["Euro","ইউরো","🇪🇺"],BDT:["Bangladeshi Taka","বাংলাদেশি টাকা","🇧🇩"],SAR:["Saudi Riyal","সৌদি রিয়াল","🇸🇦"],AED:["UAE Dirham","আমিরাতি দিরহাম","🇦🇪"],GBP:["British Pound","ব্রিটিশ পাউন্ড","🇬🇧"],INR:["Indian Rupee","ভারতীয় রুপি","🇮🇳"],JPY:["Japanese Yen","জাপানি ইয়েন","🇯🇵"],OMR:["Omani Rial","ওমানি রিয়াল","🇴🇲"],QAR:["Qatari Riyal","কাতারি রিয়াল","🇶🇦"],BHD:["Bahraini Dinar","বাহরাইনি দিনার","🇧🇭"],CAD:["Canadian Dollar","কানাডিয়ান ডলার","🇨🇦"],AUD:["Australian Dollar","অস্ট্রেলিয়ান ডলার","🇦🇺"],CHF:["Swiss Franc","সুইস ফ্রাঁ","🇨🇭"],CNY:["Chinese Yuan","চীনা ইউয়ান","🇨🇳"],PKR:["Pakistani Rupee","পাকিস্তানি রুপি","🇵🇰"],LKR:["Sri Lankan Rupee","শ্রীলঙ্কান রুপি","🇱🇰"],NPR:["Nepalese Rupee","নেপালি রুপি","🇳🇵"],MYR:["Malaysian Ringgit","মালয়েশিয়ান রিঙ্গিত","🇲🇾"],SGD:["Singapore Dollar","সিঙ্গাপুর ডলার","🇸🇬"],THB:["Thai Baht","থাই বাত","🇹🇭"],TRY:["Turkish Lira","তুর্কি লিরা","🇹🇷"],IDR:["Indonesian Rupiah","ইন্দোনেশীয় রুপিয়া","🇮🇩"],PHP:["Philippine Peso","ফিলিপাইন পেসো","🇵🇭"],ZAR:["South African Rand","দক্ষিণ আফ্রিকান র‍্যান্ড","🇿🇦"],NZD:["New Zealand Dollar","নিউজিল্যান্ড ডলার","🇳🇿"],KRW:["South Korean Won","দক্ষিণ কোরীয় ওন","🇰🇷"],MXN:["Mexican Peso","মেক্সিকান পেসো","🇲🇽"],NOK:["Norwegian Krone","নরওয়েজিয়ান ক্রোন","🇳🇴"],SEK:["Swedish Krona","সুইডিশ ক্রোনা","🇸🇪"],DKK:["Danish Krone","ড্যানিশ ক্রোন","🇩🇰"]};
-const colors=["#f47732","#4e64db","#079b2b","#e0cf12","#a218aa","#ef1684","#168fa5","#7b55c9"];
-const CACHE_PREFIX="globalmoneycalc_shared_rates_";
-function clock(){const z=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local";$("visitorLocalLabel").textContent=lang==="bn"?"আপনার স্থানীয় তারিখ ও সময়":"Your local date & time";$("visitorLocalTime").dateTime=new Date().toISOString();$("visitorLocalTime").textContent=new Intl.DateTimeFormat(lang==="bn"?"bn-BD":"en-US",{dateStyle:"full",timeStyle:"medium"}).format(new Date());$("visitorTimeZone").textContent=(lang==="bn"?"সময় অঞ্চল: ":"Time zone: ")+z}
-function displayName(code){const known=names[code];if(known)return lang==="bn"?known[1]:known[0];try{return new Intl.DisplayNames([lang==="bn"?"bn":"en"],{type:"currency"}).of(code)||code}catch(e){return code}}
+const words=window.GMC_RATE_WORDS||{};
+const locales=window.GMC_LOCALES||{en:"en-US",zh:"zh-CN",hi:"hi-IN",es:"es-ES",ar:"ar",fr:"fr-FR",bn:"bn-BD",pt:"pt-BR",ru:"ru-RU",id:"id-ID"};
+const supported=["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
+let lang=(function(){try{const v=localStorage.getItem("gmc_language");return supported.includes(v)?v:"en"}catch(e){return "en"}})(),data=null,activeRequest=0;
+const $=id=>document.getElementById(id),t=k=>(words[lang]||words.en)[k]||words.en[k]||k;
+function clock(){
+ const z=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local";
+ const label=(window.GMC_LANGUAGE_LABELS||{})[lang]||(window.GMC_LANGUAGE_LABELS||{}).en;
+ $("visitorLocalLabel").textContent=label.time;
+ $("visitorLocalTime").dateTime=new Date().toISOString();
+ $("visitorLocalTime").textContent=new Intl.DateTimeFormat(locales[lang]||"en-US",{dateStyle:"full",timeStyle:"medium"}).format(new Date());
+ $("visitorTimeZone").textContent=label.zone+z;
+}
+function displayName(code){
+ if(lang==="bn"&&names[code])return names[code][1];
+ if(lang==="en"&&names[code])return names[code][0];
+ try{return new Intl.DisplayNames([locales[lang]||"en-US"],{type:"currency"}).of(code)||names[code]?.[0]||code}catch(e){return names[code]?.[0]||code}
+}
 function flag(code){return names[code]?.[2]||""}
-function rateTime(value){const d=new Date(value);if(Number.isNaN(d.getTime()))return lang==="bn"?"সময় অজানা":"time unavailable";return new Intl.DateTimeFormat(lang==="bn"?"bn-BD":"en-US",{dateStyle:"medium",timeStyle:"short",timeZone:"UTC"}).format(d)+" UTC"}
+function rateTime(value){const d=new Date(value);if(Number.isNaN(d.getTime()))return t("timeUnknown");return new Intl.DateTimeFormat(locales[lang]||"en-US",{dateStyle:"medium",timeStyle:"short",timeZone:"UTC"}).format(d)+" UTC"}
 function setStatus(message){$("status").textContent=message}
 function showStatus(json,cached=false,failed=false){
  const observed=rateTime(json.data_updated_at||json.timestamp),session=json.market_session||"unknown";
- const sessions=lang==="bn"?{open:"বাজার খোলা",weekend:"সাপ্তাহিক ছুটি",interbank_closed:"আন্তঃব্যাংক বাজার বন্ধ",unknown:"বাজারের অবস্থা অজানা"}:{open:"Market open",weekend:"Weekend",interbank_closed:"Interbank market closed",unknown:"Market session unknown"};
+ const sessionText={open:t("marketOpen"),weekend:t("weekend"),interbank_closed:t("interbankClosed"),unknown:t("marketUnknown")};
  const stale=Object.values(json.stale||{}).some(Boolean);
  const served=Date.parse(json.timestamp||"");
  const cacheOld=Number.isFinite(served)&&Date.now()-served>30*60*1000;
  let prefix;
- if(failed&&(cacheOld||stale))prefix=lang==="bn"?"নতুন রেট আনা যায়নি; সংরক্ষিত রেট পুরোনো হতে পারে":"Refresh failed; saved rates may be out of date";
- else if(failed)prefix=lang==="bn"?"নতুন রেট আনা যায়নি; সংরক্ষিত রেট দেখানো হচ্ছে":"Could not refresh; showing saved rates";
- else if(cached)prefix=lang==="bn"?"সংরক্ষিত রেট; নতুন রেট যাচাই হচ্ছে":"Saved rates; checking for updates";
- else prefix=lang==="bn"?"রেট আপডেট হয়েছে":"Rates updated";
- const staleText=stale?(lang==="bn"?" · কিছু উৎসের রেট পুরোনো":" · Some sources are stale"):"";
- setStatus(prefix+" · "+(lang==="bn"?"পর্যবেক্ষণ: ":"Observed: ")+observed+" · "+(sessions[session]||session)+staleText);
+ if(failed&&(cacheOld||stale))prefix=t("refreshOld");
+ else if(failed)prefix=t("refreshFallback");
+ else if(cached)prefix=t("savedChecking");
+ else prefix=t("updated");
+ const staleText=stale?" · "+t("stale"):"";
+ setStatus(prefix+" · "+t("observed")+observed+" · "+(sessionText[session]||session)+staleText);
 }
 function setBaseOptions(json){
  const select=$("base"),current=select.value;
@@ -71,14 +84,14 @@ function setBaseOptions(json){
 function render(){
  if(!data)return;
  const base=$("base").value,rates=data.rates||{},allRates={USD:1,...rates},baseRate=allRates[base];
- if(!Number.isFinite(baseRate)||baseRate<=0){setStatus(lang==="bn"?"এই মূল মুদ্রার রেট পাওয়া যায়নি।":"Rate unavailable for this base currency.");$("bars").innerHTML="";$("rows").innerHTML="";return}
+ if(!Number.isFinite(baseRate)||baseRate<=0){setStatus(t("baseUnavailable"));$("bars").innerHTML="";$("rows").innerHTML="";return}
  const list=Object.entries(allRates).filter(([code,value])=>code!==base&&Number.isFinite(value)&&value>0).map(([code,value])=>[code,value/baseRate]).sort((a,b)=>b[1]-a[1]);
  const top=list.slice(0,8),max=top[0]?.[1]||1;
- const fmt=new Intl.NumberFormat(lang==="bn"?"bn-BD":"en-US",{maximumSignificantDigits:6});
- $("bars").innerHTML=top.map(([code,value],i)=>{const h=Math.max(10,Math.round(value/max*210));return '<div class="barItem"><div class="barValue">'+fmt.format(value)+'</div><div class="bar" style="height:'+h+'px;background:'+colors[i%colors.length]+'">'+(names[code]?.[2]||"🌐")+'</div><div class="barCode">'+code+'</div></div>'}).join("");
- const query=$("search").value.trim().toLocaleLowerCase(lang==="bn"?"bn-BD":"en-US");
- const matches=list.filter(([code])=>(code+" "+displayName(code)).toLocaleLowerCase(lang==="bn"?"bn-BD":"en-US").includes(query));
- $("rows").innerHTML=matches.length?matches.map(([code,value])=>'<tr><td><span class="flag">'+(names[code]?.[2]||"")+'</span><span class="currency">'+code+'</span> · '+displayName(code)+'</td><td>'+fmt.format(value)+'</td></tr>').join(""):'<tr><td colspan="2">'+(lang==="bn"?"মিল পাওয়া যায়নি":"No matching currencies")+'</td></tr>';
+ const fmt=new Intl.NumberFormat(locales[lang]||"en-US",{maximumSignificantDigits:6});
+ $("bars").innerHTML=top.map(([code,value],i)=>{const height=Math.max(10,Math.round(value/max*210));return '<div class="barItem"><div class="barValue">'+fmt.format(value)+'</div><div class="bar" style="height:'+height+'px;background:'+colors[i%colors.length]+'">'+(names[code]?.[2]||"🌐")+'</div><div class="barCode">'+code+'</div></div>'}).join("");
+ const locale=locales[lang]||"en-US",query=$("search").value.trim().toLocaleLowerCase(locale);
+ const matches=list.filter(([code])=>(code+" "+displayName(code)).toLocaleLowerCase(locale).includes(query));
+ $("rows").innerHTML=matches.length?matches.map(([code,value])=>'<tr><td><span class="flag">'+(names[code]?.[2]||"")+'</span><span class="currency">'+code+'</span> · '+displayName(code)+'</td><td>'+fmt.format(value)+'</td></tr>').join(""):'<tr><td colspan="2">'+t("noMatches")+'</td></tr>';
 }
 function readCache(){try{const cached=JSON.parse(localStorage.getItem(CACHE_PREFIX+"USD")||"null");return cached&&cached.result==="success"&&cached.base==="USD"&&cached.rates?cached:null}catch(e){return null}}
 async function load(){
@@ -88,8 +101,8 @@ async function load(){
   const nextUpdate=Number(cached.time_next_update_unix||0);
   if(nextUpdate>0&&Date.now()<nextUpdate*1000)return;
  }else if(!data){
-  $("bars").innerHTML="";$("rows").innerHTML='<tr><td colspan="2">'+(lang==="bn"?"রেট লোড হচ্ছে…":"Loading…")+'</td></tr>';
-  setStatus(lang==="bn"?"রেট লোড হচ্ছে…":"Loading exchange rates…");
+  $("bars").innerHTML="";$("rows").innerHTML='<tr><td colspan="2">'+t("loading")+'</td></tr>';
+  setStatus(t("loadingRates"));
  }
  try{
   const response=await fetch("https://api.exchangerate.dev/v1/latest/USD",{cache:"no-store"});
@@ -103,30 +116,26 @@ async function load(){
  }catch(error){
   if(request!==activeRequest)return;
   if(data)showStatus(data,true,true);
-  else setStatus(lang==="bn"?"রেট পাওয়া যায়নি। একটু পরে আবার চেষ্টা করুন।":"Rates unavailable. Please try again later.");
+  else setStatus(t("ratesUnavailable"));
  }
 }
 function setText(){
- const bn=lang==="bn";
- $("eyebrow").textContent=bn?"আন্তর্জাতিক মুদ্রা বোর্ড":"INTERNATIONAL CURRENCY BOARD";
- $("title").textContent=bn?"বিভিন্ন দেশের মুদ্রার রেট":"Currency Rate Scale";
- $("subtitle").textContent=bn?"সমর্থিত বিভিন্ন মুদ্রার বিনিময় হার চার্টে ও তালিকায় দেখুন।":"Explore supported currencies in a visual chart and searchable list.";
- $("baseLabel").textContent=bn?"মূল মুদ্রা · ১ একক":"BASE CURRENCY · 1 UNIT";
- $("chartTitle").textContent=bn?"মুদ্রার রেট তুলনা":"Currency rate comparison";
- $("chartSub").textContent=bn?"মূল মুদ্রার ১ এককে কত ইউনিট পাওয়া যায়, সেই অনুযায়ী প্রথম ৮টি মুদ্রা।":"Top eight currencies by units received for 1 unit of the selected base currency.";
- $("legend").textContent=bn?"এটি সংখ্যাগত এককের তুলনা; মুদ্রার শক্তি বা ক্রয়ক্ষমতার র‍্যাঙ্কিং নয়।":"This compares numeric units only; it is not a ranking of currency strength or purchasing power.";
- $("searchLabel").textContent=bn?"সব সমর্থিত মুদ্রা খুঁজুন":"Search all supported currencies";
- $("search").placeholder=bn?"মুদ্রার কোড বা নাম লিখুন":"Type a currency code or name";
- $("currencyHead").textContent=bn?"মুদ্রা":"Currency";
- $("rateHead").textContent=bn?"১ এককের বিনিময় হার":"Rate for 1 base unit";
- $("langBtn").textContent=bn?"English":"বাংলা";
- $("note").innerHTML=(bn?"এগুলো ইন্ডিকেটিভ রেট; ব্যাংক বা মানি এক্সচেঞ্জের লেনদেনের কোট নয়। ফ্রি ও keyless রেট ১৫ মিনিট বিলম্বিত। Credit: ":"Indicative rates, not bank or cash-exchange quotes. Free and keyless rates are delayed by 15 minutes. Credit: ")+'<a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">'+(bn?"ডকুমেন্টেশন":"API documentation")+'</a>.';
+ const w=words[lang]||words.en;
+ document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ $("homeLink").textContent=w.home;$("rateMethodLink").textContent=w.rateMethod;$("guidesLink").textContent=w.guides;
+ ["eyebrow","title","subtitle","baseLabel","chartTitle","chartSub","legend","searchLabel","currencyHead","rateHead"].forEach(id=>$(id).textContent=w[id]);
+ $("search").placeholder=w.placeholder;
+ $("note").innerHTML=w.noteLead+'<a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">'+w.apiDocs+'</a>.';
+ $("rightsText").textContent=w.rights;$("privacyLink").textContent=w.privacy;$("termsLink").textContent=w.terms;$("advertiseLink").textContent=w.advertise;$("rateDetailsLink").textContent=w.rateDetails;
+ $("languageSelect").value=lang;
+ document.title=w.title+" | GlobalMoneyCalc";
+ try{localStorage.setItem("gmc_language",lang)}catch(e){}
  clock();
 }
 $("base").addEventListener("change",()=>{render();if(data)showStatus(data,false,false)});
 $("search").addEventListener("input",render);
-$("langBtn").addEventListener("click",()=>{lang=lang==="en"?"bn":"en";document.documentElement.lang=lang;setText();if(data){setBaseOptions(data);render();showStatus(data,true,false)}});
+$("languageSelect").addEventListener("change",event=>{if(!supported.includes(event.target.value))return;lang=event.target.value;setText();if(data){setBaseOptions(data);render();showStatus(data,true,false)}});
 $("year").textContent=new Date().getFullYear();
-clock();setText();window.setInterval(clock,1000);load();window.setInterval(load,15*60*1000+5000);
+setText();clock();window.setInterval(clock,1000);load();window.setInterval(load,15*60*1000+5000);
 </script>  <script src="analytics.js" defer></script>
 </body></html>
