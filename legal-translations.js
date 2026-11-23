@@ -11,3 +11,6 @@ for (const [language, values] of Object.entries(termsAccountCopy)) {
   window.GMC_LEGAL_WORDS.terms[language] ||= {};
   Object.assign(window.GMC_LEGAL_WORDS.terms[language], {accountUseHead: values[0], accountUseText: values[1]});
 }
+
+const GMC_ACCOUNT_NAV_LABELS={"en":"My account","bn":"আমার অ্যাকাউন্ট","zh":"我的账户","hi":"मेरा खाता","es":"Mi cuenta","ar":"حسابي","fr":"Mon compte","pt":"Minha conta","ru":"Мой аккаунт","id":"Akun saya"};
+["privacy","terms"].forEach(page=>Object.entries(GMC_ACCOUNT_NAV_LABELS).forEach(([language,value])=>{if(window.GMC_LEGAL_WORDS?.[page]?.[language])window.GMC_LEGAL_WORDS[page][language].navAccount=value;}));
