@@ -59,6 +59,7 @@ Two follow-up migrations tighten default privileges for new objects created by t
 - Account use is optional; the regular calculators do not require registration.
 - Account dashboard: https://globalmoneycalc.pages.dev/account.html
 - Before email confirmation and password recovery can return correctly, add the Cloudflare Pages account URL to Supabase Authentication → URL Configuration. See `LAUNCH-CHECKLIST-BN.md`.
+- Supabase's built-in hosted email sender is for team-member testing only (currently 2 emails per hour); public sign-up/confirmation/password-reset flows need a custom SMTP provider. Do not disable email confirmation to bypass this limit.
 
 ## Important
 - Public calculator input amounts are processed in the visitor's browser and are not sent to GlobalMoneyCalc or included in currency-rate API requests.
