@@ -41,9 +41,6 @@ function applyLanguage(){
   });
   const selector=$("languageSelect");
   if(selector){selector.value=lang;const labels=window.GMC_LANGUAGE_LABELS||{};selector.setAttribute("aria-label",labels[lang]?.name||t("language"));}
-  if($("transactionType")){$("transactionType").options[0].text=t("income");$("transactionType").options[1].text=t("expense");}
-  if($("debtDirection")){$("debtDirection").options[0].text=t("iOweDirection");$("debtDirection").options[1].text=t("owedDirection");}
-  if($("transactionCategory"))buildCategoryOptions();
   document.title=t("title")+" | GlobalMoneyCalc";
   try{localStorage.setItem("gmc_language",lang);}catch{}
   const txType=$("transactionType");
