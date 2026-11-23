@@ -118,7 +118,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 কোড ও ডাটাবেসের সংযোগ তৈরি করা হয়েছে। তবে email confirmation/password recovery-এর redirect চালাতে Supabase Auth-এ সাইটের URL একবার allowlist করতে হবে।
 
 1. Supabase Dashboard খুলে **GlobalMoneyCalc** project নির্বাচন করুন।
-2. **Authentication → URL Configuration** খুলুন।
+2. **Authentication → URL Configuration** খুলুন: [সরাসরি Supabase সেটিংস খুলুন](https://supabase.com/dashboard/project/zppdlookfubyhezgwrjf/auth/url-configuration)।
 3. **Site URL** হিসেবে দিন:
    `https://sabbir019109307.github.io/GlobalMoneyCalc/`
 4. **Redirect URLs**-এ এই দুটি URL যোগ করুন:
@@ -128,7 +128,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 
 তারপর ওয়েবসাইটের **My account** পেজে গিয়ে নিজের ইমেইল দিয়ে account তৈরি করুন। Confirmation email এলে সেটি খুলে verify করুন, তারপর login করুন। প্রথমবার login হলে আপনার profile তৈরি হবে।
 
-**সবার জন্য account registration চালু করার আগে Custom SMTP লাগবে।** Supabase-এর built-in email service শুধু আপনার Supabase organization/project-এর team member email address-এ চিঠি পাঠায়; বাইরের সাধারণ visitor-দের ঠিকানায় পাঠায় না। Supabase Dashboard → **Authentication → SMTP Settings**-এ নিজের SMTP provider যুক্ত করুন। SMTP সেট না করা পর্যন্ত শুধু team member-এর email দিয়ে signup/confirmation test করা যাবে। Confirm email বন্ধ করে এই সীমা পাশ কাটাবেন না।
+**সবার জন্য account registration চালু করার আগে Custom SMTP লাগবে।** Supabase-এর built-in email service শুধু আপনার Supabase organization/project-এর team member email address-এ চিঠি পাঠায়; বাইরের সাধারণ visitor-দের ঠিকানায় পাঠায় না। Supabase Dashboard → **Authentication → SMTP Settings**-এ নিজের SMTP provider যুক্ত করুন: [SMTP সেটিংস খুলুন](https://supabase.com/dashboard/project/zppdlookfubyhezgwrjf/auth/smtp)। SMTP সেট না করা পর্যন্ত শুধু team member-এর email দিয়ে signup/confirmation test করা যাবে। Confirm email বন্ধ করে এই সীমা পাশ কাটাবেন না।
 
 নিরাপত্তা পরীক্ষার জন্য আলাদা browser/incognito profile দিয়ে অন্য account তৈরি করে নিশ্চিত করুন যে এক account অন্য account-এর transaction/debt/budget দেখতে পারে না। কোনো service-role বা secret key ওয়েবসাইটে দেবেন না।
 
