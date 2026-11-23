@@ -42,10 +42,12 @@ See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for deployment, troubleshoo
    https://sabbir019109307.github.io/GlobalMoneyCalc/
 
 ## Account data and privacy
-- Public calculator inputs and the guest money ledger are processed/stored in the visitor's browser and are not included in currency-rate API requests.
+- Public calculator inputs and saved calculation snapshots are processed/stored in the visitor's browser and are not included in currency-rate API requests.
 - When a visitor intentionally creates an account and saves records in `account.html`, profile, income/expense, debt and monthly budget records are sent to Supabase and stored with that account.
 - Row Level Security policies restrict each authenticated account to its own records. Supabase Auth handles passwords; no service-role key is placed in public JavaScript.
 - Account use is optional; the regular calculators do not require registration.
+- Account dashboard: https://sabbir019109307.github.io/GlobalMoneyCalc/account.html
+- Before email confirmation and password recovery can return correctly, add the GitHub Pages account URL to Supabase Authentication → URL Configuration. See `LAUNCH-CHECKLIST-BN.md`.
 
 ## Important
 - Public calculator input amounts are processed in the visitor's browser and are not sent to GlobalMoneyCalc or included in currency-rate API requests.
