@@ -39,7 +39,6 @@ jobs:
             'sitemap.xml',
             'analytics.js',
             'save-calculations.js',
-            'money-ledger.js',
             'account.js',
             'supabase-config.js',
             'translations.js',
@@ -101,14 +100,12 @@ jobs:
           const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
           const analytics = fs.readFileSync('analytics.js', 'utf8');
           const savedCalculations = fs.readFileSync('save-calculations.js', 'utf8');
-          const moneyLedger = fs.readFileSync('money-ledger.js', 'utf8');
           const accountScript = fs.readFileSync('account.js', 'utf8');
           const accountTranslations = fs.readFileSync('account-translations.js', 'utf8');
           const supabaseConfig = fs.readFileSync('supabase-config.js', 'utf8');
 
           try { new Function(analytics); } catch (error) { errors.push('analytics.js: syntax error: ' + error.message); }
           try { new Function(savedCalculations); } catch (error) { errors.push('save-calculations.js: syntax error: ' + error.message); }
-          try { new Function(moneyLedger); } catch (error) { errors.push('money-ledger.js: syntax error: ' + error.message); }
           try { new Function(accountScript); } catch (error) { errors.push('account.js: syntax error: ' + error.message); }
           try { new Function(accountTranslations); } catch (error) { errors.push('account-translations.js: syntax error: ' + error.message); }
           try { new Function(supabaseConfig); } catch (error) { errors.push('supabase-config.js: syntax error: ' + error.message); }
