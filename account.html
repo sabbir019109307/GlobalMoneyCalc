@@ -52,7 +52,7 @@ html[dir="rtl"] body{text-align:right}html[dir="rtl"] .nav,html[dir="rtl"] .dash
 <button class="btn primary" type="submit" data-i18n="signup">Create account</button><div class="authSwitch"><button class="textButton" type="button" id="showLogin" data-i18n="switchLogin">Already registered? Sign in</button></div>
 </form>
 </div>
-<div class="notice" style="margin:15px 0 0">Your password is handled by Supabase Auth. GlobalMoneyCalc never stores your plain-text password. Your financial records are protected by database row-level security.</div>
+<div class="notice" data-i18n="securityNotice" style="margin:15px 0 0">Supabase Auth handles your password. GlobalMoneyCalc does not receive or store your plain-text password. Your records are protected by database access policies.</div>
 </section>
 <section id="recoverySection" class="panel" hidden style="margin-top:15px">
 <form id="recoveryForm"><h2 data-i18n="resetPassword">Reset your password</h2><label class="field"><span data-i18n="newPassword">New password</span><input id="recoveryPassword" type="password" minlength="8" autocomplete="new-password" required></label><button class="btn primary" type="submit" data-i18n="updatePassword">Update password</button></form>
