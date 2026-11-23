@@ -185,7 +185,6 @@ function renderDashboard(){
   const stats=$("summaryStats");if(!stats)return;stats.replaceChildren();
   stats.append(addStat(t("incomeMonth"),currencyGroup(x=>x.transaction_type==="income")));
   stats.append(addStat(t("expensesMonth"),currencyGroup(x=>x.transaction_type==="expense")));
-  stats.append(addStat(t("owedToMe"),amountByCurrency(debts.filter(x=>x.direction==="owed_to_me"),x=>true).reduce?{}:{}));
   const debtGroup=(direction)=>{const totals={};debts.filter(x=>x.direction===direction).forEach(x=>{const currency=x.currency||"KWD";totals[currency]=(totals[currency]||0)+(Number(x.amount||0)-Number(x.settled_amount||0));});return totals;};
   stats.replaceChildren(
     addStat(t("incomeMonth"),currencyGroup(x=>x.transaction_type==="income")),
@@ -383,7 +382,7 @@ async function saveBudget(event){
   const row={user_id:currentUser.id,budget_month:monthStart(month),category:$("budgetCategory").value,amount,currency:$("budgetCurrency").value,updated_at:new Date().toISOString()};
   try{
     const {error}=await supabase.from("monthly_budgets").upsert(row,{onConflict:"user_id,budget_month,category,currency"});
-    if(error)throw error;$("budgetAmount").value="";await loadDashboard();showStatus(t("saved"));
+    if(error)throw error;$("budgetAmount").value="";$("reportMonth").value=month;activeMonth=month;await loadDashboard();showStatus(t("saved"));
   }catch(error){showStatus(error.message||"Unable to save budget.","error");}
 }
 async function deleteBudget(id){
@@ -407,11 +406,12 @@ function bindEvents(){
   $("debtForm").addEventListener("submit",addDebt);
   $("budgetForm").addEventListener("submit",saveBudget);
   $("reportMonth").addEventListener("change",()=>{updateBudgetMonthFromReport();loadDashboard();});
+  $("budgetMonth").addEventListener("change",()=>{if($("budgetMonth").value){$("reportMonth").value=$("budgetMonth").value;activeMonth=$("budgetMonth").value;loadDashboard();}});
   $("recoveryForm").addEventListener("submit",updatePassword);
 }
 async function init(){
   $("year").textContent=new Date().getFullYear();
-  fillSelects();initMonthInputs();bindEvents();applyLanguage();updateClock();window.setInterval(updateClock,1000);
+  fillSelects();initMonthInputs();bindEvents();setAuthMode("login");applyLanguage();updateClock();window.setInterval(updateClock,1000);
   if(!window.supabase?.createClient||!window.GMC_SUPABASE_CONFIG?.url||!window.GMC_SUPABASE_CONFIG?.publishableKey){
     showStatus("Supabase client could not load. Check the network connection and public configuration.","error");return;
   }
