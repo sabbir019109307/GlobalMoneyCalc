@@ -37,6 +37,7 @@ jobs:
             'robots.txt',
             'sitemap.xml',
             'analytics.js',
+            'save-calculations.js',
             'ANALYTICS-SETUP-BN.md'
           ];
 
@@ -88,8 +89,11 @@ jobs:
           const chart = fs.readFileSync('currency-rates.html', 'utf8');
           const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
           const analytics = fs.readFileSync('analytics.js', 'utf8');
+          const savedCalculations = fs.readFileSync('save-calculations.js', 'utf8');
 
           try { new Function(analytics); } catch (error) { errors.push('analytics.js: syntax error: ' + error.message); }
+          try { new Function(savedCalculations); } catch (error) { errors.push('save-calculations.js: syntax error: ' + error.message); }
+          if (!home.includes('src="save-calculations.js"')) errors.push('index.html: missing saved calculations feature');
           if (!analytics.includes('const MEASUREMENT_ID = "";')) errors.push('analytics.js: analytics must remain disabled until owner adds a real GA4 Measurement ID');
           if (!analytics.includes('gmc_ga4_consent_v1') || !analytics.includes('Allow analytics')) errors.push('analytics.js: missing explicit visitor consent flow');
           for (const file of required.filter((name) => name.endsWith('.html'))) {
