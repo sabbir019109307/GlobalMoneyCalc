@@ -4,7 +4,7 @@
 
 ## 1. রিপোজিটরিতে সম্পন্ন
 
-- [x] ইংরেজি ও বাংলা ইন্টারফেস
+- [x] ১০টি ভাষার ইন্টারফেস; আরবি ভাষায় RTL লেআউট
 - [x] মুদ্রা কনভার্টার, বেতন, বাজেট ও সঞ্চয় ক্যালকুলেটর
 - [x] হোমপেজ কনভার্টারে ৫৮টি বাছাই করা মুদ্রা
 - [x] ExchangeRate.dev-এর USD-ভিত্তিক ইন্ডিকেটিভ রেট; ফ্রি/keyless feed ১৫ মিনিট বিলম্বিত
@@ -55,13 +55,18 @@ Provider-এর বর্তমান নির্দেশিকা:
 
 ## 4. আপনার ফোনে এখনো যে পরীক্ষা দরকার
 
-- [ ] বাংলা/English toggle সব পেজে ব্যবহার করে দেখুন।
+- [ ] দশটি ভাষার selector সব পেজে ব্যবহার করে দেখুন; আরবিতে RTL layout যাচাই করুন।
 - [ ] KWD→BDT, USD→BDT, USD→EUR এবং USD→INR রূপান্তর পরীক্ষা করুন।
 - [ ] Manual provider rate দিয়ে conversion পরীক্ষা করুন।
 - [ ] চার্টে KWD, USD, EUR ও BDT base বেছে দেখুন; search-এ BDT, Euro, Rupee লিখে দেখুন।
 - [ ] Salary, budget ও savings calculator-এ খালি, শূন্য ও অস্বাভাবিক input দিয়ে পরীক্ষা করুন।
 - [ ] 360px-প্রস্থ ফোনে লেখা কাটা বা অপ্রয়োজনীয় horizontal scroll হচ্ছে কি না দেখুন।
-- [ ] Privacy, Terms, Guides, Rates, Currency Rates ও Advertise links খুলে দেখুন।
+- [ ] Privacy, Terms, Guides, Rates, Currency Rates, Advertise ও My Account পেজ খুলে দেখুন।
+- [ ] Supabase Auth URL Configuration-এ Site URL `https://sabbir019109307.github.io/GlobalMoneyCalc/` সেট করুন এবং Redirect URLs-এ `https://sabbir019109307.github.io/GlobalMoneyCalc/**` যোগ করুন।
+- [ ] নিজের একটি পরীক্ষামূলক ইমেইল দিয়ে account তৈরি করুন; confirmation email খুলে verify করে login করুন।
+- [ ] Profile name, currency ও language পরিবর্তন করে Save করুন; refresh ও অন্য পেজে গিয়ে language পছন্দ থাকে কি না দেখুন।
+- [ ] একটি income, একটি expense, একটি debt (partial payment-সহ) ও একটি monthly budget যোগ/সম্পাদনা/মুছে পরীক্ষা করুন।
+- [ ] Forgot password দিয়ে reset email এবং নতুন password দিয়ে login পরীক্ষা করুন।
 
 ## 5. বিজ্ঞাপন ও sponsor — অ্যাকাউন্ট মালিকের কাজ বাকি
 
@@ -76,17 +81,23 @@ Provider-এর বর্তমান নির্দেশিকা:
 ## 6. Privacy ও security
 
 - [x] বর্তমানে ad script বা analytics tracker নেই।
-- [x] Calculator amount browser-এ হিসাব হয়; API-তে পাঠানো হয় না।
+- [x] Public calculator input এবং guest local ledger browser-এ থাকে; exchange-rate API-তে টাকার পরিমাণ পাঠানো হয় না।
+- [x] অ্যাকাউন্টে ব্যবহারকারী ইচ্ছাকৃতভাবে যে profile, income/expense, debt ও budget রেকর্ড save করেন তা Supabase-এ সংরক্ষিত হয়; Privacy Policy-তে জানানো হয়েছে।
+- [x] চারটি ব্যক্তিগত টেবিলেই RLS চালু; প্রত্যেক authenticated user শুধু নিজের রেকর্ডে প্রবেশ করতে পারে।
+- [x] anon role থেকে ব্যক্তিগত টেবিলের access revoke করা; authenticated role-এ প্রয়োজনীয় CRUD grant আছে।
+- [x] Supabase Auth password পরিচালনা করে; public source-এ service_role/secret key নেই।
 - [x] API key বা private secret public JavaScript-এ রাখা হয়নি।
 - [x] GA4 consent flow ও Privacy Policy disclosure প্রস্তুত; Measurement ID না থাকায় analytics এখনো বন্ধ।
 - [ ] Google Analytics-এ নিজের Property/Web stream তৈরি করে G-... Measurement ID যোগ করতে হবে।
 - [ ] Search Console-এ URL-prefix property verify করে sitemap.xml জমা দিতে হবে।
-- [ ] ভবিষ্যতে API key লাগলে browser JavaScript-এ নয়—server-side proxy/secret manager দরকার।
+- [ ] Supabase URL/Redirect URL configuration এবং email confirmation flow নিজের Supabase Dashboard-এ একবার পরীক্ষা করতে হবে।
+- [ ] ভবিষ্যতে rate provider API key লাগলে browser JavaScript-এ নয়—server-side proxy/secret manager দরকার।
 
 ## 7. মালিকের সিদ্ধান্ত ছাড়া করা হয়নি
 
 - Domain কেনা বা DNS পরিবর্তন
 - AdSense account খোলা, publisher ID বসানো বা paid plan নেওয়া
+- Supabase Authentication → URL Configuration-এ Site URL ও Redirect URLs যাচাই/সেট করা এবং নিজের ইমেইলে end-to-end sign-up, confirmation ও reset পরীক্ষা
 - Public business email প্রকাশ
 - GA4 Measurement ID তৈরি/যোগ করা ও Search Console verification token আনা
 
