@@ -1,9 +1,11 @@
 # GlobalMoneyCalc
 
-Free, mobile-friendly money calculators and currency tools in English and Bengali.
+Free, mobile-friendly money calculators and currency tools in 10 languages: English, Chinese, Hindi, Spanish, Arabic, Bengali, French, Portuguese, Russian and Indonesian.
 
 ## Included
-- English / বাংলা language toggle
+- Ten-language selector shared across the website: English, 中文, हिन्दी, Español, العربية, বাংলা, Français, Português, Русский and Bahasa Indonesia
+- Language choice is saved in the visitor's browser and reused across pages
+- Arabic pages use right-to-left layout
 - Currency converter with indicative market rates from ExchangeRate.dev and manual provider-rate entry
 - A visual currency-rate chart page with a searchable list of the provider's supported currencies
 - Currency chart selector that can use any base currency returned by the API
@@ -15,7 +17,7 @@ Free, mobile-friendly money calculators and currency tools in English and Bengal
 - Monthly income and expense budget calculator
 - Monthly savings projection
 - Advertising and direct sponsorship information page
-- Privacy Policy, Terms of Use, money calculator guides and a bilingual exchange-rate methodology page
+- Privacy Policy, Terms of Use, money calculator guides and a multilingual exchange-rate methodology page
 - Custom 404 page, SEO metadata, XML sitemap, robots.txt and favicon
 - Live local date and time at the top of every page
 - Footer credit: SABBIR AHMED TAHIR
