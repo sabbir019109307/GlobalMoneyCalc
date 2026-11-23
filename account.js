@@ -291,7 +291,7 @@ async function signIn(event){
 }
 async function sendReset(){
   clearStatus();const email=$("loginEmail").value.trim();
-  if(!email){showStatus(t("email")+" — "+(t("errorNumeric")||"Enter a value."),"error");$("loginEmail").focus();return;}
+  if(!email){showStatus(t("enterEmail"),"error");$("loginEmail").focus();return;}
   try{
     const redirectTo=new URL("account.html?reset=1",window.location.href).toString();
     const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo});
