@@ -70,7 +70,7 @@ jobs:
             for (const match of refs) {
               const ref = match[1].trim();
               if (!ref || ref.startsWith('#') || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(ref)) continue;
-              if (ref === '/GlobalMoneyCalc/' || ref.startsWith('/GlobalMoneyCalc/')) continue;
+              
               const clean = decodeURIComponent(ref.split(/[?#]/, 1)[0]);
               if (!clean) continue;
               const target = path.resolve(path.dirname(file), clean);
@@ -98,7 +98,11 @@ jobs:
           const home = fs.readFileSync('index.html', 'utf8');
           const chart = fs.readFileSync('currency-rates.html', 'utf8');
           const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
+          const oldHost = 'https://sabbir019109307.github.io/GlobalMoneyCalc';
           const analytics = fs.readFileSync('analytics.js', 'utf8');
+          for (const file of required.filter((name) => name.endsWith('.html') || name === 'sitemap.xml' || name === 'robots.txt')) {
+            if (fs.existsSync(file) && fs.readFileSync(file, 'utf8').includes(oldHost)) errors.push(file + ': contains an outdated GitHub Pages URL');
+          }
           const savedCalculations = fs.readFileSync('save-calculations.js', 'utf8');
           const accountScript = fs.readFileSync('account.js', 'utf8');
           const accountTranslations = fs.readFileSync('account-translations.js', 'utf8');
@@ -141,7 +145,7 @@ jobs:
           if (!chart.includes('id="search"') || !chart.includes('id="bars"') || !chart.includes('id="visitorLocalTime"')) {
             errors.push('currency-rates.html: missing search, chart, or local clock element');
           }
-          if (!sitemap.includes('https://sabbir019109307.github.io/GlobalMoneyCalc/currency-rates.html')) {
+          if (!sitemap.includes('https://globalmoneycalc.pages.dev/currency-rates.html')) {
             errors.push('sitemap.xml: missing currency-rates.html');
           }
           for (const file of required.filter((name) => name.endsWith('.html'))) {
