@@ -338,7 +338,7 @@ async function saveTransaction(event){
     const result=id?await supabase.from("money_transactions").update({...row,updated_at:new Date().toISOString()}).eq("id",id).eq("user_id",currentUser.id)
       :await supabase.from("money_transactions").insert(row);
     if(result.error)throw result.error;
-    $("transactionForm").reset();$("transactionId").value="";$("transactionDate").value=today();$("transactionCurrency").value=currentProfile?.preferred_currency||"KWD";buildCategoryOptions();
+    resetTransactionForm();
     await loadDashboard();showStatus(t("saved"));
   }catch(error){showStatus(error.message||"Unable to save transaction.","error");}
 }
