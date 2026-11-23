@@ -109,5 +109,35 @@ Provider-এর বর্তমান নির্দেশিকা:
 এসবের জন্য আপনার নিজের account, অনুমোদন বা সিদ্ধান্ত প্রয়োজন।
 
 
+
+## 9. Supabase Account — শেষ owner setup
+
+কোড ও ডাটাবেসের সংযোগ তৈরি করা হয়েছে। তবে email confirmation/password recovery-এর redirect চালাতে Supabase Auth-এ সাইটের URL একবার allowlist করতে হবে।
+
+1. Supabase Dashboard খুলে **GlobalMoneyCalc** project নির্বাচন করুন।
+2. **Authentication → URL Configuration** খুলুন।
+3. **Site URL** হিসেবে দিন:
+   `https://sabbir019109307.github.io/GlobalMoneyCalc/`
+4. **Redirect URLs**-এ এই দুটি URL যোগ করুন:
+   `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html`
+   `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html?reset=1`
+5. Save করুন।
+
+তারপর ওয়েবসাইটের **My account** পেজে গিয়ে নিজের ইমেইল দিয়ে account তৈরি করুন। Confirmation email এলে সেটি খুলে verify করুন, তারপর login করুন। প্রথমবার login হলে আপনার profile তৈরি হবে।
+
+নিরাপত্তা পরীক্ষার জন্য আলাদা browser/incognito profile দিয়ে অন্য account তৈরি করে নিশ্চিত করুন যে এক account অন্য account-এর transaction/debt/budget দেখতে পারে না। কোনো service-role বা secret key ওয়েবসাইটে দেবেন না।
+
+Supabase URL configuration guide: https://supabase.com/docs/guides/auth/redirect-urls
+
+## 10. এখনো হাতে পরীক্ষা প্রয়োজন
+
+- [ ] ইমেইল confirmation link account.html-এ ফেরে কি না
+- [ ] Login, logout, password reset পরীক্ষা
+- [ ] Income, expense, debt, partial payment এবং budget save/edit/delete পরীক্ষা
+- [ ] একই account অন্য browser/device-এ login করলে একই data দেখা যায় কি না
+- [ ] আলাদা account দিয়ে অন্যের তথ্য দেখা যায় না—RLS isolation পরীক্ষা
+- [ ] ১০ ভাষায় account form এবং Arabic RTL layout পরীক্ষা
+
+
 ## 8. Analytics ও Search Console সেটআপ
 বাংলা নির্দেশনা: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md)। Measurement ID ও Search Console verification Google Account মালিককেই তৈরি করতে হবে।
