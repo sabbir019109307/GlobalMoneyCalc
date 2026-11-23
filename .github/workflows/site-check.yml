@@ -26,6 +26,7 @@ jobs:
 
           const required = [
             'index.html',
+            'account.html',
             'currency-rates.html',
             'rates.html',
             'guides.html',
@@ -39,6 +40,14 @@ jobs:
             'analytics.js',
             'save-calculations.js',
             'money-ledger.js',
+            'account.js',
+            'supabase-config.js',
+            'translations.js',
+            'account-translations.js',
+            'rate-translations.js',
+            'page-translations.js',
+            'rate-method-translations.js',
+            'legal-translations.js',
             'ANALYTICS-SETUP-BN.md'
           ];
 
@@ -92,10 +101,18 @@ jobs:
           const analytics = fs.readFileSync('analytics.js', 'utf8');
           const savedCalculations = fs.readFileSync('save-calculations.js', 'utf8');
           const moneyLedger = fs.readFileSync('money-ledger.js', 'utf8');
+          const accountScript = fs.readFileSync('account.js', 'utf8');
+          const accountTranslations = fs.readFileSync('account-translations.js', 'utf8');
+          const supabaseConfig = fs.readFileSync('supabase-config.js', 'utf8');
 
           try { new Function(analytics); } catch (error) { errors.push('analytics.js: syntax error: ' + error.message); }
           try { new Function(savedCalculations); } catch (error) { errors.push('save-calculations.js: syntax error: ' + error.message); }
           try { new Function(moneyLedger); } catch (error) { errors.push('money-ledger.js: syntax error: ' + error.message); }
+          try { new Function(accountScript); } catch (error) { errors.push('account.js: syntax error: ' + error.message); }
+          try { new Function(accountTranslations); } catch (error) { errors.push('account-translations.js: syntax error: ' + error.message); }
+          try { new Function(supabaseConfig); } catch (error) { errors.push('supabase-config.js: syntax error: ' + error.message); }
+          if (accountScript.includes('service_role')) errors.push('Account client must never expose a Supabase service role key.');
+          if (!fs.readFileSync('account.html', 'utf8').includes('supabase-js@2.119.2')) errors.push('account.html: Supabase JS must be pinned to a version.');
           if (!home.includes('src="money-ledger.js"')) errors.push('index.html: missing personal money ledger');
           if (!home.includes('src="save-calculations.js"')) errors.push('index.html: missing saved calculations feature');
           if (!analytics.includes('const MEASUREMENT_ID = "";')) errors.push('analytics.js: analytics must remain disabled until owner adds a real GA4 Measurement ID');
@@ -104,6 +121,7 @@ jobs:
             if (fs.existsSync(file) && !fs.readFileSync(file, 'utf8').includes('src="analytics.js"')) errors.push(file + ': missing optional analytics loader');
           }
           if (!home.includes('currency-rates.html')) errors.push('index.html: missing currency-rate chart link');
+          if (!home.includes('href="account.html"')) errors.push('index.html: missing account page link');
           if (!home.includes('Rates by Exchangerate.dev') || !home.includes('https://exchangerate.dev')) {
             errors.push('index.html: missing required visible provider credit link');
           }
