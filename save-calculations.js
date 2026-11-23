@@ -6,7 +6,6 @@
   "use strict";
   const KEY = "gmc_saved_calculations_v1";
   const $ = id => document.getElementById(id);
-  const isBn = () => (document.documentElement.lang || "en").toLowerCase().startsWith("bn");
   const words = {
     en: {
       save:"Save this calculation", saved:"Saved calculations", empty:"No saved calculations yet. Calculate an amount and tap “Save this calculation”.",
@@ -25,6 +24,9 @@
       storage:"হিসাব শুধু এই ডিভাইসের এই ব্রাউজারে সংরক্ষিত থাকে। ব্রাউজারের ডেটা মুছলে এগুলোও মুছে যেতে পারে।"
     }
   };
+  Object.assign(words, {"zh":{"save":"保存此计算","saved":"已保存的计算","empty":"尚无保存的计算。请先计算，然后点击“保存此计算”。","savedAt":"保存时间","delete":"删除","confirm":"删除此计算记录？","clear":"全部清除","clearConfirm":"清除此设备上保存的所有计算？","savedOk":"计算已保存在此设备。","limit":"最多可保存 100 条记录。请删除旧记录后再保存。","currency":"货币换算","salary":"工资计算","budget":"月度预算","savings":"储蓄预测","storage":"仅保存在此设备的当前浏览器中。清除浏览器数据可能会删除这些记录。","restore":"恢复输入","storageUnavailable":"浏览器存储不可用或已满。"},"hi":{"save":"यह गणना सहेजें","saved":"सहेजी गई गणनाएँ","empty":"अभी कोई गणना सहेजी नहीं गई है। पहले गणना करें और “यह गणना सहेजें” दबाएँ।","savedAt":"सहेजा गया","delete":"हटाएँ","confirm":"यह सहेजी गई गणना हटाएँ?","clear":"सभी हटाएँ","clearConfirm":"इस डिवाइस की सभी सहेजी गई गणनाएँ हटाएँ?","savedOk":"गणना इस डिवाइस पर सहेजी गई।","limit":"अधिकतम 100 गणनाएँ सहेज सकते हैं। नई सहेजने से पहले पुरानी हटाएँ।","currency":"मुद्रा रूपांतरण","salary":"वेतन गणना","budget":"मासिक बजट","savings":"बचत अनुमान","storage":"यह रिकॉर्ड केवल इसी डिवाइस के इस ब्राउज़र में सहेजे जाते हैं। ब्राउज़र डेटा साफ़ करने से ये मिट सकते हैं।","restore":"इनपुट वापस लाएँ","storageUnavailable":"ब्राउज़र स्टोरेज उपलब्ध नहीं है या भर गया है।"},"es":{"save":"Guardar este cálculo","saved":"Cálculos guardados","empty":"Todavía no hay cálculos guardados. Calcula una cantidad y pulsa «Guardar este cálculo».","savedAt":"Guardado","delete":"Eliminar","confirm":"¿Eliminar este cálculo guardado?","clear":"Borrar todo","clearConfirm":"¿Eliminar todos los cálculos guardados en este dispositivo?","savedOk":"Cálculo guardado en este dispositivo.","limit":"Puedes guardar hasta 100 cálculos. Elimina uno antiguo para guardar más.","currency":"Conversión de divisas","salary":"Cálculo de salario","budget":"Presupuesto mensual","savings":"Proyección de ahorros","storage":"Se guarda solo en este navegador y dispositivo. Al borrar los datos del navegador, estos registros pueden desaparecer.","restore":"Restaurar datos","storageUnavailable":"El almacenamiento del navegador no está disponible o está lleno."},"ar":{"save":"احفظ هذا الحساب","saved":"الحسابات المحفوظة","empty":"لا توجد حسابات محفوظة بعد. احسب مبلغاً ثم اضغط «احفظ هذا الحساب».","savedAt":"تم الحفظ","delete":"حذف","confirm":"هل تريد حذف هذا الحساب المحفوظ؟","clear":"حذف الكل","clearConfirm":"هل تريد حذف جميع الحسابات المحفوظة على هذا الجهاز؟","savedOk":"تم حفظ الحساب على هذا الجهاز.","limit":"يمكنك حفظ 100 حساب كحد أقصى. احذف حساباً قديماً لحفظ المزيد.","currency":"تحويل العملات","salary":"حساب الراتب","budget":"الميزانية الشهرية","savings":"توقع الادخار","storage":"يُحفظ هذا السجل في المتصفح وعلى هذا الجهاز فقط. قد يؤدي مسح بيانات المتصفح إلى حذفه.","restore":"استعادة المدخلات","storageUnavailable":"مساحة تخزين المتصفح غير متاحة أو ممتلئة."},"fr":{"save":"Enregistrer ce calcul","saved":"Calculs enregistrés","empty":"Aucun calcul enregistré. Effectuez un calcul puis appuyez sur « Enregistrer ce calcul ». ","savedAt":"Enregistré","delete":"Supprimer","confirm":"Supprimer ce calcul enregistré ?","clear":"Tout effacer","clearConfirm":"Supprimer tous les calculs enregistrés sur cet appareil ?","savedOk":"Calcul enregistré sur cet appareil.","limit":"Vous pouvez enregistrer jusqu’à 100 calculs. Supprimez-en un ancien pour continuer.","currency":"Conversion de devises","salary":"Calcul du salaire","budget":"Budget mensuel","savings":"Projection d’épargne","storage":"Enregistré uniquement dans ce navigateur sur cet appareil. L’effacement des données du navigateur peut supprimer ces enregistrements.","restore":"Restaurer les valeurs","storageUnavailable":"Le stockage du navigateur est indisponible ou plein."},"pt":{"save":"Salvar este cálculo","saved":"Cálculos salvos","empty":"Ainda não há cálculos salvos. Faça um cálculo e toque em “Salvar este cálculo”.","savedAt":"Salvo","delete":"Excluir","confirm":"Excluir este cálculo salvo?","clear":"Limpar tudo","clearConfirm":"Excluir todos os cálculos salvos neste dispositivo?","savedOk":"Cálculo salvo neste dispositivo.","limit":"Você pode salvar até 100 cálculos. Exclua um antigo para salvar mais.","currency":"Conversão de moedas","salary":"Cálculo de salário","budget":"Orçamento mensal","savings":"Projeção de poupança","storage":"Salvo apenas neste navegador e dispositivo. Limpar os dados do navegador pode apagar estes registros.","restore":"Restaurar dados","storageUnavailable":"O armazenamento do navegador está indisponível ou cheio."},"ru":{"save":"Сохранить расчёт","saved":"Сохранённые расчёты","empty":"Пока нет сохранённых расчётов. Выполните расчёт и нажмите «Сохранить расчёт».","savedAt":"Сохранено","delete":"Удалить","confirm":"Удалить этот сохранённый расчёт?","clear":"Очистить всё","clearConfirm":"Удалить все сохранённые расчёты на этом устройстве?","savedOk":"Расчёт сохранён на этом устройстве.","limit":"Можно сохранить до 100 расчётов. Удалите старый, чтобы сохранить новый.","currency":"Конвертация валют","salary":"Расчёт зарплаты","budget":"Месячный бюджет","savings":"Прогноз накоплений","storage":"Сохраняется только в этом браузере на этом устройстве. Очистка данных браузера может удалить эти записи.","restore":"Восстановить ввод","storageUnavailable":"Хранилище браузера недоступно или заполнено."},"id":{"save":"Simpan perhitungan ini","saved":"Perhitungan tersimpan","empty":"Belum ada perhitungan tersimpan. Hitung jumlah lalu tekan “Simpan perhitungan ini”.","savedAt":"Disimpan","delete":"Hapus","confirm":"Hapus perhitungan tersimpan ini?","clear":"Hapus semua","clearConfirm":"Hapus semua perhitungan tersimpan di perangkat ini?","savedOk":"Perhitungan disimpan di perangkat ini.","limit":"Anda dapat menyimpan hingga 100 perhitungan. Hapus yang lama untuk menyimpan lebih banyak.","currency":"Konversi mata uang","salary":"Perhitungan gaji","budget":"Anggaran bulanan","savings":"Proyeksi tabungan","storage":"Hanya disimpan di browser pada perangkat ini. Menghapus data browser dapat menghapus catatan ini.","restore":"Pulihkan input","storageUnavailable":"Penyimpanan browser tidak tersedia atau penuh."}});
+  const language = () => { const code=(document.documentElement.lang||"en").toLowerCase().split("-")[0]; return words[code]?code:"en"; };
+  const locale = () => ((window.GMC_LOCALES||{})[language()]||"en-US");
   const fields = {
     currency:["amount","fromCurrency","toCurrency","rate","dailyMode","manualMode"],
     salary:["salaryAmount","salaryCurrency","days","hours","deduction"],
@@ -33,7 +35,7 @@
   };
   const labels = {currency:"currency",salary:"salary",budget:"budget",savings:"savings"};
   let status;
-  function t(key){return words[isBn()?"bn":"en"][key];}
+  function t(key){return words[language()][key]||words.en[key]||key;}
   function read(){
     try {
       const data=JSON.parse(localStorage.getItem(KEY)||"[]");
@@ -71,9 +73,9 @@
       const result=document.createElement("p");result.className="gmc-saved-result";result.textContent=item.result;
       const date=document.createElement("small");
       const d=new Date(item.savedAt);
-      date.textContent=t("savedAt")+": "+(Number.isNaN(d.getTime())?"":new Intl.DateTimeFormat(isBn()?"bn-BD":"en-US",{dateStyle:"medium",timeStyle:"short"}).format(d));
+      date.textContent=t("savedAt")+": "+(Number.isNaN(d.getTime())?"":new Intl.DateTimeFormat(locale(),{dateStyle:"medium",timeStyle:"short"}).format(d));
       const actions=document.createElement("div");actions.className="gmc-saved-actions";
-      const load=document.createElement("button");load.type="button";load.textContent=isBn()?"ইনপুট ফিরিয়ে আনুন":"Restore inputs";
+      const load=document.createElement("button");load.type="button";load.textContent=t("restore");
       load.addEventListener("click",()=>{restoreValues(item.values);const target=$(item.type);if(target)target.scrollIntoView({behavior:"smooth",block:"center"});});
       const remove=document.createElement("button");remove.type="button";remove.textContent=t("delete");
       remove.addEventListener("click",()=>{if(!window.confirm(t("confirm")))return;write(read().filter(x=>x.id!==item.id));render();});
@@ -103,7 +105,7 @@
         const values={};fields[tool.type].forEach(id=>{values[id]=valueOf(id);});
         const record={id:(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+"-"+Math.random().toString(36).slice(2),type:tool.type,values,result:result.innerText.trim(),savedAt:new Date().toISOString()};
         items.unshift(record);
-        if(!write(items)){status.textContent=isBn()?"ব্রাউজারে জায়গা পাওয়া যায়নি।":"Browser storage is unavailable or full.";return;}
+        if(!write(items)){status.textContent=t("storageUnavailable");return;}
         status.textContent=t("savedOk");render();
       });
       update();
