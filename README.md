@@ -22,6 +22,7 @@ Free, mobile-friendly money calculators and currency tools in 10 languages: Engl
 - Advertising and direct sponsorship information page
 - Privacy Policy, Terms of Use, money calculator guides and a multilingual exchange-rate methodology page
 - Custom 404 page, SEO metadata, XML sitemap, robots.txt and favicon
+- Cloudflare Pages security headers: framing protection, HTTPS-only transport, restricted device permissions, and no-store/noindex account page
 - Live local date and time at the top of every page
 - Footer credit: SABBIR AHMED TAHIR
 
