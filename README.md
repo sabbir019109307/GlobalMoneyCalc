@@ -4,6 +4,9 @@ Free, mobile-friendly money calculators and currency tools in 10 languages: Engl
 
 ## Included
 - Ten-language selector shared across the website: English, 中文, हिन्दी, Español, العربية, বাংলা, Français, Português, Русский and Bahasa Indonesia
+- Optional Supabase account page with email sign-up, sign-in, sign-out and password recovery
+- Cloud personal dashboard for profiles, income/expense transactions, debt tracking with partial settlement, and monthly spending budgets
+- Supabase Row Level Security limits each signed-in account to its own profile and financial records; the browser uses only a publishable key
 - Language choice is saved in the visitor's browser and reused across pages
 - Arabic pages use right-to-left layout
 - Currency converter with indicative market rates from ExchangeRate.dev and manual provider-rate entry
@@ -38,8 +41,14 @@ See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for deployment, troubleshoo
 5. GitHub will display the published Pages URL. Expected URL:
    https://sabbir019109307.github.io/GlobalMoneyCalc/
 
+## Account data and privacy
+- Public calculator inputs and the guest money ledger are processed/stored in the visitor's browser and are not included in currency-rate API requests.
+- When a visitor intentionally creates an account and saves records in `account.html`, profile, income/expense, debt and monthly budget records are sent to Supabase and stored with that account.
+- Row Level Security policies restrict each authenticated account to its own records. Supabase Auth handles passwords; no service-role key is placed in public JavaScript.
+- Account use is optional; the regular calculators do not require registration.
+
 ## Important
-- Calculator input amounts are processed in the visitor's browser and are not sent to GlobalMoneyCalc or included in currency-rate API requests.
+- Public calculator input amounts are processed in the visitor's browser and are not sent to GlobalMoneyCalc or included in currency-rate API requests.
 - Exchange rates can differ from a bank, card provider, cash exchange or remittance service. Always check the amount actually offered after fees and spreads.
 - No ad network is connected yet. The advertising area is a placeholder; do not add AdSense scripts or an ads.txt publisher record until an account is approved and the real publisher ID is available.
 - Direct sponsorship information is in `advertise.html`. The current inquiry route is a public GitHub issue; do not post private information there.
