@@ -67,7 +67,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 - [ ] Salary, budget ও savings calculator-এ খালি, শূন্য ও অস্বাভাবিক input দিয়ে পরীক্ষা করুন।
 - [ ] 360px-প্রস্থ ফোনে লেখা কাটা বা অপ্রয়োজনীয় horizontal scroll হচ্ছে কি না দেখুন।
 - [ ] Privacy, Terms, Guides, Rates, Currency Rates, Advertise ও My Account পেজ খুলে দেখুন।
-- [ ] Supabase Auth URL Configuration-এ Site URL `https://sabbir019109307.github.io/GlobalMoneyCalc/` সেট করুন এবং Redirect URLs-এ `https://sabbir019109307.github.io/GlobalMoneyCalc/**` যোগ করুন।
+- [ ] Supabase Dashboard → Authentication → URL Configuration-এ Site URL `https://sabbir019109307.github.io/GlobalMoneyCalc/` সেট করুন। Redirect URLs-এ এই দুইটি exact URL যোগ করুন: `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html` এবং `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html?reset=1`।
 - [ ] নিজের একটি পরীক্ষামূলক ইমেইল দিয়ে account তৈরি করুন; confirmation email খুলে verify করে login করুন।
 - [ ] Profile name, currency ও language পরিবর্তন করে Save করুন; refresh ও অন্য পেজে গিয়ে language পছন্দ থাকে কি না দেখুন।
 - [ ] একটি income, একটি expense, একটি debt (partial payment-সহ) ও একটি monthly budget যোগ/সম্পাদনা/মুছে পরীক্ষা করুন।
