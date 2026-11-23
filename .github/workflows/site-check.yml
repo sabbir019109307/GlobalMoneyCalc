@@ -36,8 +36,8 @@ jobs:
             'favicon.svg',
             'robots.txt',
             'sitemap.xml',
-    'analytics.js',
-    'ANALYTICS-SETUP-BN.md'
+            'analytics.js',
+            'ANALYTICS-SETUP-BN.md'
           ];
 
           const errors = [];
@@ -87,14 +87,14 @@ jobs:
           const home = fs.readFileSync('index.html', 'utf8');
           const chart = fs.readFileSync('currency-rates.html', 'utf8');
           const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
-const analytics = fs.readFileSync('analytics.js', 'utf8');
+          const analytics = fs.readFileSync('analytics.js', 'utf8');
 
           if (!analytics.includes('const MEASUREMENT_ID = "";')) errors.push('analytics.js: analytics must remain disabled until owner adds a real GA4 Measurement ID');
-if (!analytics.includes('gmc_ga4_consent_v1') || !analytics.includes('Allow analytics')) errors.push('analytics.js: missing explicit visitor consent flow');
-for (const file of required.filter((name) => name.endsWith('.html'))) {
-  if (fs.existsSync(file) && !fs.readFileSync(file, 'utf8').includes('src="analytics.js"')) errors.push(file + ': missing optional analytics loader');
-}
-if (!home.includes('currency-rates.html')) errors.push('index.html: missing currency-rate chart link');
+          if (!analytics.includes('gmc_ga4_consent_v1') || !analytics.includes('Allow analytics')) errors.push('analytics.js: missing explicit visitor consent flow');
+          for (const file of required.filter((name) => name.endsWith('.html'))) {
+            if (fs.existsSync(file) && !fs.readFileSync(file, 'utf8').includes('src="analytics.js"')) errors.push(file + ': missing optional analytics loader');
+          }
+          if (!home.includes('currency-rates.html')) errors.push('index.html: missing currency-rate chart link');
           if (!home.includes('Rates by Exchangerate.dev') || !home.includes('https://exchangerate.dev')) {
             errors.push('index.html: missing required visible provider credit link');
           }
