@@ -183,8 +183,6 @@ function renderDashboard(){
   const month=$("reportMonth")?.value||monthNow(),current=transactions.filter(x=>x.transaction_date>=monthStart(month)&&x.transaction_date<nextMonth(month));
   const currencyGroup=(matcher)=>amountByCurrency(current,matcher);
   const stats=$("summaryStats");if(!stats)return;stats.replaceChildren();
-  stats.append(addStat(t("incomeMonth"),currencyGroup(x=>x.transaction_type==="income")));
-  stats.append(addStat(t("expensesMonth"),currencyGroup(x=>x.transaction_type==="expense")));
   const debtGroup=(direction)=>{const totals={};debts.filter(x=>x.direction===direction).forEach(x=>{const currency=x.currency||"KWD";totals[currency]=(totals[currency]||0)+(Number(x.amount||0)-Number(x.settled_amount||0));});return totals;};
   stats.replaceChildren(
     addStat(t("incomeMonth"),currencyGroup(x=>x.transaction_type==="income")),
