@@ -29,15 +29,15 @@
 ## 2. প্রকাশনা
 
 মূল ওয়েবসাইট:
-https://sabbir019109307.github.io/GlobalMoneyCalc/
+https://globalmoneycalc.pages.dev/
 
 মুদ্রার চার্ট:
-https://sabbir019109307.github.io/GlobalMoneyCalc/currency-rates.html
+https://globalmoneycalc.pages.dev/currency-rates.html
 
 ব্যক্তিগত অ্যাকাউন্ট:
-https://sabbir019109307.github.io/GlobalMoneyCalc/account.html
+https://globalmoneycalc.pages.dev/account.html
 
-GitHub Pages-এর সর্বশেষ build/deploy run Success না হওয়া পর্যন্ত নতুন commit live হয়েছে ধরে নেবেন না। Actions:
+Cloudflare Pages Dashboard-এ সর্বশেষ production deployment সফল না দেখা পর্যন্ত নতুন commit live হয়েছে ধরে নেবেন না। GitHub Actions কেবল repository validation চালায়:
 https://github.com/sabbir019109307/GlobalMoneyCalc/actions
 
 ফোনে পেজ পুরোনো দেখালে Chrome Incognito tab খুলুন অথবা সাইটের cache/site data পরিষ্কার করে reload করুন।
@@ -67,7 +67,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 - [ ] Salary, budget ও savings calculator-এ খালি, শূন্য ও অস্বাভাবিক input দিয়ে পরীক্ষা করুন।
 - [ ] 360px-প্রস্থ ফোনে লেখা কাটা বা অপ্রয়োজনীয় horizontal scroll হচ্ছে কি না দেখুন।
 - [ ] Privacy, Terms, Guides, Rates, Currency Rates, Advertise ও My Account পেজ খুলে দেখুন।
-- [ ] Supabase Dashboard → Authentication → URL Configuration-এ Site URL `https://sabbir019109307.github.io/GlobalMoneyCalc/` সেট করুন। Redirect URLs-এ এই দুইটি exact URL যোগ করুন: `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html` এবং `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html?reset=1`।
+- [ ] Supabase Dashboard → Authentication → URL Configuration-এ Site URL `https://globalmoneycalc.pages.dev/` সেট করুন। Redirect URLs-এ এই দুইটি exact URL যোগ করুন: `https://globalmoneycalc.pages.dev/account.html` এবং `https://globalmoneycalc.pages.dev/account.html?reset=1`।
 - [ ] নিজের একটি পরীক্ষামূলক ইমেইল দিয়ে account তৈরি করুন; confirmation email খুলে verify করে login করুন।
 - [ ] Profile name, currency ও language পরিবর্তন করে Save করুন; refresh ও অন্য পেজে গিয়ে language পছন্দ থাকে কি না দেখুন।
 - [ ] একটি income, একটি expense, একটি debt (partial payment-সহ) ও একটি monthly budget যোগ/সম্পাদনা/মুছে পরীক্ষা করুন।
@@ -77,8 +77,8 @@ Provider-এর বর্তমান নির্দেশিকা:
 
 - [ ] কোনো ad network এখনো সংযুক্ত নয়; placeholder-কে live বিজ্ঞাপন বলা যাবে না।
 - [ ] AdSense account, publisher ID ও Google approval প্রয়োজন। ID না পাওয়া পর্যন্ত AdSense script বা ads.txt publisher record বসানো যাবে না।
-- [ ] AdSense sign-up URL-এ path দেওয়া যায় না; standard domain প্রয়োজন। GitHub Pages-এর বর্তমান URL-এ /GlobalMoneyCalc path আছে। Google-এর URL rules দেখুন: https://support.google.com/adsense/answer/2784438
-- [ ] GitHub Pages-এর default github.io subdomain সাধারণ AdSense subdomain rule-এ পড়ে না; custom top-level domain লাগতে পারে। Domain কেনা এখনো হয়নি।
+- [ ] AdSense sign-up URL-এ path দেওয়া যায় না; standard domain প্রয়োজন। Cloudflare Pages-এর `pages.dev` shared subdomain ব্যবহার করা হচ্ছে; বিজ্ঞাপন সেবার eligibility আলাদা করে যাচাই করতে হবে। Google-এর URL rules দেখুন: https://support.google.com/adsense/answer/2784438
+- [ ] ফ্রি Cloudflare Pages ঠিকানা একটি shared `pages.dev` subdomain। AdSense-এর বর্তমান site/domain eligibility নিয়মে এটি গ্রহণযোগ্য কি না Google-এর account থেকে যাচাই করতে হবে; অনুমোদন নিশ্চিত নয় এবং এখনো কোনো domain কেনা হয়নি।
 - [ ] Site ownership verification ও Google policy review শেষে Ready status না পাওয়া পর্যন্ত বিজ্ঞাপন দেখানো যাবে না: https://support.google.com/adsense/answer/12169212
 - [ ] Direct sponsor যোগাযোগের জন্য প্রকাশযোগ্য business email বা private contact form দরকার। বর্তমান GitHub Issues inquiry public; সেখানে ব্যক্তিগত তথ্য দেবেন না।
 - [ ] বাস্তব analytics ছাড়া visitor, traffic বা earnings-এর সংখ্যা sponsor-কে জানাবেন না।
@@ -120,10 +120,10 @@ Provider-এর বর্তমান নির্দেশিকা:
 1. Supabase Dashboard খুলে **GlobalMoneyCalc** project নির্বাচন করুন।
 2. **Authentication → URL Configuration** খুলুন: [সরাসরি Supabase সেটিংস খুলুন](https://supabase.com/dashboard/project/zppdlookfubyhezgwrjf/auth/url-configuration)।
 3. **Site URL** হিসেবে দিন:
-   `https://sabbir019109307.github.io/GlobalMoneyCalc/`
+   `https://globalmoneycalc.pages.dev/`
 4. **Redirect URLs**-এ এই দুটি URL যোগ করুন:
-   `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html`
-   `https://sabbir019109307.github.io/GlobalMoneyCalc/account.html?reset=1`
+   `https://globalmoneycalc.pages.dev/account.html`
+   `https://globalmoneycalc.pages.dev/account.html?reset=1`
 5. Save করুন।
 
 তারপর ওয়েবসাইটের **My account** পেজে গিয়ে নিজের ইমেইল দিয়ে account তৈরি করুন। Confirmation email এলে সেটি খুলে verify করুন, তারপর login করুন। প্রথমবার login হলে আপনার profile তৈরি হবে।
