@@ -43,3 +43,12 @@ See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for deployment, troubleshoo
 - Direct sponsorship information is in `advertise.html`. The current inquiry route is a public GitHub issue; do not post private information there.
 - The GitHub Pages project URL contains a path. A separate domain may be useful for some advertising services, but do not assume a domain is available or buy one without authorization.
 - This website is informational and does not provide professional financial, tax, legal or investment advice.
+
+
+## Visitor analytics (optional)
+- A consent-first Google Analytics 4 loader is included in `analytics.js` on every page.
+- Analytics is fully disabled until the owner adds a real GA4 Measurement ID (`G-...`) to `analytics.js`.
+- After configuration, visitors must choose **Allow analytics**; Reject prevents the Google tag from loading.
+- Calculator inputs are never included in analytics events.
+- Setup guide: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md).
+- No fabricated/local-only public visitor counter is used. Real visitor metrics require a connected analytics property.
