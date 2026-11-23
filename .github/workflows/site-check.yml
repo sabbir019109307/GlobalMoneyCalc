@@ -47,10 +47,23 @@ jobs:
             'page-translations.js',
             'rate-method-translations.js',
             'legal-translations.js',
-            'ANALYTICS-SETUP-BN.md'
+            'ANALYTICS-SETUP-BN.md',
+            'supabase/migrations/20261123123321_harden_future_public_default_privileges.sql',
+            'supabase/migrations/20261123123354_fully_restrict_future_public_tables_and_sequences.sql'
           ];
 
           const errors = [];
+          const defaultsMigration = fs.readFileSync('supabase/migrations/20261123123321_harden_future_public_default_privileges.sql', 'utf8');
+          const grantsMigration = fs.readFileSync('supabase/migrations/20261123123354_fully_restrict_future_public_tables_and_sequences.sql', 'utf8');
+          if (!defaultsMigration.includes('ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public')) {
+            errors.push('Supabase migration: missing postgres public-schema default privilege hardening');
+          }
+          if (!grantsMigration.includes('REVOKE ALL PRIVILEGES ON TABLES FROM anon, authenticated, service_role')) {
+            errors.push('Supabase migration: missing future public table grant restriction');
+          }
+          if (!grantsMigration.includes('REVOKE ALL PRIVILEGES ON SEQUENCES FROM anon, authenticated, service_role')) {
+            errors.push('Supabase migration: missing future public sequence grant restriction');
+          }
           for (const file of required) {
             if (!fs.existsSync(file)) errors.push('Missing required file: ' + file);
           }

@@ -90,6 +90,8 @@ Provider-এর বর্তমান নির্দেশিকা:
 - [x] অ্যাকাউন্টে ব্যবহারকারী ইচ্ছাকৃতভাবে যে profile, income/expense, debt ও budget রেকর্ড save করেন তা Supabase-এ সংরক্ষিত হয়; Privacy Policy-তে জানানো হয়েছে।
 - [x] চারটি ব্যক্তিগত টেবিলেই RLS চালু; প্রত্যেক authenticated user শুধু নিজের রেকর্ডে প্রবেশ করতে পারে।
 - [x] anon role থেকে ব্যক্তিগত টেবিলের access revoke করা; authenticated role-এ প্রয়োজনীয় CRUD grant আছে।
+- [x] `postgres` role থেকে ভবিষ্যতে `public` schema-তে তৈরি table/function/sequence-এর automatic API grants বন্ধ; নতুন migration-এ প্রয়োজনীয় GRANT ও RLS স্পষ্টভাবে দিতে হবে।
+- [ ] `supabase_admin` creator role-এর default privilege আলাদা; এই সংযোগে role membership না থাকায় তা পরিবর্তন করা যায়নি। ওই role দিয়ে নতুন public object তৈরির আগে owner-level permission দিয়ে আলাদা যাচাই প্রয়োজন।
 - [x] Supabase Auth password পরিচালনা করে; public source-এ service_role/secret key নেই।
 - [x] API key বা private secret public JavaScript-এ রাখা হয়নি।
 - [x] GA4 consent flow ও Privacy Policy disclosure প্রস্তুত; Measurement ID না থাকায় analytics এখনো বন্ধ।
@@ -135,7 +137,15 @@ Provider-এর বর্তমান নির্দেশিকা:
 Supabase URL configuration guide: https://supabase.com/docs/guides/auth/redirect-urls
 Supabase Custom SMTP guide: https://supabase.com/docs/guides/auth/auth-smtp
 
-## 10. এখনো হাতে পরীক্ষা প্রয়োজন
+## 10. Supabase database migrations
+
+Supabase-এ প্রয়োগ করা migration SQL GitHub-এও রাখা হয়েছে:
+- `supabase/migrations/20261123123321_harden_future_public_default_privileges.sql`
+- `supabase/migrations/20261123123354_fully_restrict_future_public_tables_and_sequences.sql`
+
+এগুলো শুধু ভবিষ্যতে `postgres` role দ্বারা তৈরি `public` objects-এর default grants পরিবর্তন করে; বর্তমান চারটি finance table-এর grants, RLS policy বা data পরিবর্তন করে না। অন্য creator role দিয়ে public table তৈরি হলে তার default privilege আলাদাভাবে যাচাই করতে হবে।
+
+## 11. এখনো হাতে পরীক্ষা প্রয়োজন
 
 - [ ] ইমেইল confirmation link account.html-এ ফেরে কি না
 - [ ] Login, logout, password reset পরীক্ষা

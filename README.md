@@ -46,6 +46,12 @@ The production site is deployed from this repository through the Cloudflare Page
 
 Cloudflare Pages automatically builds and deploys new commits pushed to the connected `main` branch. Confirm the latest production deployment is successful in the Cloudflare dashboard before treating a commit as live.
 
+## Supabase database migrations and security
+
+Database migration history is mirrored in `supabase/migrations/`. The finance tables have Row Level Security enabled and authenticated policies bind every profile/record to `auth.uid()`. Existing account tables explicitly grant CRUD to the authenticated role; they do not grant the anonymous role access.
+
+Two follow-up migrations tighten default privileges for new objects created by the `postgres` role in the `public` schema. New tables/functions/sequences created by that role do not automatically receive Data API privileges; migrations must explicitly grant only what they need and enable RLS before exposing tables. The project integration cannot alter the separate `supabase_admin` creator-role defaults, so do not create exposed public tables as that role without reviewing those defaults first.
+
 ## Account data and privacy
 - Public calculator inputs and saved calculation snapshots are processed/stored in the visitor's browser and are not included in currency-rate API requests.
 - When a visitor intentionally creates an account and saves records in `account.html`, profile, income/expense, debt and monthly budget records are sent to Supabase and stored with that account.
