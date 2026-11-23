@@ -34,19 +34,8 @@ bn:{title:"মানি ক্যালকুলেটর ব্যবহার�
 };
 Object.assign(copy,((window.GMC_PAGE_WORDS||{})["guides"])||{});
 const supportedLanguages=["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
-let lang=(function(){
- const timeNode=document.getElementById("visitorLocalTime"),labelNode=document.getElementById("visitorLocalLabel"),zoneNode=document.getElementById("visitorTimeZone");
- if(!timeNode||!labelNode||!zoneNode)return;
- function updateVisitorClock(){
-  const language=(document.documentElement.lang||"en").toLowerCase(),locale=(window.GMC_LOCALES||{})[language]||"en-US";
-  const label=((window.GMC_LANGUAGE_LABELS||{})[language]||(window.GMC_LANGUAGE_LABELS||{}).en);
-  const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||"Local device time",now=new Date();
-  timeNode.dateTime=now.toISOString();timeNode.textContent=new Intl.DateTimeFormat(locale,{dateStyle:"full",timeStyle:"medium"}).format(now);
-  labelNode.textContent=label.time;zoneNode.textContent=label.zone+zone;
- }
- updateVisitorClock();window.setInterval(updateVisitorClock,1000);
- const selector=document.getElementById("languageSelect");if(selector)selector.addEventListener("change",updateVisitorClock);
-})();
+let lang=(function(){try{const saved=localStorage.getItem("gmc_language");return supportedLanguages.includes(saved)?saved:"en"}catch(e){return "en"}})();
+
 function setLang(){
  document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
  const words=copy[lang]||copy.en;
