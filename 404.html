@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<base href="/GlobalMoneyCalc/">
+
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#10152b">
 <title>Page not found | GlobalMoneyCalc</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:#f4f6fb;color:#172039;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}.card{width:min(100%,560px);background:white;border:1px solid #e5e9f2;border-radius:22px;padding:30px;text-align:center;box-shadow:0 14px 40px rgba(26,35,72,.08)}.mark{font-size:12px;font-weight:800;letter-spacing:.1em;color:#7157f2}.code{font-size:clamp(64px,18vw,100px);line-height:1;font-weight:900;margin:18px 0;color:#10152b}.card h1{font-size:27px;margin:12px 0}.card p{color:#65708a}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}a,button{font:inherit;border-radius:11px;padding:11px 16px;text-decoration:none;font-weight:750;cursor:pointer}.home{background:#7157f2;color:white}.back{background:#f0edff;color:#5542ca;border:0}.lang{position:absolute;top:52px;right:18px;max-width:165px;background:#1b2240;color:white;border:1px solid #555b78;border-radius:10px;padding:8px 12px;cursor:pointer}html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .lang{right:auto;left:18px}.card a:focus-visible,.lang:focus-visible{outline:3px solid #998cff;outline-offset:3px}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:#f4f6fb;color:#172039;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}.card{width:min(100%,560px);background:white;border:1px solid #e5e9f2;border-radius:22px;padding:30px;text-align:center;box-shadow:0 14px 40px rgba(26,35,72,.08)}.mark{font-size:12px;font-weight:800;letter-spacing:.1em;color:#7157f2}.code{font-size:clamp(64px,18vw,100px);line-height:1;font-weight:900;margin:18px 0;color:#10152b}.card h1{font-size:27px;margin:12px 0}.card p{color:#65708a}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}a,button{font:inherit;border-radius:11px;padding:11px 16px;text-decoration:none;font-weight:750;cursor:pointer}.home{background:#7157f2;color:white}.account{background:#f0edff;color:#5542ca}.back{background:#f0edff;color:#5542ca;border:0}.lang{position:absolute;top:52px;right:18px;max-width:165px;background:#1b2240;color:white;border:1px solid #555b78;border-radius:10px;padding:8px 12px;cursor:pointer}html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .lang{right:auto;left:18px}.card a:focus-visible,.lang:focus-visible{outline:3px solid #998cff;outline-offset:3px}
 </style>
 <script src="translations.js"></script>
 </head>
@@ -22,28 +22,28 @@
 <p id="message">The address may be incorrect, or the page may have moved. Use the home page to continue.</p>
 
 <p class="site-credit" style="margin:18px 0 0;text-align:center;font-size:13px;opacity:.8">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></p>
-<div class="actions"><a class="home" id="homeLink" href="./">Go to homepage</a><button class="back" id="backBtn" type="button">Go back</button></div>
+<div class="actions"><a class="home" id="homeLink" href="./">Go to homepage</a><a class="account" id="accountLink" href="account.html">My account</a><button class="back" id="backBtn" type="button">Go back</button></div>
 </main>
 <script>
 const supported=["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
 const messages={
-en:["This page could not be found.","The address may be incorrect, or the page may have moved. Use the home page to continue.","Go to homepage","Go back"],
-zh:["找不到此页面。","网址可能有误，或者页面已移动。请返回首页继续。","前往首页","返回"],
-hi:["यह पेज नहीं मिला।","पता गलत हो सकता है या पेज स्थानांतरित हो गया है। आगे बढ़ने के लिए होम पेज पर जाएँ।","होम पेज पर जाएँ","वापस जाएँ"],
-es:["No se ha encontrado esta página.","La dirección puede ser incorrecta o la página se ha movido. Vuelve a la página de inicio para continuar.","Ir a la página principal","Volver"],
-ar:["تعذر العثور على هذه الصفحة.","قد يكون العنوان غير صحيح أو ربما تم نقل الصفحة. انتقل إلى الصفحة الرئيسية للمتابعة.","الذهاب إلى الصفحة الرئيسية","رجوع"],
-fr:["Cette page est introuvable.","L’adresse est peut-être incorrecte ou la page a été déplacée. Utilisez la page d’accueil pour continuer.","Aller à l’accueil","Retour"],
-bn:["এই পেজটি খুঁজে পাওয়া যায়নি।","ঠিকানায় ভুল থাকতে পারে, অথবা পেজটি সরানো হয়েছে। চালিয়ে যেতে হোমপেজে যান।","হোমপেজে যান","আগের পেজে ফিরুন"],
-pt:["Esta página não foi encontrada.","O endereço pode estar incorreto ou a página pode ter sido movida. Use a página inicial para continuar.","Ir para a página inicial","Voltar"],
-ru:["Страница не найдена.","Возможно, адрес указан неверно или страница была перемещена. Перейдите на главную страницу, чтобы продолжить.","На главную","Назад"],
-id:["Halaman ini tidak ditemukan.","Alamat mungkin salah atau halaman telah dipindahkan. Gunakan halaman utama untuk melanjutkan.","Ke halaman utama","Kembali"]
+en:["This page could not be found.","The address may be incorrect, or the page may have moved. Use the home page to continue.","Go to homepage","Go back","My account"],
+zh:["找不到此页面。","网址可能有误，或者页面已移动。请返回首页继续。","前往首页","返回","我的账户"],
+hi:["यह पेज नहीं मिला।","पता गलत हो सकता है या पेज स्थानांतरित हो गया है। आगे बढ़ने के लिए होम पेज पर जाएँ।","होम पेज पर जाएँ","वापस जाएँ","मेरा खाता"],
+es:["No se ha encontrado esta página.","La dirección puede ser incorrecta o la página se ha movido. Vuelve a la página de inicio para continuar.","Ir a la página principal","Volver","Mi cuenta"],
+ar:["تعذر العثور على هذه الصفحة.","قد يكون العنوان غير صحيح أو ربما تم نقل الصفحة. انتقل إلى الصفحة الرئيسية للمتابعة.","الذهاب إلى الصفحة الرئيسية","رجوع","حسابي"],
+fr:["Cette page est introuvable.","L’adresse est peut-être incorrecte ou la page a été déplacée. Utilisez la page d’accueil pour continuer.","Aller à l’accueil","Retour","Mon compte"],
+bn:["এই পেজটি খুঁজে পাওয়া যায়নি।","ঠিকানায় ভুল থাকতে পারে, অথবা পেজটি সরানো হয়েছে। চালিয়ে যেতে হোমপেজে যান।","হোমপেজে যান","আগের পেজে ফিরুন","আমার অ্যাকাউন্ট"],
+pt:["Esta página não foi encontrada.","O endereço pode estar incorreto ou a página pode ter sido movida. Use a página inicial para continuar.","Ir para a página inicial","Voltar","Minha conta"],
+ru:["Страница не найдена.","Возможно, адрес указан неверно или страница была перемещена. Перейдите на главную страницу, чтобы продолжить.","На главную","Назад","Мой аккаунт"],
+id:["Halaman ini tidak ditemukan.","Alamat mungkin salah atau halaman telah dipindahkan. Gunakan halaman utama untuk melanjutkan.","Ke halaman utama","Kembali","Akun saya"]
 };
 const selector=document.getElementById("languageSelect");
 let lang=(function(){try{const saved=localStorage.getItem("gmc_language");return supported.includes(saved)?saved:"en"}catch(e){return "en"}})();
 function setLang(){
  const item=messages[lang]||messages.en;
  document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
- ["title","message","homeLink","backBtn"].forEach((id,i)=>document.getElementById(id).textContent=item[i]);
+ ["title","message","homeLink","backBtn","accountLink"].forEach((id,i)=>document.getElementById(id).textContent=item[i]);
  selector.value=lang;
  try{localStorage.setItem("gmc_language",lang)}catch(e){}
 }
