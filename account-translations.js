@@ -11,3 +11,8 @@ Object.assign(window.GMC_ACCOUNT_WORDS.fr,{passTooShort:"Utilisez un mot de pass
 Object.assign(window.GMC_ACCOUNT_WORDS.pt,{passTooShort:"Use uma senha com pelo menos 8 caracteres.",passwordMismatch:"As senhas não coincidem.",profileSaved:"Perfil salvo.",networkError:"Ocorreu um problema de conexão. Tente novamente."});
 Object.assign(window.GMC_ACCOUNT_WORDS.ru,{passTooShort:"Пароль должен содержать не менее 8 символов.",passwordMismatch:"Пароли не совпадают.",profileSaved:"Профиль сохранён.",networkError:"Произошла ошибка соединения. Попробуйте ещё раз."});
 Object.assign(window.GMC_ACCOUNT_WORDS.id,{passTooShort:"Gunakan kata sandi minimal 8 karakter.",passwordMismatch:"Kata sandi tidak cocok.",profileSaved:"Profil berhasil disimpan.",networkError:"Terjadi masalah koneksi. Silakan coba lagi."});
+
+const emailPrompt={en:"Enter your email address first.",bn:"আগে আপনার ইমেইল ঠিকানা লিখুন।",zh:"请先输入您的电子邮箱地址。",hi:"कृपया पहले अपना ईमेल पता दर्ज करें।",es:"Introduce primero tu dirección de correo electrónico.",ar:"يرجى إدخال عنوان بريدك الإلكتروني أولاً.",fr:"Veuillez d’abord saisir votre adresse e-mail.",pt:"Informe primeiro seu endereço de e-mail.",ru:"Сначала введите адрес электронной почты.",id:"Masukkan alamat email Anda terlebih dahulu."};
+for (const [language, message] of Object.entries(emailPrompt)) {
+  Object.assign(window.GMC_ACCOUNT_WORDS[language], {enterEmail: message});
+}
