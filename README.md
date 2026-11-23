@@ -52,3 +52,10 @@ See [LAUNCH-CHECKLIST-BN.md](LAUNCH-CHECKLIST-BN.md) for deployment, troubleshoo
 - Calculator inputs are never included in analytics events.
 - Setup guide: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md).
 - No fabricated/local-only public visitor counter is used. Real visitor metrics require a connected analytics property.
+
+
+## Saved calculations
+- The homepage includes Save buttons for currency, salary, budget, and savings calculations.
+- Saved inputs and results stay in the visitor's own browser local storage on that device; there is no account, server upload, or cross-device sync.
+- Visitors can restore inputs or delete individual/all saved entries. Browser storage clearing may erase them.
+- Implementation: `save-calculations.js`.
