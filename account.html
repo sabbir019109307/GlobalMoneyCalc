@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10152b">
+<meta name="description" content="Private money dashboard for GlobalMoneyCalc users. Save income, expenses, debts and monthly budgets securely.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>My Money Account | GlobalMoneyCalc</title>
+<script src="translations.js" defer></script>
+<script src="account-translations.js" defer></script>
+<script src="supabase-config.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2" defer></script>
+<script src="account.js" defer></script>
+<script src="analytics.js" defer></script>
+<style>
+:root{--bg:#f4f6fb;--ink:#172039;--muted:#65708a;--navy:#10152b;--line:#e5e9f2;--purple:#7157f2;--soft:#f0edff;--good:#087e66;--bad:#a43b45}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}
+.clock{background:#090e22;color:#eef0ff;text-align:center;font-size:12px;padding:8px 12px}.top{background:var(--navy);color:white}.nav{max-width:1100px;margin:auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{color:#fff;text-decoration:none;font-weight:850;font-size:19px;display:flex;align-items:center;gap:9px}.mark{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#7157f2,#a293ff);font-size:20px}.navRight{display:flex;align-items:center;gap:10px}.navLink{color:#dce0f1;text-decoration:none;font-size:14px}.lang{background:#1b2240;border:1px solid #555b78;color:white;border-radius:10px;padding:8px 10px;max-width:155px}
+main{max-width:1100px;margin:0 auto;padding:32px 18px 55px}.intro{margin:0 0 22px}.intro h1{font-size:clamp(28px,5vw,38px);line-height:1.12;margin:0 0 8px}.intro p{color:var(--muted);margin:0;max-width:750px}
+.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 8px 28px #1a23470a}.authGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.authForm h2{margin:0 0 7px;font-size:20px}.authForm p{margin:0 0 15px;color:var(--muted);font-size:13px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px;min-width:0}.field.full{grid-column:1/-1}.field label,.field>span{font-size:13px;font-weight:750;color:#53607a}.field input,.field select,.field textarea{width:100%;min-width:0;border:1px solid #dce2ee;border-radius:10px;padding:11px 12px;background:white;color:var(--ink)}.field textarea{min-height:72px;resize:vertical}
+.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:750;cursor:pointer}.primary{background:linear-gradient(135deg,#7157f2,#9583ff);color:#fff}.secondary{background:#f0edff;color:#5542ca;border:1px solid #dcd6ff}.danger{background:#fff0f0;color:#9b343e;border:1px solid #f2d4d6}.textButton{border:0;background:transparent;color:#5742cf;font-weight:750;text-decoration:underline;padding:8px 0;cursor:pointer}.authForm .btn{width:100%;margin-top:14px}.authSwitch{font-size:13px;color:var(--muted);margin-top:10px;text-align:center}.authSwitch button{font:inherit}
+.notice{padding:12px 14px;border-radius:11px;background:#f5f6fb;border:1px solid var(--line);color:#53607a;font-size:13px;margin:0 0 15px}.status{padding:11px 13px;border-radius:10px;margin:0 0 15px;font-size:13px;background:#edf8f5;color:#126c5c;border:1px solid #cdebe2}.status.error{background:#fff1f1;color:#923840;border-color:#f1d1d4}
+.dashboardHead{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.dashboardHead h2{margin:0;font-size:25px}.dashboardHead p{margin:4px 0;color:var(--muted);font-size:13px}.headActions{display:flex;gap:8px;flex-wrap:wrap}.profileBox{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}.profileBox summary{cursor:pointer;font-weight:750;color:#4d5872}.profileBox form{margin-top:13px}
+.monthRow{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:22px 0 13px}.monthRow .field{min-width:175px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0 20px}.stat{background:#f7f8fc;border:1px solid var(--line);border-radius:13px;padding:13px;min-width:0}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:18px;margin-top:5px;overflow-wrap:anywhere}.stat .subAmounts{font-size:12px;color:#53607a;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
+.workGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}.sectionPanel{min-width:0}.sectionPanel h3{font-size:18px;margin:0 0 13px}.sectionPanel .btn{margin-top:13px}.listPanel{margin-top:15px}.listPanel h3{font-size:18px;margin:0 0 12px}.record{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #edf0f6;align-items:flex-start}.record:last-child{border:0}.recordMain{min-width:0;flex:1}.recordMain strong{display:block;font-size:14px;overflow-wrap:anywhere}.recordMain small{display:block;color:var(--muted);font-size:12px;margin-top:3px;overflow-wrap:anywhere}.recordAmount{text-align:end;white-space:nowrap;font-weight:800;font-size:14px}.recordActions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-top:7px}.recordActions button{border:1px solid #dce2ee;border-radius:8px;background:#f7f8fc;padding:6px 9px;color:#34405d;font-size:12px;font-weight:700}.recordActions .danger{background:#fff0f0;color:#9b343e;border-color:#f2d4d6}
+.progress{height:7px;border-radius:8px;background:#e8ebf4;overflow:hidden;margin-top:8px}.progress i{display:block;height:100%;background:var(--purple)}.empty{color:var(--muted);font-size:13px;padding:10px 0}.settleInput{width:100px;max-width:100%;padding:6px 8px;border:1px solid #dce2ee;border-radius:8px}
+footer{background:#0c1125;color:#b9bfd4;text-align:center;padding:20px;font-size:12px}
+[hidden]{display:none!important}
+html[dir="rtl"] body{text-align:right}html[dir="rtl"] .nav,html[dir="rtl"] .dashboardHead,html[dir="rtl"] .record{direction:rtl}html[dir="rtl"] .recordAmount{text-align:start}
+@media(max-width:760px){main{padding:25px 13px 40px}.authGrid,.workGrid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.panel{padding:16px}.navLink{display:none}}
+@media(max-width:390px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.stats{gap:8px}.stat{padding:10px}.stat strong{font-size:16px}.lang{max-width:130px}}
+</style>
+</head>
+<body>
+<div class="clock"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time> <span id="visitorTimeZone"></span></div>
+<header class="top"><nav class="nav"><a class="brand" href="index.html"><span class="mark">✦</span>GlobalMoneyCalc</a><div class="navRight"><a class="navLink" href="index.html">Home</a><select id="languageSelect" class="lang" aria-label="Choose language"><option value="en">English</option><option value="zh">中文</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="fr">Français</option><option value="bn">বাংলা</option><option value="pt">Português</option><option value="ru">Русский</option><option value="id">Bahasa Indonesia</option></select></div></nav></header>
+<main>
+<section class="intro"><h1 data-i18n="title">My Money Account</h1><p data-i18n="subtitle">Sign in to securely save your income, expenses, debts and monthly budgets across devices.</p></section>
+<div id="statusMessage" class="status" role="status" aria-live="polite" hidden></div>
+<section id="authSection" class="panel">
+<div class="authGrid">
+<form id="loginForm" class="authForm">
+<h2 data-i18n="loginTitle">Welcome back</h2><p data-i18n="subtitle">Sign in to your private money dashboard.</p>
+<div class="fields"><label class="field full"><span data-i18n="email">Email address</span><input id="loginEmail" type="email" autocomplete="email" required></label><label class="field full"><span data-i18n="password">Password</span><input id="loginPassword" type="password" autocomplete="current-password" required minlength="8"></label></div>
+<button class="btn primary" type="submit" data-i18n="login">Sign in</button><div class="authSwitch"><button class="textButton" type="button" id="showSignup" data-i18n="switchSignup">New here? Create an account</button></div>
+<button class="textButton" type="button" id="forgotButton" data-i18n="forgotPassword">Forgot password?</button>
+</form>
+<form id="signupForm" class="authForm">
+<h2 data-i18n="signupTitle">Create your account</h2><p data-i18n="signupTitle">Register with your email and a password.</p>
+<div class="fields"><label class="field full"><span data-i18n="fullName">Full name</span><input id="signupName" type="text" maxlength="100" autocomplete="name" required></label><label class="field full"><span data-i18n="email">Email address</span><input id="signupEmail" type="email" autocomplete="email" required></label><label class="field full"><span data-i18n="password">Password</span><input id="signupPassword" type="password" autocomplete="new-password" minlength="8" required></label><label class="field full"><span data-i18n="confirmPassword">Confirm password</span><input id="signupConfirm" type="password" autocomplete="new-password" minlength="8" required></label></div>
+<button class="btn primary" type="submit" data-i18n="signup">Create account</button><div class="authSwitch"><button class="textButton" type="button" id="showLogin" data-i18n="switchLogin">Already registered? Sign in</button></div>
+</form>
+</div>
+<div class="notice" style="margin:15px 0 0">Your password is handled by Supabase Auth. GlobalMoneyCalc never stores your plain-text password. Your financial records are protected by database row-level security.</div>
+</section>
+<section id="recoverySection" class="panel" hidden style="margin-top:15px">
+<form id="recoveryForm"><h2 data-i18n="resetPassword">Reset your password</h2><label class="field"><span data-i18n="newPassword">New password</span><input id="recoveryPassword" type="password" minlength="8" autocomplete="new-password" required></label><button class="btn primary" type="submit" data-i18n="updatePassword">Update password</button></form>
+</section>
+<section id="dashboardSection" class="panel" hidden>
+<div class="dashboardHead"><div><h2 data-i18n="dashboardTitle">Your money dashboard</h2><p id="signedInAs"></p><p data-i18n="dashboardSubtitle">Your private financial records are saved to your account.</p></div><div class="headActions"><button class="btn secondary" type="button" id="refreshButton" data-i18n="refresh">Refresh data</button><button class="btn danger" type="button" id="signOutButton" data-i18n="signOut">Sign out</button></div></div>
+<details class="profileBox"><summary data-i18n="profileTitle">Profile settings</summary><form id="profileForm" class="fields"><label class="field"><span data-i18n="fullName">Full name</span><input id="profileName" maxlength="100"></label><label class="field"><span data-i18n="currency">Preferred currency</span><select id="profileCurrency"></select></label><label class="field"><span data-i18n="languagePref">Preferred language</span><select id="profileLanguage"></select></label><div class="field" style="align-self:end"><button class="btn primary" type="submit" data-i18n="saveProfile">Save profile</button></div></form></details>
+<div class="monthRow"><label class="field"><span data-i18n="reportMonth">Report month</span><input id="reportMonth" type="month"></label></div>
+<div class="stats" id="summaryStats"></div>
+<div class="workGrid">
+<form id="transactionForm" class="sectionPanel panel">
+<h3 data-i18n="transactionTitle">Add income or expense</h3><input id="transactionId" type="hidden">
+<div class="fields"><label class="field"><span data-i18n="transactionType">Transaction type</span><select id="transactionType"><option value="income">Income</option><option value="expense">Expense</option></select></label><label class="field"><span data-i18n="category">Category</span><select id="transactionCategory"></select></label><label class="field"><span data-i18n="amount">Amount</span><input id="transactionAmount" type="number" min="0.01" step="any" required inputmode="decimal"></label><label class="field"><span data-i18n="currency">Currency</span><select id="transactionCurrency"></select></label><label class="field"><span data-i18n="date">Date</span><input id="transactionDate" type="date" required></label><label class="field"><span data-i18n="description">Description / note</span><input id="transactionDescription" maxlength="160"></label></div>
+<button class="btn primary" type="submit" data-i18n="saveTransaction">Save transaction</button><button class="textButton" id="cancelTransactionEdit" type="button" data-i18n="cancel" hidden>Cancel</button>
+</form>
+<form id="debtForm" class="sectionPanel panel">
+<h3 data-i18n="debtsTitle">Debt and loan records</h3>
+<div class="fields"><label class="field"><span data-i18n="direction">Direction</span><select id="debtDirection"><option value="i_owe">I owe someone</option><option value="owed_to_me">Someone owes me</option></select></label><label class="field"><span data-i18n="person">Person's name</span><input id="debtPerson" maxlength="100" required></label><label class="field"><span data-i18n="totalAmount">Total amount</span><input id="debtAmount" type="number" min="0.01" step="any" required></label><label class="field"><span data-i18n="currency">Currency</span><select id="debtCurrency"></select></label><label class="field"><span data-i18n="settledAmount">Amount already paid / received</span><input id="debtSettled" type="number" min="0" step="any" value="0"></label><label class="field"><span data-i18n="dueDate">Due date (optional)</span><input id="debtDue" type="date"></label><label class="field full"><span data-i18n="note">Note (optional)</span><input id="debtNote" maxlength="180"></label></div>
+<button class="btn primary" type="submit" data-i18n="addDebt">Add debt record</button>
+</form>
+<form id="budgetForm" class="sectionPanel panel">
+<h3 data-i18n="budgetsTitle">Monthly spending budgets</h3>
+<div class="fields"><label class="field"><span data-i18n="budgetMonth">Budget month</span><input id="budgetMonth" type="month" required></label><label class="field"><span data-i18n="budgetCategory">Budget category</span><select id="budgetCategory"></select></label><label class="field"><span data-i18n="monthlyLimit">Monthly budget limit</span><input id="budgetAmount" type="number" min="0.01" step="any" required></label><label class="field"><span data-i18n="currency">Currency</span><select id="budgetCurrency"></select></label></div>
+<button class="btn primary" type="submit" data-i18n="saveBudget">Save budget</button>
+</form>
+<div class="sectionPanel panel"><h3 data-i18n="history">Transaction history</h3><div id="transactionList"></div></div>
+<div class="sectionPanel panel"><h3 data-i18n="debtsTitle">Debt and loan records</h3><div id="debtList"></div></div>
+<div class="sectionPanel panel"><h3 data-i18n="budgetsTitle">Monthly spending budgets</h3><div id="budgetList"></div></div>
+</div>
+</section>
+</main>
+<footer>© <span id="year"></span> GlobalMoneyCalc. All rights reserved.</footer>
+</body></html>
