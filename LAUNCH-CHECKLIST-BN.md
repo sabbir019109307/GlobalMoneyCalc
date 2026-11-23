@@ -19,6 +19,9 @@
 - [x] Rate methodology, Guides, Privacy Policy, Terms, Advertise এবং bilingual 404 pages
 - [x] প্রতিটি পেজের একেবারে উপরে চলমান স্থানীয় তারিখ/সময়; নিচে SABBIR AHMED TAHIR credit
 - [x] robots.txt, sitemap.xml (currency-rates page-সহ), favicon
+- [x] সব পেজে ঐচ্ছিক GA4 integration প্রস্তুত; আসল Measurement ID না দেওয়া পর্যন্ত সম্পূর্ণ বন্ধ
+- [x] GA4 চালু হলে Allow/Reject consent banner; Reject করলে Google tag লোড হয় না
+- [x] Privacy Policy পেজে analytics preference পরিবর্তনের ব্যবস্থা
 - [x] GitHub Actions-এ প্রয়োজনীয় পেজ, local links, metadata, JavaScript syntax ও sitemap validation
 
 ## 2. প্রকাশনা
@@ -75,7 +78,9 @@ Provider-এর বর্তমান নির্দেশিকা:
 - [x] বর্তমানে ad script বা analytics tracker নেই।
 - [x] Calculator amount browser-এ হিসাব হয়; API-তে পাঠানো হয় না।
 - [x] API key বা private secret public JavaScript-এ রাখা হয়নি।
-- [ ] Analytics বা advertising tracker যোগ করার আগে Privacy Policy ও প্রয়োজনীয় consent disclosure আপডেট করতে হবে।
+- [x] GA4 consent flow ও Privacy Policy disclosure প্রস্তুত; Measurement ID না থাকায় analytics এখনো বন্ধ।
+- [ ] Google Analytics-এ নিজের Property/Web stream তৈরি করে G-... Measurement ID যোগ করতে হবে।
+- [ ] Search Console-এ URL-prefix property verify করে sitemap.xml জমা দিতে হবে।
 - [ ] ভবিষ্যতে API key লাগলে browser JavaScript-এ নয়—server-side proxy/secret manager দরকার।
 
 ## 7. মালিকের সিদ্ধান্ত ছাড়া করা হয়নি
@@ -83,6 +88,10 @@ Provider-এর বর্তমান নির্দেশিকা:
 - Domain কেনা বা DNS পরিবর্তন
 - AdSense account খোলা, publisher ID বসানো বা paid plan নেওয়া
 - Public business email প্রকাশ
-- Analytics/third-party visitor tracking চালু করা
+- GA4 Measurement ID তৈরি/যোগ করা ও Search Console verification token আনা
 
 এসবের জন্য আপনার নিজের account, অনুমোদন বা সিদ্ধান্ত প্রয়োজন।
+
+
+## 8. Analytics ও Search Console সেটআপ
+বাংলা নির্দেশনা: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md)। Measurement ID ও Search Console verification Google Account মালিককেই তৈরি করতে হবে।
