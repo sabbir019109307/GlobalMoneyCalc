@@ -15,15 +15,16 @@
     try { const v=JSON.parse(localStorage.getItem(KEY)||"[]"); return Array.isArray(v)?v:[]; }
     catch (_) { return []; }
   }
-  function status(message, ok) {
-    let node=$("gmc-save-status");
+  function status(message, ok, button) {
+    const type=button ? button.getAttribute("data-gmc-save") : "global";
+    const id="gmc-save-status-"+type;
+    let node=$(id);
     if(!node) {
-      node=document.createElement("p"); node.id="gmc-save-status";
+      node=document.createElement("p"); node.id=id;
       node.setAttribute("role","status"); node.setAttribute("aria-live","polite");
-      node.style.cssText="margin:10px 0;padding:12px;border-radius:10px;font-weight:700";
-      const section=$("gmc-save-section");
-      if(section) section.insertBefore(node,section.children[1]||null);
-      else document.body.append(node);
+      node.style.cssText="display:block;min-height:22px;margin:7px 0 0;padding:8px 10px;border-radius:9px;font-size:13px;font-weight:700";
+      if(button) button.insertAdjacentElement("afterend",node);
+      else { const section=$("gmc-save-section"); if(section) section.append(node); else document.body.append(node); }
     }
     node.textContent=message;
     node.style.background=ok?"#e8f8ef":"#fff0ed";
@@ -68,6 +69,13 @@
       }
       button.textContent=say("Save this calculation","এই হিসাব সংরক্ষণ করুন");
       button.setAttribute("data-gmc-save",tool.type);
+      const statusId="gmc-save-status-"+tool.type;
+      if(!$(statusId)) {
+        const note=document.createElement("p"); note.id=statusId;
+        note.setAttribute("role","status"); note.setAttribute("aria-live","polite");
+        note.style.cssText="display:block;min-height:22px;margin:7px 0 0;padding:0;font-size:13px;font-weight:700";
+        button.insertAdjacentElement("afterend",note);
+      }
     });
     let section=$("gmc-save-section");
     if(!section) {
@@ -90,7 +98,7 @@
     const result=$(tool.result);
     const output=result ? (result.innerText||result.textContent||"").trim() : "";
     if(!result || !output || result.classList.contains("empty")) {
-      status(say("Calculate first, then save.","আগে হিসাব করুন, তারপর সংরক্ষণ করুন।"),false); return;
+      status(say("Calculate first, then save.","আগে হিসাব করুন, তারপর সংরক্ষণ করুন।"),false,button); return;
     }
     try {
       const values={};
@@ -99,9 +107,9 @@
       items.unshift({id:String(Date.now())+"-"+Math.random().toString(36).slice(2),type:tool.type,result:output,values,date:new Date().toISOString()});
       localStorage.setItem(KEY,JSON.stringify(items.slice(0,100)));
       render();
-      status(say("Saved successfully on this device.","হিসাবটি এই ডিভাইসে সফলভাবে সংরক্ষিত হয়েছে।"),true);
+      status(say("Saved successfully on this device.","✓ হিসাব সংরক্ষিত হয়েছে!"),true,button);
     } catch (_) {
-      status(say("Saving failed. Your browser may be blocking local storage.","সংরক্ষণ হয়নি। আপনার ব্রাউজার স্টোরেজ ব্যবহারে বাধা দিচ্ছে।"),false);
+      status(say("Saving failed. Your browser may be blocking local storage.","✗ সংরক্ষণ হয়নি। ব্রাউজারের স্টোরেজ অনুমতি পরীক্ষা করুন।"),false,button);
     }
   },true);
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init,{once:true});
