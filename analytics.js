@@ -5,7 +5,7 @@
  */
 (() => {
   "use strict";
-  const MEASUREMENT_ID = "";
+  const MEASUREMENT_ID = "G-EG7C8SGNNW";
   const CONSENT_KEY = "gmc_ga4_consent_v1";
   if (!/^G-[A-Z0-9]+$/.test(MEASUREMENT_ID)) return;
   const language = () => { const code=(document.documentElement.lang||"en").toLowerCase().split("-")[0]; return code; };
