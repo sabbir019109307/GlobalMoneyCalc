@@ -62,7 +62,7 @@
       if(!button) {
         button=document.createElement("button");
         button.id="gmc-save-"+tool.type; button.type="button";
-        button.className="btn secondary";
+        button.className="btn primary";
         button.style.cssText="display:block;width:100%;margin-top:10px;padding:12px;cursor:pointer";
         result.insertAdjacentElement("afterend",button);
       }
