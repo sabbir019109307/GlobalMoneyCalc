@@ -45,7 +45,9 @@
       const title=document.createElement("strong");
       title.textContent=item.type==="salary"?say("Salary calculation","বেতনের হিসাব"):item.type;
       const result=document.createElement("p"); result.textContent=item.result;
-      const date=document.createElement("small"); date.textContent=new Date(item.date).toLocaleString();
+      const date=document.createElement("small");
+      const parsedDate=item.date?new Date(item.date):null;
+      date.textContent=parsedDate&&Number.isFinite(parsedDate.getTime())?parsedDate.toLocaleString():say("Date unavailable","তারিখ পাওয়া যায়নি");
       const del=document.createElement("button"); del.type="button";
       del.textContent=say("Delete","মুছুন");
       del.addEventListener("click",()=>{
@@ -54,6 +56,43 @@
       });
       card.append(title,result,date,del); list.append(card);
     });
+  }
+  function exportSavedPdf() {
+    const items=read();
+    if(!items.length) {
+      status(say("There are no saved calculations to export.","PDF করার মতো কোনো সংরক্ষিত হিসাব নেই।"),false);
+      return;
+    }
+    const lang=(document.documentElement.lang||"en").toLowerCase().split("-")[0];
+    const bn=lang==="bn";
+    const labels=bn?{
+      title:"সংরক্ষিত হিসাবসমূহ",created:"তৈরির সময়",type:"হিসাবের ধরন",
+      result:"ফলাফল",details:"ইনপুটের বিবরণ",date:"তারিখ পাওয়া যায়নি",
+      note:"এই PDF আপনার এই ডিভাইসে সংরক্ষিত হিসাব থেকে তৈরি।",
+      print:"PDF হিসেবে সংরক্ষণ / প্রিন্ট"
+    }:{
+      title:"All Saved Calculations",created:"Exported",type:"Calculation type",
+      result:"Result",details:"Input details",date:"Date unavailable",
+      note:"This PDF was generated from calculations saved on this device.",
+      print:"Save as PDF / Print"
+    };
+    const esc=value=>String(value==null?"":value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+    const typeNames={currency:bn?"মুদ্রা রূপান্তর":"Currency",salary:bn?"বেতন":"Salary",budget:bn?"মাসিক বাজেট":"Monthly budget",savings:bn?"সঞ্চয়":"Savings"};
+    const sections=items.map((item,index)=>{
+      const d=item.date?new Date(item.date):null;
+      const date=d&&Number.isFinite(d.getTime())?d.toLocaleString():labels.date;
+      const values=item.values&&typeof item.values==="object"?Object.entries(item.values):[];
+      const rows=values.map(([key,value])=>"<tr><th>"+esc(key)+"</th><td>"+esc(value)+"</td></tr>").join("");
+      return "<section class='record'><h2>"+(index+1)+". "+esc(typeNames[item.type]||item.type||labels.type)+"</h2><p class='date'>"+esc(date)+"</p><h3>"+esc(labels.result)+"</h3><p class='result'>"+esc(item.result||"")+"</p>"+(rows?"<h3>"+esc(labels.details)+"</h3><table>"+rows+"</table>":"")+"</section>";
+    }).join("");
+    const now=new Date().toLocaleString();
+    const html='<!doctype html><html lang="'+(bn?"bn":"en")+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(labels.title)+'</title><style>body{font-family:system-ui,-apple-system,"Noto Sans Bengali","Segoe UI",sans-serif;color:#172039;line-height:1.55;margin:0;padding:24px}main{max-width:800px;margin:auto}.brand{font-weight:800;color:#6652d9}.date,.note{color:#68738a;font-size:12px}h1{font-size:25px;margin:8px 0}h2{font-size:19px;margin:0 0 4px}h3{font-size:14px;margin:14px 0 5px}.record{padding:18px 0;border-bottom:2px solid #e5e9f2;break-inside:avoid}.result{white-space:pre-wrap;background:#f5f6fb;border:1px solid #e2e6ef;padding:12px;border-radius:9px}table{width:100%;border-collapse:collapse}th,td{text-align:start;padding:7px;border-bottom:1px solid #e5e9f2}th{width:45%;color:#58647b}.actions{margin:18px 0}.actions button{background:#6652d9;color:white;border:0;border-radius:8px;padding:11px 16px;font-weight:700}@media print{body{padding:0}.actions{display:none}}@page{margin:15mm}</style></head><body><main><div class="brand">GlobalMoneyCalc</div><h1>'+esc(labels.title)+'</h1><p class="date">'+esc(labels.created)+': '+esc(now)+' · '+items.length+'</p>'+sections+'<p class="note">'+esc(labels.note)+'</p><div class="actions"><button onclick="window.print()">'+esc(labels.print)+'</button></div></main><script>window.addEventListener("load",function(){setTimeout(function(){window.focus();window.print()},350)})<\\/script></body></html>';
+    const popup=window.open("","_blank");
+    if(!popup) {
+      status(say("Allow pop-ups for this site, then try again.","এই সাইটের Pop-ups অনুমতি দিয়ে আবার চেষ্টা করুন।"),false);
+      return;
+    }
+    popup.document.open(); popup.document.write(html); popup.document.close();
   }
   function init() {
     tools.forEach(tool=>{
@@ -82,8 +121,14 @@
       section=document.createElement("section"); section.id="gmc-save-section";
       section.style.cssText="margin:28px 0;padding:18px;background:#fff;border:1px solid #ddd;border-radius:14px";
       const h=document.createElement("h2"); h.textContent=say("Saved calculations","সংরক্ষিত হিসাব");
+      const exportButton=document.createElement("button");
+      exportButton.id="gmc-export-saved-pdf"; exportButton.type="button";
+      exportButton.className="btn primary";
+      exportButton.style.cssText="display:block;width:100%;margin:12px 0;padding:12px;cursor:pointer";
+      exportButton.textContent=say("Download all saved as PDF","সব সংরক্ষিত হিসাব PDF ডাউনলোড");
+      exportButton.addEventListener("click",exportSavedPdf);
       const list=document.createElement("div"); list.id="gmc-saved-list";
-      section.append(h,list);
+      section.append(h,exportButton,list);
       const anchor=$("tools");
       if(anchor) anchor.insertAdjacentElement("afterend",section); else document.body.append(section);
     }
