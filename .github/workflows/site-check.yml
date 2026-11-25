@@ -51,7 +51,8 @@ jobs:
             'ANALYTICS-SETUP-BN.md',
             'supabase/migrations/20261123123321_harden_future_public_default_privileges.sql',
             'supabase/migrations/20261123123354_fully_restrict_future_public_tables_and_sequences.sql',
-            'supabase/migrations/20261125085149_add_user_saved_calculations.sql'
+            'supabase/migrations/20261125085149_add_user_saved_calculations.sql',
+            'supabase/migrations/20261125090031_index_saved_calculations_by_user_and_saved_time.sql'
           ];
 
           const errors = [];
@@ -128,6 +129,8 @@ jobs:
           if (!savedMigration.includes('enable row level security')) errors.push('Saved calculations migration: RLS must be enabled');
           if (!savedMigration.includes('for all to authenticated') || !savedMigration.includes('(select auth.uid()) = user_id')) errors.push('Saved calculations migration: missing owner-only authenticated policy');
           if (!savedMigration.includes('unique (user_id, local_id)')) errors.push('Saved calculations migration: missing per-user local record uniqueness');
+          const savedIndexMigration = fs.readFileSync('supabase/migrations/20261125090031_index_saved_calculations_by_user_and_saved_time.sql', 'utf8');
+          if (!savedIndexMigration.includes('(user_id, saved_at desc)')) errors.push('Saved calculations migration: missing user-scoped date index');
           if (!savedCalculations.includes('gmc_saved_calculations_owner_v1') || !savedCalculations.includes('owner!==cloudUserId')) errors.push('Saved calculations: missing local account isolation guard');
           if (!savedCalculations.includes('gmc_saved_calculations_user_v1_') || !savedCalculations.includes('readUserCache')) errors.push('Saved calculations: missing per-account local cache');
           if (!savedCalculations.includes('from("saved_calculations")')) errors.push('Saved calculations: missing Supabase cloud storage');
