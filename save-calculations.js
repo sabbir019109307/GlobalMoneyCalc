@@ -15,6 +15,23 @@
     try { const v=JSON.parse(localStorage.getItem(KEY)||"[]"); return Array.isArray(v)?v:[]; }
     catch (_) { return []; }
   }
+  function savedDate(item) {
+    if (!item || typeof item !== "object") return null;
+    const candidates = [item.date, item.createdAt, item.savedAt, item.timestamp];
+    for (const value of candidates) {
+      if (value === undefined || value === null || value === "") continue;
+      const parsed = typeof value === "number"
+        ? new Date(value < 100000000000 ? value * 1000 : value)
+        : new Date(value);
+      if (Number.isFinite(parsed.getTime())) return parsed;
+    }
+    const idMatch = String(item.id || "").match(/^(\\d{13})(?:-|$)/);
+    if (idMatch) {
+      const parsed = new Date(Number(idMatch[1]));
+      if (Number.isFinite(parsed.getTime())) return parsed;
+    }
+    return null;
+  }
   function status(message, ok, button) {
     const type=button ? button.getAttribute("data-gmc-save") : "global";
     const id="gmc-save-status-"+type;
@@ -46,8 +63,8 @@
       title.textContent=item.type==="salary"?say("Salary calculation","বেতনের হিসাব"):item.type;
       const result=document.createElement("p"); result.textContent=item.result;
       const date=document.createElement("small");
-      const parsedDate=item.date?new Date(item.date):null;
-      date.textContent=parsedDate&&Number.isFinite(parsedDate.getTime())?parsedDate.toLocaleString():say("Date unavailable","তারিখ পাওয়া যায়নি");
+      const parsedDate=savedDate(item);
+      date.textContent=parsedDate?parsedDate.toLocaleString():say("Date not recorded","তারিখ সংরক্ষিত ছিল না");
       const del=document.createElement("button"); del.type="button";
       del.textContent=say("Delete","মুছুন");
       del.addEventListener("click",()=>{
@@ -79,8 +96,8 @@
     const esc=value=>String(value==null?"":value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
     const typeNames={currency:bn?"মুদ্রা রূপান্তর":"Currency",salary:bn?"বেতন":"Salary",budget:bn?"মাসিক বাজেট":"Monthly budget",savings:bn?"সঞ্চয়":"Savings"};
     const sections=items.map((item,index)=>{
-      const d=item.date?new Date(item.date):null;
-      const date=d&&Number.isFinite(d.getTime())?d.toLocaleString():labels.date;
+      const d=savedDate(item);
+      const date=d?d.toLocaleString():labels.date;
       const values=item.values&&typeof item.values==="object"?Object.entries(item.values):[];
       const rows=values.map(([key,value])=>"<tr><th>"+esc(key)+"</th><td>"+esc(value)+"</td></tr>").join("");
       return "<section class='record'><h2>"+(index+1)+". "+esc(typeNames[item.type]||item.type||labels.type)+"</h2><p class='date'>"+esc(date)+"</p><h3>"+esc(labels.result)+"</h3><p class='result'>"+esc(item.result||"")+"</p>"+(rows?"<h3>"+esc(labels.details)+"</h3><table>"+rows+"</table>":"")+"</section>";
