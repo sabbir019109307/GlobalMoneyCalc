@@ -9,11 +9,60 @@
     {type:"savings",result:"savingsResult",inputs:["monthlySave","savingsCurrency","months","interest"]}
   ];
   const $ = id => document.getElementById(id);
+  let cloudClient = null;
+  let cloudUserId = null;
+  let cloudSyncBusy = false;
   const bn = () => (document.documentElement.lang || "").toLowerCase().startsWith("bn");
   const say = (en,bnText) => bn() ? bnText : en;
   function read() {
     try { const v=JSON.parse(localStorage.getItem(KEY)||"[]"); return Array.isArray(v)?v:[]; }
     catch (_) { return []; }
+  }
+  function cloudMessage(message, ok=true) {
+    const section=$("gmc-save-section"); if(!section)return;
+    let node=$("gmc-cloud-status");
+    if(!node){node=document.createElement("p");node.id="gmc-cloud-status";node.setAttribute("role","status");node.setAttribute("aria-live","polite");node.style.cssText="font-size:13px;margin:8px 0;color:#17643a";section.insertBefore(node,section.firstChild.nextSibling);}
+    node.textContent=message;node.style.color=ok?"#17643a":"#9a2d20";
+  }
+  function cloudRow(item) {
+    return {user_id:cloudUserId,local_id:String(item.id),calculation_type:item.type,result:String(item.result||""),input_values:item.values&&typeof item.values==="object"?item.values:{},saved_at:savedDate(item)?.toISOString()||new Date().toISOString()};
+  }
+  async function saveCloudRecord(item) {
+    if(!cloudClient||!cloudUserId)return;
+    const {error}=await cloudClient.from("saved_calculations").upsert(cloudRow(item),{onConflict:"user_id,local_id"});
+    if(error)throw error;
+  }
+  async function syncCloud() {
+    if(!cloudClient||!cloudUserId||cloudSyncBusy)return;
+    cloudSyncBusy=true;
+    try {
+      const local=read();
+      if(local.length){const {error}=await cloudClient.from("saved_calculations").upsert(local.map(cloudRow),{onConflict:"user_id,local_id"});if(error)throw error;}
+      const {data,error}=await cloudClient.from("saved_calculations").select("local_id,calculation_type,result,input_values,saved_at").order("saved_at",{ascending:false});
+      if(error)throw error;
+      const merged=new Map();
+      local.forEach(item=>merged.set(String(item.id),item));
+      (data||[]).forEach(row=>{if(!merged.has(String(row.local_id)))merged.set(String(row.local_id),{id:String(row.local_id),type:row.calculation_type,result:row.result,values:row.input_values||{},date:row.saved_at});});
+      const all=Array.from(merged.values()).sort((a,b)=>(savedDate(b)?.getTime()||0)-(savedDate(a)?.getTime()||0)).slice(0,100);
+      localStorage.setItem(KEY,JSON.stringify(all));render();
+      cloudMessage(say("✓ Your saved calculations are synced to your account.","✓ তোমার সংরক্ষিত হিসাব অ্যাকাউন্টে সিঙ্ক হয়েছে।"),true);
+    } catch(error) {
+      cloudMessage(say("Cloud sync failed: ","ক্লাউড সিঙ্ক হয়নি: ")+(error.message||"Please try again."),false);
+    } finally {cloudSyncBusy=false;}
+  }
+  async function initCloud() {
+    if(!window.supabase?.createClient||!window.GMC_SUPABASE_CONFIG?.url||!window.GMC_SUPABASE_CONFIG?.publishableKey)return;
+    cloudClient=window.supabase.createClient(window.GMC_SUPABASE_CONFIG.url,window.GMC_SUPABASE_CONFIG.publishableKey,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
+    cloudClient.auth.onAuthStateChange((event,session)=>{
+      cloudUserId=session?.user?.id||null;
+      if(cloudUserId)setTimeout(syncCloud,0);
+      else cloudMessage(say("Sign in to sync saved calculations across devices.","বিভিন্ন ডিভাইসে হিসাব পেতে লগইন করো।"),true);
+    });
+    const {data,error}=await cloudClient.auth.getSession();
+    if(error){cloudMessage(error.message,false);return;}
+    cloudUserId=data.session?.user?.id||null;
+    if(cloudUserId)await syncCloud();
+    else cloudMessage(say("Sign in to sync saved calculations across devices.","বিভিন্ন ডিভাইসে হিসাব পেতে লগইন করো।"),true);
   }
   function savedDate(item) {
     if (!item || typeof item !== "object") return null;
@@ -68,7 +117,7 @@
       const del=document.createElement("button"); del.type="button";
       del.textContent=say("Delete","মুছুন");
       del.addEventListener("click",()=>{
-        try { localStorage.setItem(KEY,JSON.stringify(read().filter(x=>x.id!==item.id))); render(); }
+        try { localStorage.setItem(KEY,JSON.stringify(read().filter(x=>x.id!==item.id))); render(); if(cloudClient&&cloudUserId) cloudClient.from("saved_calculations").delete().eq("local_id",String(item.id)).then(({error})=>{if(error)cloudMessage(error.message,false);}); }
         catch (_) { status(say("Could not delete this record.","হিসাবটি মুছতে পারিনি।"),false); }
       });
       card.append(title,result,date,del); list.append(card);
@@ -167,13 +216,17 @@
       tool.inputs.forEach(id=>{const field=$(id); if(field) values[id]=field.value;});
       const items=read();
       items.unshift({id:String(Date.now())+"-"+Math.random().toString(36).slice(2),type:tool.type,result:output,values,date:new Date().toISOString()});
+      const savedItem=items[0];
       localStorage.setItem(KEY,JSON.stringify(items.slice(0,100)));
       render();
-      status(say("Saved successfully on this device.","✓ হিসাব সংরক্ষিত হয়েছে!"),true,button);
+      status(say("Saved on this device.","✓ এই ডিভাইসে হিসাব সংরক্ষিত হয়েছে।"),true,button);
+      if(cloudClient&&cloudUserId) saveCloudRecord(savedItem).then(()=>cloudMessage(say("✓ Saved to your account.","✓ তোমার অ্যাকাউন্টেও সংরক্ষিত হয়েছে।"),true)).catch(error=>cloudMessage(error.message||say("Cloud save failed.","ক্লাউডে সংরক্ষণ হয়নি।"),false));
+      else cloudMessage(say("Sign in to sync this calculation across devices.","অন্য ডিভাইসে পেতে অ্যাকাউন্টে লগইন করো।"),true);
     } catch (_) {
       status(say("Saving failed. Your browser may be blocking local storage.","✗ সংরক্ষণ হয়নি। ব্রাউজারের স্টোরেজ অনুমতি পরীক্ষা করুন।"),false,button);
     }
   },true);
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init,{once:true});
   else init();
+  initCloud();
 })();
