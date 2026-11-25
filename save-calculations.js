@@ -3,6 +3,7 @@
   "use strict";
   const KEY = "gmc_saved_calculations_v1";
   const OWNER_KEY = "gmc_saved_calculations_owner_v1";
+  const USER_CACHE_PREFIX = "gmc_saved_calculations_user_v1_";
   const tools = [
     {type:"currency",result:"currencyResult",inputs:["amount","fromCurrency","toCurrency","rate"]},
     {type:"salary",result:"salaryResult",inputs:["salaryAmount","salaryCurrency","days","hours","deduction"]},
@@ -18,6 +19,14 @@
   function read() {
     try { const v=JSON.parse(localStorage.getItem(KEY)||"[]"); return Array.isArray(v)?v:[]; }
     catch (_) { return []; }
+  }
+  function readUserCache(userId) {
+    try { const value=JSON.parse(localStorage.getItem(USER_CACHE_PREFIX+userId)||"[]"); return Array.isArray(value)?value:[]; }
+    catch (_) { return []; }
+  }
+  function writeUserCache(userId,items) {
+    try { localStorage.setItem(USER_CACHE_PREFIX+userId,JSON.stringify(items.slice(0,100))); }
+    catch (_) { /* The main local save remains available if quota is reached. */ }
   }
   function cloudMessage(message, ok=true) {
     const section=$("gmc-save-section"); if(!section)return;
@@ -38,7 +47,12 @@
     cloudSyncBusy=true;
     try {
       const owner=localStorage.getItem(OWNER_KEY);
-      const local=owner && owner!==cloudUserId ? [] : read();
+      const currentLocal=read();
+      let local=currentLocal;
+      if(owner && owner!==cloudUserId) {
+        writeUserCache(owner,currentLocal);
+        local=readUserCache(cloudUserId);
+      }
       if(local.length){const {error}=await cloudClient.from("saved_calculations").upsert(local.map(cloudRow),{onConflict:"user_id,local_id"});if(error)throw error;}
       const {data,error}=await cloudClient.from("saved_calculations").select("local_id,calculation_type,result,input_values,saved_at").order("saved_at",{ascending:false});
       if(error)throw error;
@@ -48,6 +62,7 @@
       const all=Array.from(merged.values()).sort((a,b)=>(savedDate(b)?.getTime()||0)-(savedDate(a)?.getTime()||0)).slice(0,100);
       localStorage.setItem(KEY,JSON.stringify(all));
       localStorage.setItem(OWNER_KEY,cloudUserId);
+      writeUserCache(cloudUserId,all);
       render();
       cloudMessage(say("✓ Your saved calculations are synced to your account.","✓ তোমার সংরক্ষিত হিসাব অ্যাকাউন্টে সিঙ্ক হয়েছে।"),true);
     } catch(error) {
@@ -121,7 +136,7 @@
       const del=document.createElement("button"); del.type="button";
       del.textContent=say("Delete","মুছুন");
       del.addEventListener("click",()=>{
-        try { localStorage.setItem(KEY,JSON.stringify(read().filter(x=>x.id!==item.id))); render(); if(cloudClient&&cloudUserId) cloudClient.from("saved_calculations").delete().eq("local_id",String(item.id)).then(({error})=>{if(error)cloudMessage(error.message,false);}); }
+        try { const remaining=read().filter(x=>x.id!==item.id); localStorage.setItem(KEY,JSON.stringify(remaining)); if(cloudUserId)writeUserCache(cloudUserId,remaining); render(); if(cloudClient&&cloudUserId) cloudClient.from("saved_calculations").delete().eq("local_id",String(item.id)).then(({error})=>{if(error)cloudMessage(error.message,false);}); }
         catch (_) { status(say("Could not delete this record.","হিসাবটি মুছতে পারিনি।"),false); }
       });
       card.append(title,result,date,del); list.append(card);
@@ -222,6 +237,7 @@
       items.unshift({id:String(Date.now())+"-"+Math.random().toString(36).slice(2),type:tool.type,result:output,values,date:new Date().toISOString()});
       const savedItem=items[0];
       localStorage.setItem(KEY,JSON.stringify(items.slice(0,100)));
+      if(cloudUserId)writeUserCache(cloudUserId,items.slice(0,100));
       render();
       status(say("Saved on this device.","✓ এই ডিভাইসে হিসাব সংরক্ষিত হয়েছে।"),true,button);
       if(cloudClient&&cloudUserId) saveCloudRecord(savedItem).then(()=>cloudMessage(say("✓ Saved to your account.","✓ তোমার অ্যাকাউন্টেও সংরক্ষিত হয়েছে।"),true)).catch(error=>cloudMessage(error.message||say("Cloud save failed.","ক্লাউডে সংরক্ষণ হয়নি।"),false));
