@@ -205,7 +205,7 @@ function renderSavedCalculations(){
   if(!savedCalculations.length){box.append(make("p","empty",lang==="bn"?"এখনো কোনো ক্যালকুলেটর হিসাব সংরক্ষণ করা হয়নি।":"No saved calculator results yet."));return;}
   savedCalculations.forEach(row=>{
     const card=make("div","record"),main=make("div","recordMain");
-    const typeNames={currency:lang==="bn"?"মুদ্রা রূপান্তর":"Currency conversion",salary:lang==="bn"?"বেতনের হিসাব":"Salary",budget:lang==="bn"?"মাসিক বাজেট":"Monthly budget",savings:lang==="bn"?"সঞ্চয়ের হিসাব":"Savings"};
+    const typeNames={currency:t("typeCurrency"),salary:t("typeSalary"),budget:t("typeBudget"),savings:t("typeSavings")};
     main.append(make("strong","",typeNames[row.calculation_type]||row.calculation_type));
     main.append(make("small","",row.result||""));
     main.append(make("small","",row.saved_at?new Date(row.saved_at).toLocaleString(LOCALES[lang]||"en-US"):""));
