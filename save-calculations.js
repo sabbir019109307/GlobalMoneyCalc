@@ -25,7 +25,7 @@
         : new Date(value);
       if (Number.isFinite(parsed.getTime())) return parsed;
     }
-    const idMatch = String(item.id || "").match(/^(\\d{13})(?:-|$)/);
+    const idMatch = String(item.id || "").match(/^(\d{13})(?:-|$)/);
     if (idMatch) {
       const parsed = new Date(Number(idMatch[1]));
       if (Number.isFinite(parsed.getTime())) return parsed;
