@@ -129,9 +129,11 @@ jobs:
           if (!savedMigration.includes('for all to authenticated') || !savedMigration.includes('(select auth.uid()) = user_id')) errors.push('Saved calculations migration: missing owner-only authenticated policy');
           if (!savedMigration.includes('unique (user_id, local_id)')) errors.push('Saved calculations migration: missing per-user local record uniqueness');
           if (!savedCalculations.includes('gmc_saved_calculations_owner_v1') || !savedCalculations.includes('owner!==cloudUserId')) errors.push('Saved calculations: missing local account isolation guard');
+          if (!savedCalculations.includes('gmc_saved_calculations_user_v1_') || !savedCalculations.includes('readUserCache')) errors.push('Saved calculations: missing per-account local cache');
           if (!savedCalculations.includes('from("saved_calculations")')) errors.push('Saved calculations: missing Supabase cloud storage');
           if (!accountScript.includes('from("saved_calculations")') || !accountScript.includes('function renderSavedCalculations')) errors.push('Account dashboard: missing cloud saved calculation list');
           if (!fs.readFileSync('account.html', 'utf8').includes('id="savedCalculationsList"')) errors.push('account.html: missing saved calculation list');
+          if (!accountTranslations.includes('savedCalculations')) errors.push('account translations: missing saved calculations label');
           if (!home.includes('supabase-config.js') || !home.includes('supabase-js@2.119.2')) errors.push('index.html: missing Supabase browser client setup');
 
           try { new Function(analytics); } catch (error) { errors.push('analytics.js: syntax error: ' + error.message); }
