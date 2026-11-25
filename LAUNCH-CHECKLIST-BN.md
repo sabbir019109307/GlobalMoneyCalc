@@ -95,6 +95,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 - [ ] `supabase_admin` creator role-এর default privilege আলাদা; এই সংযোগে role membership না থাকায় তা পরিবর্তন করা যায়নি। ওই role দিয়ে নতুন public object তৈরির আগে owner-level permission দিয়ে আলাদা যাচাই প্রয়োজন।
 - [x] Supabase Auth password পরিচালনা করে; public source-এ service_role/secret key নেই।
 - [x] API key বা private secret public JavaScript-এ রাখা হয়নি।
+- [ ] Supabase Auth-এর leaked-password protection চালু করুন; Security Advisor-এ এটি এখনো disabled warning হিসেবে আছে: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection
 - [x] GA4 consent flow ও Privacy Policy disclosure প্রস্তুত; Measurement ID না থাকায় analytics এখনো বন্ধ।
 - [ ] Google Analytics-এ নিজের Property/Web stream তৈরি করে G-... Measurement ID যোগ করতে হবে।
 - [ ] Search Console-এ URL-prefix property verify করে sitemap.xml জমা দিতে হবে।
