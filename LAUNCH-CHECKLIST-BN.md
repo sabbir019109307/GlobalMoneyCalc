@@ -37,7 +37,7 @@ https://globalmoneycalc.pages.dev/currency-rates.html
 ব্যক্তিগত অ্যাকাউন্ট:
 https://globalmoneycalc.pages.dev/account.html
 
-Cloudflare Pages Dashboard-এ সর্বশেষ production deployment সফল না দেখা পর্যন্ত নতুন commit live হয়েছে ধরে নেবেন না। GitHub Actions কেবল repository validation চালায়:
+GitHub Actions-এর Site quality checks সর্বশেষ commit-এ সফল হয়েছে। তবে GitHub Pages-এর build এবং Cloudflare Pages production deployment আলাদা বিষয়। `pages.dev` ঠিকানায় পরিবর্তন live হয়েছে কি না Cloudflare Pages Dashboard-এ Production deployment দেখে নিশ্চিত করুন:
 https://github.com/sabbir019109307/GlobalMoneyCalc/actions
 
 ফোনে পেজ পুরোনো দেখালে Chrome Incognito tab খুলুন অথবা সাইটের cache/site data পরিষ্কার করে reload করুন।
