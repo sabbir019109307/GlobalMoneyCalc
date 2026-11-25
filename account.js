@@ -12,7 +12,7 @@ const CATS = {
 };
 let lang = (() => { try { const saved=localStorage.getItem("gmc_language"); return LANGUAGES.includes(saved)?saved:"en"; } catch { return "en"; } })();
 let supabase = null, currentUser = null, currentProfile = null;
-let transactions = [], debts = [], budgets = [], activeMonth = "";
+let transactions = [], debts = [], budgets = [], savedCalculations = [], activeMonth = "";
 let loadingUserId = "", isLoading = false;
 
 const t = (key) => (WORDS[lang] && WORDS[lang][key]) || (WORDS.en && WORDS.en[key]) || key;
@@ -85,7 +85,7 @@ function openDashboard(session){
   else{
     $("dashboardSection").hidden=true;
     $("authSection").hidden=false;
-    transactions=[];debts=[];budgets=[];currentProfile=null;loadingUserId="";
+    transactions=[];debts=[];budgets=[];savedCalculations=[];currentProfile=null;loadingUserId="";renderSavedCalculations();
   }
 }
 async function ensureProfile(){
@@ -197,7 +197,20 @@ function renderDashboard(){
   );
 }
 function renderLists(){
-  renderTransactionList();renderDebtList();renderBudgetList();
+  renderTransactionList();renderDebtList();renderBudgetList();renderSavedCalculations();
+}
+function renderSavedCalculations(){
+  const box=$("savedCalculationsList");if(!box)return;box.replaceChildren();
+  if(!currentUser){box.append(make("p","empty",lang==="bn"?"হিসাব দেখতে লগইন করুন।":"Sign in to view your saved calculations."));return;}
+  if(!savedCalculations.length){box.append(make("p","empty",lang==="bn"?"এখনো কোনো ক্যালকুলেটর হিসাব সংরক্ষণ করা হয়নি।":"No saved calculator results yet."));return;}
+  savedCalculations.forEach(row=>{
+    const card=make("div","record"),main=make("div","recordMain");
+    const typeNames={currency:lang==="bn"?"মুদ্রা রূপান্তর":"Currency conversion",salary:lang==="bn"?"বেতনের হিসাব":"Salary",budget:lang==="bn"?"মাসিক বাজেট":"Monthly budget",savings:lang==="bn"?"সঞ্চয়ের হিসাব":"Savings"};
+    main.append(make("strong","",typeNames[row.calculation_type]||row.calculation_type));
+    main.append(make("small","",row.result||""));
+    main.append(make("small","",row.saved_at?new Date(row.saved_at).toLocaleString(LOCALES[lang]||"en-US"):""));
+    card.append(main);box.append(card);
+  });
 }
 function renderTransactionList(){
   const box=$("transactionList");if(!box)return;box.replaceChildren();
@@ -260,13 +273,14 @@ async function loadDashboard(){
   isLoading=true;showStatus(t("loading"));
   try{
     const month=$("reportMonth").value||monthNow();
-    const [txRes,debtRes,budgetRes]=await Promise.all([
+    const [txRes,debtRes,budgetRes,savedRes]=await Promise.all([
       supabase.from("money_transactions").select("*").gte("transaction_date",monthStart(month)).lt("transaction_date",nextMonth(month)).order("transaction_date",{ascending:false}).order("created_at",{ascending:false}),
       supabase.from("debts").select("*").order("created_at",{ascending:false}),
-      supabase.from("monthly_budgets").select("*").eq("budget_month",monthStart(month)).order("category")
+      supabase.from("monthly_budgets").select("*").eq("budget_month",monthStart(month)).order("category"),
+      supabase.from("saved_calculations").select("local_id,calculation_type,result,saved_at").order("saved_at",{ascending:false}).limit(100)
     ]);
-    const error=txRes.error||debtRes.error||budgetRes.error;if(error)throw error;
-    transactions=txRes.data||[];debts=debtRes.data||[];budgets=budgetRes.data||[];activeMonth=month;
+    const error=txRes.error||debtRes.error||budgetRes.error||savedRes.error;if(error)throw error;
+    transactions=txRes.data||[];debts=debtRes.data||[];budgets=budgetRes.data||[];savedCalculations=savedRes.data||[];activeMonth=month;
     renderDashboard();renderLists();clearStatus();
   }catch(error){showStatus(error.message||t("networkError"),"error");}
   finally{isLoading=false;}
