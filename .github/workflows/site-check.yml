@@ -151,7 +151,7 @@ jobs:
           if (!/const MEASUREMENT_ID = "G-[A-Z0-9]+";/.test(analytics)) errors.push('analytics.js: missing valid configured GA4 Measurement ID');
           if (!analytics.includes('gmc_ga4_consent_v1') || !analytics.includes('Allow analytics')) errors.push('analytics.js: missing explicit visitor consent flow');
           for (const file of required.filter((name) => name.endsWith('.html'))) {
-            if (fs.existsSync(file) && !/src="analytics\\.js(?:\\?[^\"]*)?"/.test(fs.readFileSync(file, 'utf8'))) errors.push(file + ': missing optional analytics loader');
+            if (fs.existsSync(file) && !fs.readFileSync(file, 'utf8').includes('src="analytics.js')) errors.push(file + ': missing optional analytics loader');
           }
           if (!home.includes('currency-rates.html')) errors.push('index.html: missing currency-rate chart link');
           if (!home.includes('href="account.html"')) errors.push('index.html: missing account page link');
