@@ -2,6 +2,7 @@
 (() => {
   "use strict";
   const KEY = "gmc_saved_calculations_v1";
+  const OWNER_KEY = "gmc_saved_calculations_owner_v1";
   const tools = [
     {type:"currency",result:"currencyResult",inputs:["amount","fromCurrency","toCurrency","rate"]},
     {type:"salary",result:"salaryResult",inputs:["salaryAmount","salaryCurrency","days","hours","deduction"]},
@@ -36,7 +37,8 @@
     if(!cloudClient||!cloudUserId||cloudSyncBusy)return;
     cloudSyncBusy=true;
     try {
-      const local=read();
+      const owner=localStorage.getItem(OWNER_KEY);
+      const local=owner && owner!==cloudUserId ? [] : read();
       if(local.length){const {error}=await cloudClient.from("saved_calculations").upsert(local.map(cloudRow),{onConflict:"user_id,local_id"});if(error)throw error;}
       const {data,error}=await cloudClient.from("saved_calculations").select("local_id,calculation_type,result,input_values,saved_at").order("saved_at",{ascending:false});
       if(error)throw error;
@@ -44,7 +46,9 @@
       local.forEach(item=>merged.set(String(item.id),item));
       (data||[]).forEach(row=>{if(!merged.has(String(row.local_id)))merged.set(String(row.local_id),{id:String(row.local_id),type:row.calculation_type,result:row.result,values:row.input_values||{},date:row.saved_at});});
       const all=Array.from(merged.values()).sort((a,b)=>(savedDate(b)?.getTime()||0)-(savedDate(a)?.getTime()||0)).slice(0,100);
-      localStorage.setItem(KEY,JSON.stringify(all));render();
+      localStorage.setItem(KEY,JSON.stringify(all));
+      localStorage.setItem(OWNER_KEY,cloudUserId);
+      render();
       cloudMessage(say("✓ Your saved calculations are synced to your account.","✓ তোমার সংরক্ষিত হিসাব অ্যাকাউন্টে সিঙ্ক হয়েছে।"),true);
     } catch(error) {
       cloudMessage(say("Cloud sync failed: ","ক্লাউড সিঙ্ক হয়নি: ")+(error.message||"Please try again."),false);
