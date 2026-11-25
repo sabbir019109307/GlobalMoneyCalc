@@ -80,7 +80,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 - [ ] AdSense sign-up URL-এ path দেওয়া যায় না; standard domain প্রয়োজন। Cloudflare Pages-এর `pages.dev` shared subdomain ব্যবহার করা হচ্ছে; বিজ্ঞাপন সেবার eligibility আলাদা করে যাচাই করতে হবে। Google-এর URL rules দেখুন: https://support.google.com/adsense/answer/2784438
 - [ ] ফ্রি Cloudflare Pages ঠিকানা একটি shared `pages.dev` subdomain। AdSense-এর বর্তমান site/domain eligibility নিয়মে এটি গ্রহণযোগ্য কি না Google-এর account থেকে যাচাই করতে হবে; অনুমোদন নিশ্চিত নয় এবং এখনো কোনো domain কেনা হয়নি।
 - [ ] Site ownership verification ও Google policy review শেষে Ready status না পাওয়া পর্যন্ত বিজ্ঞাপন দেখানো যাবে না: https://support.google.com/adsense/answer/12169212
-- [ ] Direct sponsor যোগাযোগের জন্য প্রকাশযোগ্য business email বা private contact form দরকার। বর্তমান GitHub Issues inquiry public; সেখানে ব্যক্তিগত তথ্য দেবেন না।
+- [x] Sponsor যোগাযোগের জন্য `globalmoneycalc@gmail.com` এবং mailto inquiry form আছে; form ইমেইল অ্যাপ খোলে, visitor-কে Send চাপতে হয়; ওয়েবসাইটে বার্তা সংরক্ষণ হয় না। [ ] Sponsor-দের কাছে বাস্তব outreach করা বাকি।
 - [ ] বাস্তব analytics ছাড়া visitor, traffic বা earnings-এর সংখ্যা sponsor-কে জানাবেন না।
 
 ## 6. Privacy ও security
@@ -106,7 +106,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 - Domain কেনা বা DNS পরিবর্তন
 - AdSense account খোলা, publisher ID বসানো বা paid plan নেওয়া
 - Supabase Authentication → URL Configuration-এ Site URL ও Redirect URLs যাচাই/সেট করা এবং নিজের ইমেইলে end-to-end sign-up, confirmation ও reset পরীক্ষা
-- Public business email প্রকাশ
+- Sponsor outreach শুরু করা এবং প্রস্তাবিত বিজ্ঞাপনের মূল্য/সময় নির্ধারণ
 - GA4 Measurement ID তৈরি/যোগ করা ও Search Console verification token আনা
 
 এসবের জন্য আপনার নিজের account, অনুমোদন বা সিদ্ধান্ত প্রয়োজন।
