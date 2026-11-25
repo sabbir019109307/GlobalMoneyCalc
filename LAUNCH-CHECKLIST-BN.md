@@ -86,7 +86,7 @@ Provider-এর বর্তমান নির্দেশিকা:
 ## 6. Privacy ও security
 
 - [x] Cloudflare Pages `_headers`-এ clickjacking protection, HSTS, camera/microphone/geolocation/payment restriction; account page noindex/no-store
-- [x] বর্তমানে ad script বা analytics tracker নেই।
+- [x] AdSense/ad-network script নেই; GA4 কেবল visitor consent দিলে চলে।
 - [x] Public calculator input ও save করা calculation browser local storage-এ থাকে; exchange-rate API-তে টাকার পরিমাণ পাঠানো হয় না।
 - [x] অ্যাকাউন্টে ব্যবহারকারী ইচ্ছাকৃতভাবে যে profile, income/expense, debt ও budget রেকর্ড save করেন তা Supabase-এ সংরক্ষিত হয়; Privacy Policy-তে জানানো হয়েছে।
 - [x] চারটি ব্যক্তিগত টেবিলেই RLS চালু; প্রত্যেক authenticated user শুধু নিজের রেকর্ডে প্রবেশ করতে পারে।
@@ -114,11 +114,11 @@ Provider-এর বর্তমান নির্দেশিকা:
 
 
 ## 8. Analytics ও Search Console সেটআপ
-বাংলা নির্দেশনা: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md)। Measurement ID ও Search Console verification Google Account মালিককেই তৈরি করতে হবে।
+বাংলা নির্দেশনা: [ANALYTICS-SETUP-BN.md](ANALYTICS-SETUP-BN.md)। GA4 Measurement ID যুক্ত এবং Search Console ownership verified; GA4 Realtime test visit ও নতুন guide পেজের indexing request বাকি।
 
 ## 9. Supabase Account — শেষ owner setup
 
-কোড ও ডাটাবেসের সংযোগ তৈরি করা হয়েছে। তবে email confirmation/password recovery-এর redirect চালাতে Supabase Auth-এ সাইটের URL একবার allowlist করতে হবে।
+কোড ও ডাটাবেসের সংযোগ তৈরি করা হয়েছে। Saved calculations cloud sync, account dashboard display এবং per-user RLS policy যোগ করা হয়েছে। তবে email confirmation/password recovery-এর redirect চালাতে Supabase Auth-এ সাইটের URL allowlist এবং SMTP সেটআপ/পরীক্ষা বাকি।
 
 1. Supabase Dashboard খুলে **GlobalMoneyCalc** project নির্বাচন করুন।
 2. **Authentication → URL Configuration** খুলুন: [সরাসরি Supabase সেটিংস খুলুন](https://supabase.com/dashboard/project/zppdlookfubyhezgwrjf/auth/url-configuration)।
