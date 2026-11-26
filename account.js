@@ -3,7 +3,7 @@
 "use strict";
 const $ = (id) => document.getElementById(id);
 const WORDS = window.GMC_ACCOUNT_WORDS || {};
-const LANGUAGES = ["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
+const LANGUAGES = ["en","bn"];
 const LOCALES = window.GMC_LOCALES || {en:"en-US",zh:"zh-CN",hi:"hi-IN",es:"es-ES",ar:"ar",fr:"fr-FR",bn:"bn-BD",pt:"pt-BR",ru:"ru-RU",id:"id-ID"};
 const CURRENCIES = ["KWD","USD","BDT","SAR","AED","EUR","GBP","INR","PKR","PHP","CNY","JPY","CAD","AUD","IDR","MYR","SGD","THB","OMR","BHD","QAR","LKR","NPR","CHF","KRW","HKD","TRY","ZAR","EGP","JOD","IQD","RUB","BRL","NGN"];
 const CATS = {
