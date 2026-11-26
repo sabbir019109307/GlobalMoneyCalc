@@ -3,3 +3,15 @@ window.GMC_RATE_WORDS={"en":{"home":"Home","rateMethod":"Rate method","guides":"
 
 const GMC_ACCOUNT_NAV_LABELS={"en":"My account","bn":"আমার অ্যাকাউন্ট","zh":"我的账户","hi":"मेरा खाता","es":"Mi cuenta","ar":"حسابي","fr":"Mon compte","pt":"Minha conta","ru":"Мой аккаунт","id":"Akun saya"};
 Object.entries(GMC_ACCOUNT_NAV_LABELS).forEach(([language,value])=>{if(window.GMC_RATE_WORDS?.[language])window.GMC_RATE_WORDS[language].account=value;});
+
+/* Localized account navigation for the rate chart. */
+Object.assign(window.GMC_RATE_WORDS.en,{account:"My account"});
+Object.assign(window.GMC_RATE_WORDS.bn,{account:"আমার অ্যাকাউন্ট"});
+Object.assign(window.GMC_RATE_WORDS.zh,{account:"我的账户"});
+Object.assign(window.GMC_RATE_WORDS.hi,{account:"मेरा खाता"});
+Object.assign(window.GMC_RATE_WORDS.es,{account:"Mi cuenta"});
+Object.assign(window.GMC_RATE_WORDS.ar,{account:"حسابي"});
+Object.assign(window.GMC_RATE_WORDS.fr,{account:"Mon compte"});
+Object.assign(window.GMC_RATE_WORDS.pt,{account:"Minha conta"});
+Object.assign(window.GMC_RATE_WORDS.ru,{account:"Мой аккаунт"});
+Object.assign(window.GMC_RATE_WORDS.id,{account:"Akun saya"});
