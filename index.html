@@ -2,16 +2,16 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#10152b">
-<meta name="description" content="Free multilingual money calculators: currency conversion, salary, budget and savings tools in 10 languages.">
-<meta property="og:title" content="GlobalMoneyCalc — Smart money tools for everyone">
-<meta property="og:description" content="Simple, free financial calculators in 10 languages.">
+<meta name="description" content="Use free online financial calculators for currency conversion, KWD to BDT exchange estimates, salary, monthly budgets and savings. Simple tools in 10 languages, with no sign-up required.">
+<meta property="og:title" content="Free Currency, Salary, Budget & Savings Calculators | GlobalMoneyCalc">
+<meta property="og:description" content="Free online tools for currency conversion, salary, monthly budgets and savings. Available in 10 languages.">
 <meta property="og:type" content="website">
 <meta name="robots" content="index,follow">
 <meta name="google-site-verification" content="sX5otWo5aUjfswmJb70SqSFIvyz-9w_tawY2n1M0zZU" />
 <link rel="canonical" href="https://globalmoneycalc.pages.dev/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GlobalMoneyCalc","url":"https://globalmoneycalc.pages.dev/","description":"Free multilingual currency, salary, budget and savings calculators in 10 languages with 15-minute-delayed indicative exchange rates.","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","inLanguage":["en","zh","hi","es","ar","fr","bn","pt","ru","id"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Currency conversion with 15-minute-delayed indicative market rates","Visual currency rate chart with searchable supported currencies","Salary and deduction calculator","Monthly budget calculator","Savings projection calculator","Interface in 10 languages: English, Chinese, Hindi, Spanish, Arabic, French, Bengali, Portuguese, Russian and Indonesian"]}</script>
-<title>GlobalMoneyCalc — Smart money tools for everyone</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GlobalMoneyCalc","url":"https://globalmoneycalc.pages.dev/","description":"Free online currency converter, salary calculator, monthly budget planner and savings calculator in 10 languages.","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","inLanguage":["en","zh","hi","es","ar","fr","bn","pt","ru","id"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Currency conversion with 15-minute-delayed indicative market rates","Visual currency rate chart with searchable supported currencies","Salary and deduction calculator","Monthly budget calculator","Savings projection calculator","Interface in 10 languages: English, Chinese, Hindi, Spanish, Arabic, French, Bengali, Portuguese, Russian and Indonesian"]}</script>
+<title>Free Currency, Salary, Budget &amp; Savings Calculators | GlobalMoneyCalc</title>
 <style>
 :root{--bg:#f4f6fb;--ink:#172039;--muted:#65708a;--navy:#10152b;--line:#e5e9f2;--purple:#7157f2;--soft:#f0edff;--shadow:0 14px 40px rgba(26,35,72,.08)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}
@@ -80,8 +80,7 @@ function setLang(){
  const selector=el("languageSelect");if(selector){selector.value=lang;selector.setAttribute("aria-label",lang==="en"?"Select language":((window.GMC_LANGUAGE_LABELS[lang]||{}).name||"Select language"))}
  const label=el("rateLabel");if(label)label.textContent=t("manualRateLabel")+" (1 "+el("fromCurrency").value+" = ? "+el("toCurrency").value+")";
  try{localStorage.setItem("gmc_language",lang)}catch(e){}
- document.title="GlobalMoneyCalc — "+(lang==="en"?"Smart money tools for everyone":t("cardBig").replace(/<br>/g," "));
- const meta=document.querySelector('meta[name="description"]');if(meta)meta.content=t("heroText").replace(/<br>/g," ");
+ // Keep the descriptive SEO title and meta description from the initial HTML head.
  if(typeof refreshRateStatus==="function")refreshRateStatus();
 }
 el("languageSelect").addEventListener("change",event=>{if(supportedLanguages.includes(event.target.value)){lang=event.target.value;setLang()}});
