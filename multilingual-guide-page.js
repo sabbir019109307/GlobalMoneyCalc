@@ -17,7 +17,7 @@
    const key=node.getAttribute("data-guide-word");
    if(words[key]!==undefined)node.innerHTML=words[key];
   });
-  if(select){select.value=lang;select.setAttribute("aria-label",(window.GMC_LANGUAGE_LABELS?.[lang]?.name)||"Choose language");}
+  if(select){select.value=lang;select.setAttribute("aria-label",({en:"Choose language",bn:"ভাষা নির্বাচন করুন",zh:"选择语言",hi:"भाषा चुनें",es:"Elegir idioma",ar:"اختر اللغة",fr:"Choisir la langue",pt:"Escolher idioma",ru:"Выбрать язык",id:"Pilih bahasa"})[lang]||"Choose language");}
   const titleKey=document.body.getAttribute("data-guide-title-key");
   if(titleKey&&words[titleKey])document.title=words[titleKey]+" | GlobalMoneyCalc";
   if(save){try{localStorage.setItem("gmc_language",lang);}catch{}}
