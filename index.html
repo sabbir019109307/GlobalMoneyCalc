@@ -67,6 +67,28 @@ bn:{skipContent:"মূল কনটেন্টে যান",navGuides:"নি
 };
 words.en.proofLogin="Login to save your records";
 words.bn.proofLogin="হিসাব সংরক্ষণ করতে লগইন করুন";
+Object.assign(words.en,{
+ navRates:"Rates",salaryGuide:"Salary guide",currencyGuide:"Currency guide",budgetGuide:"Budget guide",savingsGuide:"Savings guide",currencyRates:"Currency rates",viewRateChart:"View the currency rate chart →",saveCalculation:"Save this calculation",createdBy:"Created with ❤️ by",
+ guidesHeading:"Free money calculator guides",guidesIntro:"Learn how each tool works before calculating.",
+ currencyGuideCardTitle:"Currency Converter Guide",currencyGuideCardText:"Exchange rates, KWD to BDT, conversion formula and provider fees.",
+ kwdGuideCardTitle:"KWD to BDT Converter",kwdGuideCardText:"Estimate Kuwaiti dinar to Bangladeshi taka and understand remittance fees.",
+ salaryGuideCardTitle:"Salary Calculator Guide",salaryGuideCardText:"Net salary, deductions, daily pay and hourly pay explained.",
+ budgetGuideCardTitle:"Monthly Budget Guide",budgetGuideCardText:"Organize income, expenses and the money remaining each month.",
+ savingsGuideCardTitle:"Savings Calculator Guide",savingsGuideCardText:"Monthly deposits, estimated growth and savings assumptions.",
+ browseGuides:"Browse all money calculator guides →",faqHeading:"Frequently asked questions",faqIntro:"Understand the estimates before you use them.",
+ ratePlaceholder:"Enter the rate from your bank or exchange provider"
+});
+Object.assign(words.bn,{
+ navRates:"মুদ্রার রেট",salaryGuide:"বেতন নির্দেশিকা",currencyGuide:"মুদ্রা রূপান্তর নির্দেশিকা",budgetGuide:"মাসিক বাজেট নির্দেশিকা",savingsGuide:"সঞ্চয় নির্দেশিকা",currencyRates:"মুদ্রার রেট",viewRateChart:"মুদ্রার রেটের চার্ট দেখুন →",saveCalculation:"এই হিসাব সংরক্ষণ করুন",createdBy:"তৈরি করেছেন ❤️",
+ guidesHeading:"বিনামূল্যের মানি ক্যালকুলেটর নির্দেশিকা",guidesIntro:"হিসাব করার আগে প্রতিটি ক্যালকুলেটর কীভাবে কাজ করে জেনে নিন।",
+ currencyGuideCardTitle:"মুদ্রা রূপান্তর নির্দেশিকা",currencyGuideCardText:"বিনিময় হার, KWD থেকে BDT, রূপান্তরের সূত্র ও প্রতিষ্ঠানের ফি সম্পর্কে জানুন।",
+ kwdGuideCardTitle:"KWD থেকে BDT কনভার্টার",kwdGuideCardText:"কুয়েতি দিনার থেকে বাংলাদেশি টাকার হিসাব এবং রেমিট্যান্স ফি বুঝুন।",
+ salaryGuideCardTitle:"বেতন ক্যালকুলেটর নির্দেশিকা",salaryGuideCardText:"নিট বেতন, কর্তন, দৈনিক ও ঘণ্টাপ্রতি বেতনের ব্যাখ্যা।",
+ budgetGuideCardTitle:"মাসিক বাজেট নির্দেশিকা",budgetGuideCardText:"আয়, খরচ এবং মাস শেষে অবশিষ্ট টাকার হিসাব সাজান।",
+ savingsGuideCardTitle:"সঞ্চয় ক্যালকুলেটর নির্দেশিকা",savingsGuideCardText:"মাসিক জমা, সম্ভাব্য বৃদ্ধি ও সঞ্চয়ের হিসাবের নিয়ম।",
+ browseGuides:"সব মানি ক্যালকুলেটর নির্দেশিকা দেখুন →",faqHeading:"সাধারণ জিজ্ঞাসা",faqIntro:"হিসাব ব্যবহারের আগে ফলাফল সম্পর্কে জেনে নিন।",
+ ratePlaceholder:"আপনার ব্যাংক বা এক্সচেঞ্জ প্রতিষ্ঠানের দেওয়া রেট লিখুন"
+});
 const extraWords=window.GMC_EXTRA_WORDS||{};
 Object.keys(extraWords).forEach(code=>{words[code]={...(words[code]||{}),...(extraWords[code]||{})};});
 words.en.proof3="Available in English and Bengali";
