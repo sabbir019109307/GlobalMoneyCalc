@@ -85,7 +85,7 @@ function setLang(){
  const label=el("rateLabel");if(label)label.textContent=t("manualRateLabel")+" (1 "+el("fromCurrency").value+" = ? "+el("toCurrency").value+")";
  try{localStorage.setItem("gmc_language",lang)}catch(e){}
  // Keep the descriptive SEO title and meta description from the initial HTML head.
- if(typeof refreshRateStatus==="function")refreshRateStatus();
+ if(typeof refreshRateStatus==="function")refreshRateStatus();\n document.title=lang==="bn"?"মুদ্রা রূপান্তর, বেতন, বাজেট ও সঞ্চয় ক্যালকুলেটর | GlobalMoneyCalc":"Free Currency, Salary, Budget & Savings Calculators | GlobalMoneyCalc";
 }
 el("languageSelect").addEventListener("change",event=>{if(supportedLanguages.includes(event.target.value)){lang=event.target.value;setLang()}});
 el("year").textContent=new Date().getFullYear();
