@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Compare supported international currencies with a visual exchange-rate chart, searchable rate table and a 10-language interface.">
+<meta name="description" content="Compare supported international currencies with a visual exchange-rate chart, searchable rate table and an English and Bengali interface.">
 <meta name="theme-color" content="#a9c8c7">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://globalmoneycalc.pages.dev/currency-rates.html">
@@ -39,7 +39,7 @@ html[dir="rtl"]{direction:rtl}html[dir="rtl"] body{text-align:right}html[dir="rt
 <div class="searchControl"><label id="searchLabel" for="search">Search all currencies</label><input id="search" type="search" autocomplete="off" placeholder="Type a currency code or name"></div><div class="tableWrap"><table><thead><tr><th id="currencyHead">Currency</th><th id="rateHead">Rate for 1 base unit</th></tr></thead><tbody id="rows"><tr><td colspan="2">Loading…</td></tr></tbody></table></div>
 <p class="note" id="note">Indicative rates, not bank or cash-exchange quotes. Free and keyless rates are delayed by 15 minutes. Credit: <a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">API documentation</a>.</p>
 </section></main>
-<footer><div>© <span id="year"></span> GlobalMoneyCalc. <span id="rightsText">All rights reserved.</span> <a id="privacyLink" href="privacy.html">Privacy</a><a id="termsLink" href="terms.html">Terms</a><a id="advertiseLink" href="advertise.html">Advertise</a><a id="rateDetailsLink" href="rates.html">Rate details</a></div><div class="credit">Created with ❤️ by <strong>SABBIR AHMED TAHIR</strong></div></footer>
+<footer><div>© <span id="year"></span> GlobalMoneyCalc. <span id="rightsText">All rights reserved.</span> <a id="privacyLink" href="privacy.html">Privacy</a><a id="termsLink" href="terms.html">Terms</a><a id="advertiseLink" href="advertise.html">Advertise</a><a id="rateDetailsLink" href="rates.html">Rate details</a></div><div class="credit"><span data-gmc-lang-en="Created with ❤️ by" data-gmc-lang-bn="তৈরি করেছেন ❤️">Created with ❤️ by</span> <strong>SABBIR AHMED TAHIR</strong></div></footer>
 <script>
 const words=window.GMC_RATE_WORDS||{};
 const names={
@@ -145,4 +145,4 @@ $("languageSelect").addEventListener("change",event=>{if(!supported.includes(eve
 $("year").textContent=new Date().getFullYear();
 setText();clock();window.setInterval(clock,1000);load();window.setInterval(load,15*60*1000+5000);
 </script>  <script src="analytics.js" defer></script>
-</body></html>
+<script src="localized-static-text.js"></script>\n</body></html>
