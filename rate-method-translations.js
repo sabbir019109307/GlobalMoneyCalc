@@ -12,3 +12,15 @@ Object.assign(window.GMC_RATE_METHOD_WORDS.id,{navAccount:"Akun saya"});
 
 const GMC_ACCOUNT_NAV_LABELS={"en":"My account","bn":"আমার অ্যাকাউন্ট","zh":"我的账户","hi":"मेरा खाता","es":"Mi cuenta","ar":"حسابي","fr":"Mon compte","pt":"Minha conta","ru":"Мой аккаунт","id":"Akun saya"};
 Object.entries(GMC_ACCOUNT_NAV_LABELS).forEach(([language,value])=>{if(window.GMC_RATE_METHOD_WORDS?.[language])window.GMC_RATE_METHOD_WORDS[language].navAccount=value;});
+
+/* Account navigation label for every language. */
+Object.assign(window.GMC_RATE_METHOD_WORDS.en||(window.GMC_RATE_METHOD_WORDS.en={}),{navAccount:"My account"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.bn||(window.GMC_RATE_METHOD_WORDS.bn={}),{navAccount:"আমার অ্যাকাউন্ট"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.zh||(window.GMC_RATE_METHOD_WORDS.zh={}),{navAccount:"我的账户"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.hi||(window.GMC_RATE_METHOD_WORDS.hi={}),{navAccount:"मेरा खाता"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.es||(window.GMC_RATE_METHOD_WORDS.es={}),{navAccount:"Mi cuenta"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.ar||(window.GMC_RATE_METHOD_WORDS.ar={}),{navAccount:"حسابي"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.fr||(window.GMC_RATE_METHOD_WORDS.fr={}),{navAccount:"Mon compte"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.pt||(window.GMC_RATE_METHOD_WORDS.pt={}),{navAccount:"Minha conta"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.ru||(window.GMC_RATE_METHOD_WORDS.ru={}),{navAccount:"Мой аккаунт"});
+Object.assign(window.GMC_RATE_METHOD_WORDS.id||(window.GMC_RATE_METHOD_WORDS.id={}),{navAccount:"Akun saya"});
