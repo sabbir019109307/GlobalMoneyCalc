@@ -13,7 +13,7 @@ html[dir="rtl"]{direction:rtl}html[dir="rtl"] body{text-align:right}html[dir="rt
      crossorigin="anonymous"></script>
 </head><body>
 <div class="visitor-local-clock" style="display:block;width:100%;box-sizing:border-box;margin:0;padding:8px 12px;background:#090e22;color:#eef0ff;text-align:center;font-size:12px;line-height:1.55;opacity:1"><span id="visitorLocalLabel" style="font-weight:750">Your local date &amp; time</span>: <time id="visitorLocalTime" style="font-variant-numeric:tabular-nums"></time><span id="visitorTimeZone" style="margin-left:9px;color:#bdc5e4"></span></div>
-<header><nav class="nav"><a href="index.html">✦ GlobalMoneyCalc</a><a href="account.html" data-i18n="navAccount">My account</a><select id="languageSelect" class="lang" aria-label="Select language"><option value="en">English</option><option value="zh">中文</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="fr">Français</option><option value="bn">বাংলা</option><option value="pt">Português</option><option value="ru">Русский</option><option value="id">Bahasa Indonesia</option></select></nav></header>
+<header><nav class="nav"><a href="index.html">✦ GlobalMoneyCalc</a><a href="account.html" data-i18n="navAccount">My account</a><select id="languageSelect" class="lang" aria-label="Select language"><option value="en">English</option><option value="bn">বাংলা</option></select></nav></header>
 <main class="wrap">
 <h1 data-i18n="title">Terms of Use</h1><p class="muted" data-i18n="updated">Last updated: November 23, 2026</p>
 <p data-i18n="intro">Use GlobalMoneyCalc lawfully and at your own discretion.</p>
@@ -37,7 +37,7 @@ bn:{title:"ব্যবহারের শর্তাবলি",updated:"সর
 for (const [language, translations] of Object.entries(((window.GMC_LEGAL_WORDS||{})["terms"])||{})) {
   copy[language]={...(copy[language]||{}),...translations};
 }
-const supportedLanguages=["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
+const supportedLanguages=["en","bn"];
 let lang=(function(){try{const saved=localStorage.getItem("gmc_language");return supportedLanguages.includes(saved)?saved:"en"}catch(e){return "en"}})();
 function setLang(){
  document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
