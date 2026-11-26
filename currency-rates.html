@@ -28,7 +28,7 @@ html[dir="rtl"]{direction:rtl}html[dir="rtl"] body{text-align:right}html[dir="rt
 </head>
 <body>
 <div class="clock"><span id="visitorLocalLabel">Your local date &amp; time</span>: <time id="visitorLocalTime"></time><span id="visitorTimeZone"></span></div>
-<header><a class="brand" href="index.html">✦ GlobalMoneyCalc</a><nav><a id="homeLink" href="index.html">Home</a><a id="rateMethodLink" href="rates.html">Rate method</a><a id="guidesLink" href="guides.html">Guides</a><a id="accountLink" href="account.html">My account</a><select class="lang" id="languageSelect" aria-label="Select language"><option value="en">English</option><option value="zh">中文</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="fr">Français</option><option value="bn">বাংলা</option><option value="pt">Português</option><option value="ru">Русский</option><option value="id">Bahasa Indonesia</option></select></nav></header>
+<header><a class="brand" href="index.html">✦ GlobalMoneyCalc</a><nav><a id="homeLink" href="index.html">Home</a><a id="rateMethodLink" href="rates.html">Rate method</a><a id="guidesLink" href="guides.html">Guides</a><a id="accountLink" href="account.html">My account</a><select class="lang" id="languageSelect" aria-label="Select language"><option value="en">English</option><option value="bn">বাংলা</option></select></nav></header>
 <main>
 <section class="intro"><div class="eyebrow" id="eyebrow">INTERNATIONAL CURRENCY BOARD</div><h1 id="title">Currency Rate Scale</h1><p id="subtitle">Compare currencies around the world with an easy-to-read visual rate chart.</p></section>
 <section class="panel">
@@ -48,7 +48,7 @@ const names={
 const colors=["#f47732","#4e64db","#079b2b","#e0cf12","#a218aa","#ef1684","#168fa5","#7b55c9"];
 const CACHE_PREFIX="globalmoneycalc_shared_rates_";
 const locales=window.GMC_LOCALES||{en:"en-US",zh:"zh-CN",hi:"hi-IN",es:"es-ES",ar:"ar",fr:"fr-FR",bn:"bn-BD",pt:"pt-BR",ru:"ru-RU",id:"id-ID"};
-const supported=["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
+const supported=["en","bn"];
 let lang=(function(){try{const v=localStorage.getItem("gmc_language");return supported.includes(v)?v:"en"}catch(e){return "en"}})(),data=null,activeRequest=0;
 const $=id=>document.getElementById(id),t=k=>(words[lang]||words.en)[k]||words.en[k]||k;
 function clock(){
