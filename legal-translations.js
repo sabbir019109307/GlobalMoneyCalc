@@ -31,3 +31,25 @@ for (const [language, values] of Object.entries(termsAccountCopy)) {
 
 const GMC_ACCOUNT_NAV_LABELS={"en":"My account","bn":"আমার অ্যাকাউন্ট","zh":"我的账户","hi":"मेरा खाता","es":"Mi cuenta","ar":"حسابي","fr":"Mon compte","pt":"Minha conta","ru":"Мой аккаунт","id":"Akun saya"};
 ["privacy","terms"].forEach(page=>Object.entries(GMC_ACCOUNT_NAV_LABELS).forEach(([language,value])=>{if(window.GMC_LEGAL_WORDS?.[page]?.[language])window.GMC_LEGAL_WORDS[page][language].navAccount=value;}));
+
+/* Complete account navigation label across all supported languages. */
+Object.assign(window.GMC_LEGAL_WORDS.privacy.en||(window.GMC_LEGAL_WORDS.privacy.en={}),{navAccount:"My account"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.en||(window.GMC_LEGAL_WORDS.terms.en={}),{navAccount:"My account"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.bn||(window.GMC_LEGAL_WORDS.privacy.bn={}),{navAccount:"আমার অ্যাকাউন্ট"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.bn||(window.GMC_LEGAL_WORDS.terms.bn={}),{navAccount:"আমার অ্যাকাউন্ট"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.zh||(window.GMC_LEGAL_WORDS.privacy.zh={}),{navAccount:"我的账户"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.zh||(window.GMC_LEGAL_WORDS.terms.zh={}),{navAccount:"我的账户"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.hi||(window.GMC_LEGAL_WORDS.privacy.hi={}),{navAccount:"मेरा खाता"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.hi||(window.GMC_LEGAL_WORDS.terms.hi={}),{navAccount:"मेरा खाता"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.es||(window.GMC_LEGAL_WORDS.privacy.es={}),{navAccount:"Mi cuenta"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.es||(window.GMC_LEGAL_WORDS.terms.es={}),{navAccount:"Mi cuenta"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.ar||(window.GMC_LEGAL_WORDS.privacy.ar={}),{navAccount:"حسابي"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.ar||(window.GMC_LEGAL_WORDS.terms.ar={}),{navAccount:"حسابي"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.fr||(window.GMC_LEGAL_WORDS.privacy.fr={}),{navAccount:"Mon compte"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.fr||(window.GMC_LEGAL_WORDS.terms.fr={}),{navAccount:"Mon compte"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.pt||(window.GMC_LEGAL_WORDS.privacy.pt={}),{navAccount:"Minha conta"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.pt||(window.GMC_LEGAL_WORDS.terms.pt={}),{navAccount:"Minha conta"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.ru||(window.GMC_LEGAL_WORDS.privacy.ru={}),{navAccount:"Мой аккаунт"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.ru||(window.GMC_LEGAL_WORDS.terms.ru={}),{navAccount:"Мой аккаунт"});
+Object.assign(window.GMC_LEGAL_WORDS.privacy.id||(window.GMC_LEGAL_WORDS.privacy.id={}),{navAccount:"Akun saya"});
+Object.assign(window.GMC_LEGAL_WORDS.terms.id||(window.GMC_LEGAL_WORDS.terms.id={}),{navAccount:"Akun saya"});
