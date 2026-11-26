@@ -23,7 +23,7 @@ html[dir="rtl"]{direction:rtl}html[dir="rtl"] body{text-align:right}html[dir="rt
 </head>
 <body>
 <div class="visitor-local-clock" style="display:block;width:100%;box-sizing:border-box;margin:0;padding:8px 12px;background:#090e22;color:#eef0ff;text-align:center;font-size:12px;line-height:1.55;opacity:1"><span id="visitorLocalLabel" style="font-weight:750">Your local date &amp; time</span>: <time id="visitorLocalTime" style="font-variant-numeric:tabular-nums"></time><span id="visitorTimeZone" style="margin-left:9px;color:#bdc5e4"></span></div>
-<header><nav class="nav"><a href="index.html">✦ GlobalMoneyCalc</a><div class="navlinks"><a href="guides.html" data-i18n="guidesLink">Guides</a><a href="privacy.html" data-i18n="privacyLink">Privacy</a><a href="account.html" data-i18n="navAccount">My account</a></div><select id="languageSelect" class="lang" aria-label="Select language"><option value="en">English</option><option value="zh">中文</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="fr">Français</option><option value="bn">বাংলা</option><option value="pt">Português</option><option value="ru">Русский</option><option value="id">Bahasa Indonesia</option></select></nav></header>
+<header><nav class="nav"><a href="index.html">✦ GlobalMoneyCalc</a><div class="navlinks"><a href="guides.html" data-i18n="guidesLink">Guides</a><a href="privacy.html" data-i18n="privacyLink">Privacy</a><a href="account.html" data-i18n="navAccount">My account</a></div><select id="languageSelect" class="lang" aria-label="Select language"><option value="en">English</option><option value="bn">বাংলা</option></select></nav></header>
 <main class="wrap">
 <section class="hero"><h1 data-i18n="title">Exchange-rate source and calculation method</h1><p data-i18n="intro">Understand where the reference rates come from, how the converter calculates a currency pair and what the displayed numbers can—and cannot—tell you.</p></section>
 <section class="panel"><h2 data-i18n="sourceTitle">1. Where the rates come from</h2><p data-i18n="sourceText">The automatic converter requests indicative market exchange rates from ExchangeRate.dev. The free/keyless feed is delayed by 15 minutes and includes source, market-session and observation timestamps. It is indicative data, not a bank or cash-exchange quote.</p><p><a href="https://exchangerate.dev/docs" target="_blank" rel="noopener" data-i18n="providerDocs">ExchangeRate.dev API documentation ↗</a> · <a href="https://exchangerate.dev/terms" target="_blank" rel="noopener" data-i18n="providerTerms">Provider terms ↗</a></p><p class="note" data-i18n="attribution">The free feed requires linked credit on every page that shows rates. See the provider credit below.</p><p class="note"><a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a></p></section>
@@ -95,7 +95,7 @@ backHome:"← GlobalMoneyCalc-এ ফিরে যান"
 }
 };
 Object.assign(copy,window.GMC_RATE_METHOD_WORDS||{});
-const supported=["en","zh","hi","es","ar","fr","bn","pt","ru","id"];
+const supported=["en","bn"];
 let lang=(function(){try{const x=localStorage.getItem("gmc_language");return supported.includes(x)?x:"en"}catch(e){return "en"}})();
 const selector=document.getElementById("languageSelect");
 function setLang(next){
