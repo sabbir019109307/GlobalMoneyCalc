@@ -94,7 +94,7 @@ redistributionText:"ফ্রি পরিকল্পনার রেট দে
 backHome:"← GlobalMoneyCalc-এ ফিরে যান"
 }
 };
-Object.assign(copy,window.GMC_RATE_METHOD_WORDS||{});
+for (const [language, translations] of Object.entries(window.GMC_RATE_METHOD_WORDS||{})) { copy[language]={...(copy[language]||{}),...translations}; }
 const supported=["en","bn","zh","hi","es","ar","fr","pt","ru","id"];
 let lang=(function(){try{const x=localStorage.getItem("gmc_language");return supported.includes(x)?x:"en"}catch(e){return "en"}})();
 const selector=document.getElementById("languageSelect");
