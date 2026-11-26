@@ -11,3 +11,25 @@ Object.assign(window.GMC_PAGE_WORDS.advertise.ru,{"formName":"Ваше имя","
 Object.assign(window.GMC_PAGE_WORDS.advertise.id,{"formName":"Nama Anda","formCompany":"Perusahaan / merek","formEmail":"Email Anda","formMessage":"Pesan Anda","formSubmit":"Siapkan email","formNote":"Formulir ini membuka aplikasi email dengan pesan yang sudah disiapkan. Anda harus menekan Kirim di sana. Situs ini tidak mengirim atau menyimpan informasi Anda."});
 const GMC_ACCOUNT_NAV_LABELS={"en":"My account","bn":"আমার অ্যাকাউন্ট","zh":"我的账户","hi":"मेरा खाता","es":"Mi cuenta","ar":"حسابي","fr":"Mon compte","pt":"Minha conta","ru":"Мой аккаунт","id":"Akun saya"};
 ["advertise","guides"].forEach(page=>Object.entries(GMC_ACCOUNT_NAV_LABELS).forEach(([language,value])=>{if(window.GMC_PAGE_WORDS?.[page]?.[language])window.GMC_PAGE_WORDS[page][language].navAccount=value;}));
+
+/* Complete account navigation label across all supported languages. */
+Object.assign(window.GMC_PAGE_WORDS.advertise.en||(window.GMC_PAGE_WORDS.advertise.en={}),{navAccount:"My account"});
+Object.assign(window.GMC_PAGE_WORDS.guides.en||(window.GMC_PAGE_WORDS.guides.en={}),{navAccount:"My account"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.bn||(window.GMC_PAGE_WORDS.advertise.bn={}),{navAccount:"আমার অ্যাকাউন্ট"});
+Object.assign(window.GMC_PAGE_WORDS.guides.bn||(window.GMC_PAGE_WORDS.guides.bn={}),{navAccount:"আমার অ্যাকাউন্ট"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.zh||(window.GMC_PAGE_WORDS.advertise.zh={}),{navAccount:"我的账户"});
+Object.assign(window.GMC_PAGE_WORDS.guides.zh||(window.GMC_PAGE_WORDS.guides.zh={}),{navAccount:"我的账户"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.hi||(window.GMC_PAGE_WORDS.advertise.hi={}),{navAccount:"मेरा खाता"});
+Object.assign(window.GMC_PAGE_WORDS.guides.hi||(window.GMC_PAGE_WORDS.guides.hi={}),{navAccount:"मेरा खाता"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.es||(window.GMC_PAGE_WORDS.advertise.es={}),{navAccount:"Mi cuenta"});
+Object.assign(window.GMC_PAGE_WORDS.guides.es||(window.GMC_PAGE_WORDS.guides.es={}),{navAccount:"Mi cuenta"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.ar||(window.GMC_PAGE_WORDS.advertise.ar={}),{navAccount:"حسابي"});
+Object.assign(window.GMC_PAGE_WORDS.guides.ar||(window.GMC_PAGE_WORDS.guides.ar={}),{navAccount:"حسابي"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.fr||(window.GMC_PAGE_WORDS.advertise.fr={}),{navAccount:"Mon compte"});
+Object.assign(window.GMC_PAGE_WORDS.guides.fr||(window.GMC_PAGE_WORDS.guides.fr={}),{navAccount:"Mon compte"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.pt||(window.GMC_PAGE_WORDS.advertise.pt={}),{navAccount:"Minha conta"});
+Object.assign(window.GMC_PAGE_WORDS.guides.pt||(window.GMC_PAGE_WORDS.guides.pt={}),{navAccount:"Minha conta"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.ru||(window.GMC_PAGE_WORDS.advertise.ru={}),{navAccount:"Мой аккаунт"});
+Object.assign(window.GMC_PAGE_WORDS.guides.ru||(window.GMC_PAGE_WORDS.guides.ru={}),{navAccount:"Мой аккаунт"});
+Object.assign(window.GMC_PAGE_WORDS.advertise.id||(window.GMC_PAGE_WORDS.advertise.id={}),{navAccount:"Akun saya"});
+Object.assign(window.GMC_PAGE_WORDS.guides.id||(window.GMC_PAGE_WORDS.guides.id={}),{navAccount:"Akun saya"});
