@@ -101,29 +101,72 @@ function render(){
  $("rows").innerHTML=matches.length?matches.map(([code,value])=>'<tr><td><span class="flag">'+(names[code]?.[2]||"")+'</span><span class="currency">'+code+'</span> · '+displayName(code)+'</td><td>'+fmt.format(value)+'</td></tr>').join(""):'<tr><td colspan="2">'+t("noMatches")+'</td></tr>';
 }
 function readCache(){try{const cached=JSON.parse(localStorage.getItem(CACHE_PREFIX+"USD")||"null");return cached&&cached.result==="success"&&cached.base==="USD"&&cached.rates?cached:null}catch(e){return null}}
+
+async function fetchRateJson(url,timeoutMs=8000){
+ const controller=new AbortController();
+ const timeout=window.setTimeout(()=>controller.abort(),timeoutMs);
+ try{
+  const response=await fetch(url,{cache:"no-store",signal:controller.signal});
+  if(!response.ok)throw new Error("HTTP "+response.status);
+  const json=await response.json();
+  if(!json||json.result!=="success"||!json.rates||typeof json.rates!=="object")throw new Error(json&&json.message||"Invalid exchange-rate response");
+  return json;
+ }finally{window.clearTimeout(timeout);}
+}
+function normalizeRateData(json,provider){
+ const updatedAt=json.data_updated_at||json.timestamp||json.time_last_update_utc;
+ let lastUpdate=Number(json.time_last_update_unix);
+ if(!Number.isFinite(lastUpdate)||lastUpdate<=0)lastUpdate=Math.floor(new Date(updatedAt).getTime()/1000);
+ if(!Number.isFinite(lastUpdate)||lastUpdate<=0)throw new Error("Invalid exchange-rate timestamp");
+ for(const code of ["USD","KWD","BDT"]){
+  const value=Number(json.rates[code]);
+  if(!Number.isFinite(value)||value<=0)throw new Error("Required currency missing: "+code);
+ }
+ const now=Math.floor(Date.now()/1000);
+ let nextUpdate=Number(json.time_next_update_unix);
+ if(!Number.isFinite(nextUpdate)||nextUpdate<=now)nextUpdate=provider==="exchange-rate-api-open"?lastUpdate+86400:now+900;
+ return {...json,result:"success",base:json.base||json.base_code||"USD",
+  timestamp:json.timestamp||updatedAt||new Date(lastUpdate*1000).toISOString(),
+  data_updated_at:json.data_updated_at||updatedAt||new Date(lastUpdate*1000).toISOString(),
+  time_last_update_unix:lastUpdate,time_next_update_unix:nextUpdate,rateProvider:provider};
+}
 async function load(){
  const request=++activeRequest,cached=readCache();
+ let cachedFallback=null;
  if(cached){
   data=cached;setBaseOptions(cached);render();showStatus(cached,true,false);
   const nextUpdate=Number(cached.time_next_update_unix||0);
-  if(nextUpdate>0&&Date.now()<nextUpdate*1000)return;
+  if(nextUpdate>0&&Date.now()<nextUpdate*1000){
+   if(cached.rateProvider!=="exchange-rate-api-open")return;
+   cachedFallback=cached;
+  }
  }else if(!data){
-  $("bars").innerHTML="";$("rows").innerHTML='<tr><td colspan="2">'+t("loading")+'</td></tr>';
+  $("bars").innerHTML="";
+  $("rows").innerHTML='<tr><td colspan="2">'+t("loading")+'</td></tr>';
   setStatus(t("loadingRates"));
  }
  try{
-  const response=await fetch("https://api.exchangerate.dev/v1/latest/USD",{cache:"no-store"});
-  if(!response.ok)throw new Error("HTTP "+response.status);
-  const json=await response.json();
+  let normalized;
+  try{
+   const primary=await fetchRateJson("https://api.exchangerate.dev/v1/latest/USD");
+   normalized=normalizeRateData(primary,"exchangerate.dev");
+  }catch(primaryError){
+   console.warn("Primary chart rate feed unavailable; trying daily backup.",primaryError);
+   if(cachedFallback)normalized=cachedFallback;
+   else normalized=normalizeRateData(await fetchRateJson("https://open.er-api.com/v6/latest/USD"),"exchange-rate-api-open");
+  }
   if(request!==activeRequest)return;
-  if(json.result!=="success"||json.base!=="USD"||!json.rates||!json.timestamp||!json.data_updated_at)throw new Error(json.message||"Invalid exchange-rate response");
-  data={...json,time_next_update_unix:Math.floor(Date.now()/1000)+900};
+  data=normalized;
   try{localStorage.setItem(CACHE_PREFIX+"USD",JSON.stringify(data))}catch(e){}
   setBaseOptions(data);render();showStatus(data,false,false);
+  if(data.rateProvider==="exchange-rate-api-open"){
+   const backupText={en:"Daily backup rates · refreshed about once a day",bn:"বিকল্প দৈনিক রেট · দিনে প্রায় একবার হালনাগাদ হয়",zh:"每日备用汇率 · 约每天更新一次",hi:"दैनिक वैकल्पिक दरें · लगभग दिन में एक बार अपडेट",es:"Tipos diarios de respaldo · se actualizan aproximadamente una vez al día",ar:"أسعار يومية احتياطية · تُحدّث مرة يومياً تقريباً",fr:"Taux quotidiens de secours · mis à jour environ une fois par jour",pt:"Taxas diárias alternativas · atualizadas aproximadamente uma vez por dia",ru:"Резервные ежедневные курсы · обновляются примерно раз в день",id:"Kurs harian cadangan · diperbarui kira-kira sekali sehari"};
+   setStatus($("status").textContent+" · "+(backupText[lang]||backupText.en));
+  }
  }catch(error){
   if(request!==activeRequest)return;
-  if(data)showStatus(data,true,true);
-  else setStatus(t("ratesUnavailable"));
+  console.error("Both currency chart rate feeds failed:",error);
+  if(data)showStatus(data,true,true);else setStatus(t("ratesUnavailable"));
  }
 }
 function setText(){
@@ -132,7 +175,7 @@ function setText(){
  $("homeLink").textContent=w.home;$("rateMethodLink").textContent=w.rateMethod;$("guidesLink").textContent=w.guides;$("accountLink").textContent=w.account;
  ["eyebrow","title","subtitle","baseLabel","chartTitle","chartSub","legend","searchLabel","currencyHead","rateHead"].forEach(id=>$(id).textContent=w[id]);
  $("search").placeholder=w.placeholder;
- $("note").innerHTML=w.noteLead+'<a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">'+w.apiDocs+'</a>.';
+ $("note").innerHTML=w.noteLead+'<a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a> · <a href="https://exchangerate.dev/docs" target="_blank" rel="noopener">'+w.apiDocs+'</a> · <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">Rates By Exchange Rate API</a>.';
  $("rightsText").textContent=w.rights;$("privacyLink").textContent=w.privacy;$("termsLink").textContent=w.terms;$("advertiseLink").textContent=w.advertise;$("rateDetailsLink").textContent=w.rateDetails;
  $("languageSelect").value=lang;
  document.title=w.title+" | GlobalMoneyCalc";
@@ -148,5 +191,5 @@ setText();clock();window.setInterval(clock,1000);load();window.setInterval(load,
 window.addEventListener("gmc:languagechange",function(event){var code=event.detail&&event.detail.language;if(supported.includes(code)){lang=code;setText();if(data){setBaseOptions(data);render();showStatus(data,true,false);}}});
 </script>  <script src="analytics.js" defer></script>
 <script src="localized-static-text.js"></script>
-<script src="language-sync.js?v=6"></script>
+<script src="language-sync.js?v=7"></script>
 </body></html>
