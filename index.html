@@ -279,6 +279,8 @@ el("calcSalary").onclick=()=>{const s=n("salaryAmount"),d=n("days"),h=n("hours")
 el("calcBudget").onclick=()=>{const income=n("income"),costs=["housing","food","transport","other"].map(n),sum=costs.reduce((a,b)=>a+b,0),o=el("budgetResult"),currency=el("budgetCurrency").value;if(!Number.isFinite(income)||income<0||costs.some(x=>!Number.isFinite(x)||x<0)){invalid(o);return}const left=income-sum,pct=income>0?sum/income*100:0;o.classList.remove("empty");o.innerHTML="<small>"+t("remaining")+"</small><strong>"+fmt(left,currency)+"</strong><small>"+t("expenses")+": "+fmt(sum,currency)+" · "+fmt(pct)+"% "+t("spent")+"</small>"};
 el("calcSavings").onclick=()=>{const m=n("monthlySave"),months=n("months"),rate=n("interest"),o=el("savingsResult"),currency=el("savingsCurrency").value;if(![m,months,rate].every(Number.isFinite)||m<0||months<=0||months>1200||rate<0||rate>100){invalid(o);return}const r=rate/1200,total=r===0?m*months:m*((Math.pow(1+r,months)-1)/r),deposit=m*months;if(!Number.isFinite(total)||!Number.isFinite(deposit)){invalid(o);return}o.classList.remove("empty");o.innerHTML="<small>"+t("totalSaved")+"</small><strong>"+fmt(total,currency)+"</strong><small>"+t("deposited")+": "+fmt(deposit,currency)+" · "+t("growth")+": "+fmt(total-deposit,currency)+" · "+months+" "+t("monthLabel")+"</small>"};
 setLang();setRateMode("daily");loadDailyRates();window.setInterval(loadDailyRates,RATE_REFRESH_MS+5000);
+
+window.addEventListener("gmc:languagechange",function(event){var code=event.detail&&event.detail.language;if(code&&typeof window.gmcSetLanguage==="function")window.gmcSetLanguage(code);});
 </script><script>
 (function(){
   const timeNode=document.getElementById("visitorLocalTime");
