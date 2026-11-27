@@ -52,6 +52,8 @@ function setLang(){
 selector.addEventListener("change",()=>{if(supported.includes(selector.value)){lang=selector.value;setLang()}});
 document.getElementById("backBtn").addEventListener("click",()=>history.length>1?history.back():location.assign("./"));
 setLang();
+
+window.addEventListener("gmc:languagechange",function(event){var code=event.detail&&event.detail.language;if(supported.includes(code)){lang=code;setLang();}});
 </script>
 <script>
 (function(){
