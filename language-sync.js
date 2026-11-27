@@ -31,6 +31,23 @@
     } catch (_) {}
   }
 
+  // Call the active page's full translator directly. Updating <html lang> alone
+  // only changes locale-aware widgets such as the clock, not page copy.
+  function applyPageLanguage(language) {
+    if (!isLanguage(language)) return false;
+    try {
+      if (typeof window.gmcSetLanguage === "function") {
+        return window.gmcSetLanguage(language) !== false;
+      }
+      if (typeof window.GMCApplyHomepageLanguage === "function") {
+        return window.GMCApplyHomepageLanguage(language) !== false;
+      }
+    } catch (error) {
+      console.error("GlobalMoneyCalc page translation failed:", error);
+    }
+    return false;
+  }
+
   function applyDocumentLanguage(language, dispatchChange) {
     if (!isLanguage(language)) return false;
 
@@ -58,6 +75,7 @@
     persistLanguage(language);
     document.documentElement.lang = language;
     document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    applyPageLanguage(language);
     // Explicitly notify each page's own translator; the clock alone is not the translator.
     window.dispatchEvent(new CustomEvent("gmc:languagechange", {
       detail: { language, source: "language-selector" }
@@ -68,6 +86,7 @@
   window.addEventListener("storage", event => {
     if (event.key !== STORAGE_KEY || !isLanguage(event.newValue)) return;
     applyDocumentLanguage(event.newValue, true);
+    applyPageLanguage(event.newValue);
   });
 
   // Account profile language changes use this event after saving the preference.
@@ -76,6 +95,7 @@
     if (!isLanguage(language)) return;
     persistLanguage(language);
     applyDocumentLanguage(language, true);
+    applyPageLanguage(language);
   });
 
   // A common API for any current or future page-specific language control.
@@ -83,6 +103,7 @@
     if (!isLanguage(language)) return false;
     persistLanguage(language);
     applyDocumentLanguage(language, true);
+    applyPageLanguage(language);
     window.dispatchEvent(new CustomEvent("gmc:languagechange", {
       detail: { language, source: "global-language-control" }
     }));
