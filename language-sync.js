@@ -58,6 +58,10 @@
     persistLanguage(language);
     document.documentElement.lang = language;
     document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    // Explicitly notify each page's own translator; the clock alone is not the translator.
+    window.dispatchEvent(new CustomEvent("gmc:languagechange", {
+      detail: { language, source: "language-selector" }
+    }));
   }, true);
 
   // Keep other tabs in sync when a visitor changes the language elsewhere.
