@@ -56,7 +56,7 @@ for (const [language, label] of Object.entries(accountNavLabels)) {
 <main id="main-content"><section id="tools"><div class="heading"><h2 data-i18n="toolsTitle">Money tools</h2><p data-i18n="toolsSub">Choose a calculator and get a clear estimate in seconds.</p></div><div class="grid">
 <article class="tool" id="currency"><div class="toolHead"><div class="ico">🌍</div><div><h3 data-i18n="currencyTitle">Currency converter</h3><div class="sub" data-i18n="currencySub">Convert using a rate you provide</div></div></div>
 <div class="fields"><div class="field full"><label for="amount" data-i18n="amount">Amount</label><input id="amount" type="number" min="0" step="any" value="100" inputmode="decimal"></div><div class="field"><label for="fromCurrency" data-i18n="from">From</label><select id="fromCurrency"><option>KWD</option><option>USD</option><option>BDT</option><option>SAR</option><option>AED</option><option>EUR</option><option>GBP</option><option>INR</option><option>PKR</option><option>PHP</option></select></div><div class="field"><label for="toCurrency" data-i18n="to">To</label><select id="toCurrency"><option>BDT</option><option>KWD</option><option>USD</option><option>SAR</option><option>AED</option><option>EUR</option><option>GBP</option><option>INR</option><option>PKR</option><option>PHP</option></select></div><div class="field full"><div class="rateModes"><button type="button" id="dailyMode" class="active" data-i18n="dailyMode">Indicative market rate</button><button type="button" id="manualMode" data-i18n="manualMode">Enter my own rate</button></div><p class="rateStatus" id="rateStatus" role="status" aria-live="polite">Loading exchange rates…</p></div><div class="field full" id="manualRateField" hidden><label id="rateLabel" for="rate" data-i18n="manualRateLabel">Your provider’s exchange rate</label><input id="rate" type="number" min="0" step="any" placeholder="Enter the rate from your bank or exchange provider" data-i18n-placeholder="ratePlaceholder" inputmode="decimal"></div></div>
-<button type="button" class="btn primary" id="convert" data-i18n="convert">Convert amount</button><div class="result empty" id="currencyResult" aria-live="polite" data-i18n="currencyEmpty">Enter your provider's exchange rate, then convert.</div><button type="button" id="gmc-save-currency" class="btn primary" data-gmc-save="currency" data-i18n="saveCalculation">Save this calculation</button><div class="notice" data-i18n="rateNote">Free indicative market rates are delayed by 15 minutes and may pause outside market hours. Your bank or exchange provider may use a different rate and charge fees.</div><p class="rateCredit" data-i18n="rateCredit">Rate data by <a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a>.</p><p class="rateCredit"><a href="currency-rates.html" data-i18n="viewRateChart">View the currency rate chart →</a></p><p class="rateCredit"><a href="rates.html" data-i18n="rateDetails">How rates are sourced and calculated</a></p><p class="rateCredit"><a href="currency-converter-guide.html" data-i18n="currencyGuide">Currency conversion guide →</a></p></article>
+<button type="button" class="btn primary" id="convert" data-i18n="convert">Convert amount</button><div class="result empty" id="currencyResult" aria-live="polite" data-i18n="currencyEmpty">Enter your provider's exchange rate, then convert.</div><button type="button" id="gmc-save-currency" class="btn primary" data-gmc-save="currency" data-i18n="saveCalculation">Save this calculation</button><div class="notice" data-i18n="rateNote">Free indicative market rates are delayed by 15 minutes and may pause outside market hours. Your bank or exchange provider may use a different rate and charge fees.</div><p class="rateCredit" data-i18n="rateCredit">Rate data by <a href="https://exchangerate.dev" target="_blank" rel="noopener">Rates by Exchangerate.dev</a>.</p><p class="rateCredit"><a href="https://www.exchangerate-api.com/docs/free" target="_blank" rel="noopener">ExchangeRate-API</a></p><p class="rateCredit"><a href="currency-rates.html" data-i18n="viewRateChart">View the currency rate chart →</a></p><p class="rateCredit"><a href="rates.html" data-i18n="rateDetails">How rates are sourced and calculated</a></p><p class="rateCredit"><a href="currency-converter-guide.html" data-i18n="currencyGuide">Currency conversion guide →</a></p></article>
 <article class="tool" id="salary"><div class="toolHead"><div class="ico">💼</div><div><h3 data-i18n="salaryTitle">Salary calculator</h3><div class="sub" data-i18n="salarySub">Break down your pay and deductions</div></div></div><div class="fields"><div class="field"><label for="salaryAmount" data-i18n="monthlySalary">Monthly salary</label><input id="salaryAmount" type="number" min="0" step="any" value="500"></div><div class="field"><label for="salaryCurrency" data-i18n="currencyUnit">Currency</label><select id="salaryCurrency"></select></div><div class="field"><label for="days" data-i18n="days">Working days / month</label><input id="days" type="number" min="1" max="31" value="26"></div><div class="field"><label for="hours" data-i18n="hours">Hours / day</label><input id="hours" type="number" min="1" max="24" value="8"></div><div class="field full"><label for="deduction" data-i18n="deduction">Deductions (%)</label><input id="deduction" type="number" min="0" max="100" value="0"></div></div><button type="button" class="btn primary" id="calcSalary" data-i18n="calcSalary">Calculate salary</button><div class="result empty" id="salaryResult" aria-live="polite" data-i18n="salaryEmpty">Enter your salary details to see the breakdown.</div><button type="button" id="gmc-save-salary" class="btn primary" data-gmc-save="salary" data-i18n="saveCalculation">Save this calculation</button>
 <p class="rateCredit"><a href="salary-calculator-guide.html" data-i18n="salaryGuide">Salary guide</a></p></article>
 <article class="tool" id="budget"><div class="toolHead"><div class="ico">📊</div><div><h3 data-i18n="budgetTitle">Monthly budget</h3><div class="sub" data-i18n="budgetSub">See what remains after expenses</div></div></div><div class="fields"><div class="field"><label for="income" data-i18n="income">Monthly income</label><input id="income" type="number" min="0" step="any" value="1000"></div><div class="field"><label for="budgetCurrency" data-i18n="currencyUnit">Currency</label><select id="budgetCurrency"></select></div><div class="field"><label for="housing" data-i18n="housing">Housing</label><input id="housing" type="number" min="0" step="any" value="300"></div><div class="field"><label for="food" data-i18n="food">Food</label><input id="food" type="number" min="0" step="any" value="180"></div><div class="field"><label for="transport" data-i18n="transport">Transport</label><input id="transport" type="number" min="0" step="any" value="60"></div><div class="field"><label for="other" data-i18n="other">Other expenses</label><input id="other" type="number" min="0" step="any" value="100"></div></div><button type="button" class="btn primary" id="calcBudget" data-i18n="calcBudget">Calculate budget</button><div class="result empty" id="budgetResult" aria-live="polite" data-i18n="budgetEmpty">Add income and expenses to see your balance.</div><button type="button" id="gmc-save-budget" class="btn primary" data-gmc-save="budget" data-i18n="saveCalculation">Save this calculation</button><p class="rateCredit"><a href="monthly-budget-guide.html" data-i18n="budgetGuide">Budget guide</a></p></article>
@@ -250,27 +250,100 @@ function refreshRateStatus(){
   if(sessions[dailyRates.market_session])message+=" · "+sessions[dailyRates.market_session];
  }
  if(dailyRates&&Object.values(dailyRates.stale||{}).some(Boolean)){const staleText={en:"Some rates are stale",bn:"কিছু রেট পুরোনো",zh:"部分汇率已过期",hi:"कुछ दरें पुरानी हैं",es:"Algunos tipos están desactualizados",ar:"بعض الأسعار قديمة",fr:"Certains taux sont anciens",pt:"Algumas cotações estão desatualizadas",ru:"Некоторые курсы устарели",id:"Beberapa kurs sudah lama"};message+=" · "+(staleText[lang]||staleText.en);}
+ if(dailyRates&&dailyRates.rateProvider==="exchange-rate-api-open"){const backupText={en:"Backup daily reference rates · updated about once per day",bn:"বিকল্প দৈনিক রেফারেন্স রেট · দিনে প্রায় একবার হালনাগাদ হয়",zh:"备用每日参考汇率 · 约每天更新一次",hi:"वैकल्पिक दैनिक संदर्भ दरें · लगभग दिन में एक बार अपडेट",es:"Tipos de referencia diarios de respaldo · se actualizan aproximadamente una vez al día",ar:"أسعار مرجعية يومية احتياطية · تُحدّث مرة يومياً تقريباً",fr:"Taux de référence quotidiens de secours · mis à jour environ une fois par jour",pt:"Taxas de referência diárias alternativas · atualizadas aproximadamente uma vez por dia",ru:"Резервные ежедневные справочные курсы · обновляются примерно раз в день",id:"Kurs referensi harian cadangan · diperbarui kira-kira sekali sehari"};message+=" · "+(backupText[lang]||backupText.en);}
  status.textContent=message;
 }
 function setRateMode(mode){useDailyRate=mode==="daily";el("manualRateField").hidden=useDailyRate;el("dailyMode").classList.toggle("active",useDailyRate);el("manualMode").classList.toggle("active",!useDailyRate);if(useDailyRate&&!dailyRates){rateStatusKey="rateUnavailable";}else if(!useDailyRate){rateStatusKey="manualHelp";}else if(Date.now()>=dailyRates.time_next_update_unix*1000){rateStatusKey="rateStale";}else{rateStatusKey="rateReady";}refreshRateStatus()}
 function getDailyPairRate(){if(!dailyRates||!dailyRates.rates)return null;const from=dailyRates.rates[el("fromCurrency").value],to=dailyRates.rates[el("toCurrency").value];if(!Number.isFinite(from)||from<=0||!Number.isFinite(to)||to<=0)return null;return to/from}
-async function loadDailyRates(){
- try{const saved=localStorage.getItem(RATE_CACHE_KEY);if(saved){const parsed=JSON.parse(saved);if(parsed&&parsed.result==="success"&&parsed.rates&&parsed.time_next_update_unix){dailyRates=parsed;rateStatusKey=Date.now()<parsed.time_next_update_unix*1000?"rateReady":"rateStale";rateDateText=rateDate(parsed.data_updated_at||parsed.timestamp);refreshRateStatus();if(Date.now()<parsed.time_next_update_unix*1000)return;}}}catch(error){/* Continue with network request if browser storage is unavailable. */}
- rateStatusKey="rateLoading";refreshRateStatus();
+async function fetchRateJson(url, timeoutMs=8000){
+ const controller=new AbortController();
+ const timeout=window.setTimeout(()=>controller.abort(),timeoutMs);
  try{
-  const response=await fetch("https://api.exchangerate.dev/v1/latest/USD",{cache:"no-store"});
+  const response=await fetch(url,{cache:"no-store",signal:controller.signal});
   if(!response.ok)throw new Error("Exchange-rate service returned "+response.status);
   const raw=await response.json();
-  if(raw.result!=="success"||!raw.rates||!raw.timestamp)throw new Error(raw.message||"Invalid exchange-rate response");
-  const updatedAt=raw.data_updated_at||raw.timestamp;
-  const data={...raw,base:raw.base||"USD",base_code:raw.base||"USD",rates:raw.rates,timestamp:raw.timestamp,data_updated_at:updatedAt,source:raw.source||"indicative",market_session:raw.market_session||"unknown",stale:raw.stale||{},time_last_update_unix:Math.floor(new Date(updatedAt).getTime()/1000),time_next_update_unix:Math.floor(Date.now()/1000)+RATE_REFRESH_MS/1000};
-  if(!Number.isFinite(data.time_last_update_unix))throw new Error("Invalid rate timestamp");
-  dailyRates=data;rateDateText=rateDate(data.data_updated_at);rateStatusKey="rateReady";
+  if(!raw||raw.result!=="success"||!raw.rates||typeof raw.rates!=="object")throw new Error(raw&&raw.message||"Invalid exchange-rate response");
+  return raw;
+ }finally{window.clearTimeout(timeout);}
+}
+function normalizeRateData(raw,provider){
+ const updatedAt=raw.data_updated_at||raw.timestamp||raw.time_last_update_utc;
+ let lastUpdate=Number(raw.time_last_update_unix);
+ if(!Number.isFinite(lastUpdate)||lastUpdate<=0)lastUpdate=Math.floor(new Date(updatedAt).getTime()/1000);
+ if(!Number.isFinite(lastUpdate)||lastUpdate<=0)throw new Error("Invalid rate timestamp");
+ const now=Math.floor(Date.now()/1000);
+ let nextUpdate=Number(raw.time_next_update_unix);
+ if(!Number.isFinite(nextUpdate)||nextUpdate<=now){
+  nextUpdate=provider==="exchange-rate-api-open"?lastUpdate+24*60*60:now+RATE_REFRESH_MS/1000;
+ }
+ for(const code of ["USD","KWD","BDT"]){
+  const value=Number(raw.rates[code]);
+  if(!Number.isFinite(value)||value<=0)throw new Error("Required currency missing from exchange-rate response: "+code);
+ }
+ return {
+  ...raw,
+  result:"success",
+  base:raw.base||raw.base_code||"USD",
+  base_code:raw.base_code||raw.base||"USD",
+  timestamp:raw.timestamp||updatedAt||new Date(lastUpdate*1000).toISOString(),
+  data_updated_at:raw.data_updated_at||updatedAt||new Date(lastUpdate*1000).toISOString(),
+  source:raw.source||(provider==="exchange-rate-api-open"?"daily_reference":"indicative"),
+  market_session:raw.market_session||"unknown",
+  stale:raw.stale||{},
+  time_last_update_unix:lastUpdate,
+  time_next_update_unix:nextUpdate,
+  rateProvider:provider
+ };
+}
+async function loadDailyRates(){
+ let cachedFallback=null;
+ try{
+  const saved=localStorage.getItem(RATE_CACHE_KEY);
+  if(saved){
+   const parsed=JSON.parse(saved);
+   if(parsed&&parsed.result==="success"&&parsed.rates&&parsed.time_next_update_unix&&
+      Number.isFinite(Number(parsed.rates.KWD))&&Number.isFinite(Number(parsed.rates.BDT))){
+    dailyRates=parsed;
+    rateDateText=rateDate(parsed.data_updated_at||parsed.timestamp);
+    const fresh=Date.now()<Number(parsed.time_next_update_unix)*1000;
+    rateStatusKey=fresh?"rateReady":"rateStale";
+    refreshRateStatus();
+    if(fresh&&parsed.rateProvider!=="exchange-rate-api-open")return;
+    if(fresh&&parsed.rateProvider==="exchange-rate-api-open")cachedFallback=parsed;
+   }
+  }
+ }catch(error){/* Continue with network requests if browser storage is unavailable. */}
+ if(!dailyRates){rateStatusKey="rateLoading";refreshRateStatus();}
+ try{
+  let data;
+  try{
+   const primary=await fetchRateJson("https://api.exchangerate.dev/v1/latest/USD");
+   data=normalizeRateData(primary,"exchangerate.dev");
+  }catch(primaryError){
+   console.warn("Primary exchange-rate feed unavailable; trying the daily backup.",primaryError);
+   if(cachedFallback)data=cachedFallback;
+   else{
+    const backup=await fetchRateJson("https://open.er-api.com/v6/latest/USD");
+    data=normalizeRateData(backup,"exchange-rate-api-open");
+   }
+  }
+  dailyRates=data;
+  rateDateText=rateDate(data.data_updated_at||data.timestamp);
+  rateStatusKey=Date.now()>=data.time_next_update_unix*1000?"rateStale":"rateReady";
   try{localStorage.setItem(RATE_CACHE_KEY,JSON.stringify(data));}catch(error){/* Conversion still works for this visit. */}
   refreshRateStatus();
  }catch(error){
-  if(dailyRates){rateStatusKey="rateStale";rateDateText=rateDateText||rateDate(dailyRates.data_updated_at||dailyRates.timestamp);}
-  else{rateStatusKey="rateUnavailable";useDailyRate=false;el("manualRateField").hidden=false;el("dailyMode").classList.remove("active");el("manualMode").classList.add("active");}
+  console.error("Both exchange-rate feeds failed:",error);
+  if(dailyRates){
+   rateStatusKey="rateStale";
+   rateDateText=rateDateText||rateDate(dailyRates.data_updated_at||dailyRates.timestamp);
+  }else{
+   rateStatusKey="rateUnavailable";
+   useDailyRate=false;
+   el("manualRateField").hidden=false;
+   el("dailyMode").classList.remove("active");
+   el("manualMode").classList.add("active");
+  }
   refreshRateStatus();
  }
 }
@@ -313,6 +386,6 @@ window.addEventListener("gmc:languagechange",function(event){var code=event.deta
   <script src="download-pdf.js?v=1" defer></script>
   <script src="analytics.js?v=2" defer></script>
 <script src="localized-static-text.js?v=5"></script>
-<script src="language-sync.js?v=6"></script>
-<script src="homepage-language.js?v=5" defer></script>
+<script src="language-sync.js?v=7"></script>
+<script src="homepage-language.js?v=6" defer></script>
 </body></html>
