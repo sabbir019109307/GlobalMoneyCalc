@@ -116,6 +116,8 @@ jobs:
           const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
           const oldHost = 'https://sabbir019109307.github.io/GlobalMoneyCalc';
           const analytics = fs.readFileSync('analytics.js', 'utf8');
+          const languageSync = fs.readFileSync('language-sync.js', 'utf8');
+          const pdfScript = fs.readFileSync('download-pdf.js', 'utf8');
           for (const file of required.filter((name) => name.endsWith('.html') || name === 'sitemap.xml' || name === 'robots.txt')) {
             if (fs.existsSync(file) && fs.readFileSync(file, 'utf8').includes(oldHost)) errors.push(file + ': contains an outdated GitHub Pages URL');
           }
@@ -167,6 +169,15 @@ jobs:
           if (!chart.includes('globalmoneycalc_shared_rates_')) errors.push('currency-rates.html: missing shared browser cache');
           if (!chart.includes('rel="canonical"')) errors.push('currency-rates.html: missing canonical URL');
           if (!home.includes('globalmoneycalc_shared_rates_USD')) errors.push('index.html: missing shared browser cache key');
+          if (!home.includes('https://api.exchangerate.dev/v1/latest/USD')) errors.push('index.html: missing primary USD-based rate endpoint');
+          if (!home.includes('https://open.er-api.com/v6/latest/USD')) errors.push('index.html: missing backup daily exchange-rate endpoint');
+          if (!home.includes('function fetchRateJson') || !home.includes('controller.abort()')) errors.push('index.html: exchange-rate requests must have a timeout');
+          if (!home.includes('Required currency missing from exchange-rate response')) errors.push('index.html: exchange-rate response must validate required currencies');
+          if (!home.includes('Rates By Exchange Rate API') || !home.includes('https://www.exchangerate-api.com')) errors.push('index.html: missing required backup exchange-rate provider attribution');
+          if (!home.includes('saveCalculation:"এই হিসাব সংরক্ষণ করুন"')) errors.push('index.html: missing Bengali save-calculation translation');
+          if (!languageSync.includes('window.GMCApplyHomepageLanguage') || !languageSync.includes('window.gmcSetLanguage')) errors.push('language-sync.js: must invoke both page and calculator translators');
+          if (!languageSync.includes('window.addEventListener("load"')) errors.push('language-sync.js: must reapply the saved language after page scripts load');
+          if (!pdfScript.includes('bn:{button:"PDF ডাউনলোড"')) errors.push('download-pdf.js: missing Bengali PDF label');
           if (!home.includes('window.setInterval(loadDailyRates,RATE_REFRESH_MS+5000)')) {
             errors.push('index.html: missing periodic exchange-rate refresh');
           }
