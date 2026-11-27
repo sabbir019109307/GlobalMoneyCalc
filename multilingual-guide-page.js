@@ -23,5 +23,9 @@
   if(save){try{localStorage.setItem("gmc_language",lang);}catch{}}
  }
  if(select)select.addEventListener("change",()=>apply(select.value));
+ window.addEventListener("gmc:languagechange",event=>{
+  const code=event.detail&&event.detail.language;
+  if(supported.includes(code))apply(code,true);
+ });
  apply(lang,false);
 })();
