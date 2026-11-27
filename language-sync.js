@@ -35,17 +35,27 @@
   // only changes locale-aware widgets such as the clock, not page copy.
   function applyPageLanguage(language) {
     if (!isLanguage(language)) return false;
+    let applied = false;
+
+    // Run both translators when present: the calculator's dynamic labels and
+    // the shared page dictionary cover different parts of the same page.
     try {
       if (typeof window.gmcSetLanguage === "function") {
-        return window.gmcSetLanguage(language) !== false;
-      }
-      if (typeof window.GMCApplyHomepageLanguage === "function") {
-        return window.GMCApplyHomepageLanguage(language) !== false;
+        applied = window.gmcSetLanguage(language) !== false || applied;
       }
     } catch (error) {
-      console.error("GlobalMoneyCalc page translation failed:", error);
+      console.error("GlobalMoneyCalc calculator translation failed:", error);
     }
-    return false;
+
+    try {
+      if (typeof window.GMCApplyHomepageLanguage === "function") {
+        applied = window.GMCApplyHomepageLanguage(language) !== false || applied;
+      }
+    } catch (error) {
+      console.error("GlobalMoneyCalc shared page translation failed:", error);
+    }
+
+    return applied;
   }
 
   function applyDocumentLanguage(language, dispatchChange) {
@@ -109,6 +119,14 @@
     }));
     return true;
   };
+
+  // Translators marked defer may not be available when this file first runs.
+  // Re-apply the saved language after all page scripts have finished loading.
+  window.addEventListener("load", () => {
+    const language = readLanguage();
+    applyDocumentLanguage(language, false);
+    applyPageLanguage(language);
+  });
 
   // Translators are loaded before this file. If a stored selection differs
   // from the page's default selector, trigger its normal change handler once.
