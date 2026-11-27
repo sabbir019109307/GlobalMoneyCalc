@@ -48,7 +48,9 @@ function setLang(){
  document.title=(words.title||"GlobalMoneyCalc")+" | GlobalMoneyCalc";
 }
 document.getElementById("languageSelect").addEventListener("change",event=>{if(supportedLanguages.includes(event.target.value)){lang=event.target.value;setLang()}});
-document.getElementById("year").textContent=new Date().getFullYear();setLang();</script>
+document.getElementById("year").textContent=new Date().getFullYear();setLang();
+window.addEventListener("gmc:languagechange",function(event){var code=event.detail&&event.detail.language;if(supportedLanguages.includes(code)){lang=code;setLang();}});
+</script>
 <script>
 (function(){
  const timeNode=document.getElementById("visitorLocalTime"),labelNode=document.getElementById("visitorLocalLabel"),zoneNode=document.getElementById("visitorTimeZone");
