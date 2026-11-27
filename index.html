@@ -200,6 +200,7 @@ Object.assign(words.ru,{navAccount:"Мой аккаунт",proofLogin:"Войд�
 Object.assign(words.id,{navAccount:"Akun saya",proofLogin:"Masuk untuk menyimpan catatan Anda"});
 const extraWords=window.GMC_EXTRA_WORDS||{};
 Object.keys(extraWords).forEach(code=>{words[code]={...(words[code]||{}),...(extraWords[code]||{})};});
+window.GMC_TRANSLATIONS = words;
 const supportedLanguages=["en","bn","zh","hi","es","ar","fr","pt","ru","id"];
 const localeMap=window.GMC_LOCALES||{en:"en-US",zh:"zh-CN",hi:"hi-IN",es:"es-ES",ar:"ar",fr:"fr-FR",bn:"bn-BD",pt:"pt-BR",ru:"ru-RU",id:"id-ID"};
 let lang=(function(){try{const saved=localStorage.getItem("gmc_language");return supportedLanguages.includes(saved)?saved:"en"}catch(e){return "en"}})();
@@ -313,4 +314,5 @@ window.addEventListener("gmc:languagechange",function(event){var code=event.deta
   <script src="analytics.js?v=2" defer></script>
 <script src="localized-static-text.js?v=2"></script>
 <script src="language-sync.js?v=2"></script>
+<script src="homepage-language.js?v=1" defer></script>
 </body></html>
