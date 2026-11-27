@@ -10,7 +10,9 @@ const CATS = {
   income:[["salary","salary"],["business","business"],["other_income","otherIncome"],["gift","gift"]],
   expense:[["housing","housing"],["food","food"],["transport","transport"],["bills","bills"],["health","health"],["education","education"],["shopping","shopping"],["family","family"],["other_expense","otherExpense"]]
 };
-let lang = (() => { try { const saved=localStorage.getItem("gmc_language"); return LANGUAGES.includes(saved)?saved:"en"; } catch { return "en"; } })();
+const initialSavedLanguage = (() => { try { const saved=localStorage.getItem("gmc_language"); return LANGUAGES.includes(saved)?saved:null; } catch { return null; } })();
+let languageChosenThisSession = !!initialSavedLanguage;
+let lang = initialSavedLanguage || "en";
 let supabase = null, currentUser = null, currentProfile = null;
 let transactions = [], debts = [], budgets = [], savedCalculations = [], activeMonth = "";
 let loadingUserId = "", isLoading = false;
@@ -53,7 +55,9 @@ function applyLanguage(){
 }
 function changeLanguage(next){
   if(!LANGUAGES.includes(next))return;
+  languageChosenThisSession=true;
   lang=next;applyLanguage();updateClock();
+  window.dispatchEvent(new CustomEvent("gmc:languagechange",{detail:{language:lang,source:"account"}}));
 }
 function updateClock(){
   const time=$("visitorLocalTime"),label=$("visitorLocalLabel"),zoneNode=$("visitorTimeZone");
@@ -113,8 +117,8 @@ async function handleSession(session){
   loadingUserId=session.user.id;
   try{
     currentProfile=await ensureProfile();
-    if(currentProfile?.preferred_language&&LANGUAGES.includes(currentProfile.preferred_language)&&currentProfile.preferred_language!==lang){
-      lang=currentProfile.preferred_language;applyLanguage();
+    if(!languageChosenThisSession&&currentProfile?.preferred_language&&LANGUAGES.includes(currentProfile.preferred_language)){
+      changeLanguage(currentProfile.preferred_language);
     }
     fillProfile();
     await loadDashboard();
