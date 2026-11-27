@@ -59,6 +59,13 @@ function changeLanguage(next){
   lang=next;applyLanguage();updateClock();
   window.dispatchEvent(new CustomEvent("gmc:languagechange",{detail:{language:lang,source:"account"}}));
 }
+window.addEventListener("gmc:languagechange",event=>{
+  const detail=event.detail||{};
+  const next=detail.language;
+  if(detail.source==="account"||!LANGUAGES.includes(next))return;
+  languageChosenThisSession=true;
+  lang=next;applyLanguage();updateClock();
+});
 function updateClock(){
   const time=$("visitorLocalTime"),label=$("visitorLocalLabel"),zoneNode=$("visitorTimeZone");
   if(!time||!label||!zoneNode)return;
