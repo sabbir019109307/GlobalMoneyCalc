@@ -195,12 +195,14 @@ const el=id=>document.getElementById(id),t=k=>(words[lang]&&words[lang][k])||wor
 function setLang(){
  document.documentElement.lang=lang;
  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
- document.querySelectorAll("[data-i18n]").forEach(node=>{const key=node.dataset.i18n;const value=(words[lang]&&words[lang][key])||words.en[key];if(value!==undefined)node.innerHTML=value});\n document.querySelectorAll("[data-i18n-placeholder]").forEach(node=>{const key=node.dataset.i18nPlaceholder;const value=(words[lang]&&words[lang][key])||words.en[key];if(value!==undefined)node.placeholder=value;});
+ document.querySelectorAll("[data-i18n]").forEach(node=>{const key=node.dataset.i18n;const value=(words[lang]&&words[lang][key])||words.en[key];if(value!==undefined)node.innerHTML=value});
+ document.querySelectorAll("[data-i18n-placeholder]").forEach(node=>{const key=node.dataset.i18nPlaceholder;const value=(words[lang]&&words[lang][key])||words.en[key];if(value!==undefined)node.placeholder=value;});
  const selector=el("languageSelect");if(selector){selector.value=lang;selector.setAttribute("aria-label",lang==="en"?"Select language":((window.GMC_LANGUAGE_LABELS[lang]||{}).name||"Select language"))}
  const label=el("rateLabel");if(label)label.textContent=t("manualRateLabel")+" (1 "+el("fromCurrency").value+" = ? "+el("toCurrency").value+")";
  try{localStorage.setItem("gmc_language",lang)}catch(e){}
  // Keep the descriptive SEO title and meta description from the initial HTML head.
- if(typeof refreshRateStatus==="function")refreshRateStatus();\n document.title=(t("heroTitle").replace(/<br\s*\/?\s*>/gi," ")||"GlobalMoneyCalc")+" | GlobalMoneyCalc";
+ if(typeof refreshRateStatus==="function")refreshRateStatus();
+ document.title=(t("heroTitle").replace(/<br\s*\/?\s*>/gi," ")||"GlobalMoneyCalc")+" | GlobalMoneyCalc";
 }
 el("languageSelect").addEventListener("change",event=>{if(supportedLanguages.includes(event.target.value)){lang=event.target.value;setLang()}});
 el("year").textContent=new Date().getFullYear();
