@@ -187,6 +187,9 @@ jobs:
           if (!chart.includes('https://api.exchangerate.dev/v1/latest/USD')) {
             errors.push('currency-rates.html: missing USD-based rate endpoint');
           }
+          if (!chart.includes('https://open.er-api.com/v6/latest/USD')) errors.push('currency-rates.html: missing backup daily exchange-rate endpoint');
+          if (!chart.includes('function fetchRateJson') || !chart.includes('controller.abort()')) errors.push('currency-rates.html: exchange-rate requests must have a timeout');
+          if (!chart.includes('Rates By Exchange Rate API') || !chart.includes('https://www.exchangerate-api.com')) errors.push('currency-rates.html: missing required backup exchange-rate provider attribution');
           if (!chart.includes('Rates by Exchangerate.dev') || !chart.includes('https://exchangerate.dev')) {
             errors.push('currency-rates.html: missing required visible provider credit link');
           }
