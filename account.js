@@ -32,7 +32,24 @@ const showStatus = (message,kind="ok") => {
 const clearStatus = () => { if($("statusMessage")) $("statusMessage").hidden=true; };
 const make = (tag,cls,text) => { const node=document.createElement(tag); if(cls)node.className=cls; if(text!==undefined)node.textContent=text; return node; };
 const option = (select,value,label) => select.add(new Option(label,value));
+
 const selectedLanguage = () => lang;
+function localizeSavedCalculationResult(value){
+  let result=String(value||"");
+  const keys=[
+    ["Net monthly salary","savedNetSalary"],["Daily estimate","savedDailyEstimate"],
+    ["Hourly estimate","savedHourlyEstimate"],["Deductions","savedDeductions"],
+    ["Converted amount","savedConvertedAmount"],["Rate used","savedRateUsed"],
+    ["Remaining","savedRemaining"],["Total expenses","savedTotalExpenses"],
+    ["Estimated savings total","savedEstimatedSavings"],["Total amount saved","savedDeposited"],
+    ["Estimated growth","savedGrowth"],["of income spent","savedSpent"]
+  ];
+  keys.forEach(([english,key])=>{
+    const translated=t(key);
+    if(translated && translated!==key) result=result.split(english).join(translated);
+  });
+  return result;
+}
 
 function applyLanguage(){
   document.documentElement.lang=lang;
@@ -218,7 +235,7 @@ function renderSavedCalculations(){
     const card=make("div","record"),main=make("div","recordMain");
     const typeNames={currency:t("typeCurrency"),salary:t("typeSalary"),budget:t("typeBudget"),savings:t("typeSavings")};
     main.append(make("strong","",typeNames[row.calculation_type]||row.calculation_type));
-    main.append(make("small","",row.result||""));
+    main.append(make("small","",localizeSavedCalculationResult(row.result||"")));
     main.append(make("small","",row.saved_at?new Date(row.saved_at).toLocaleString(LOCALES[lang]||"en-US"):""));
     card.append(main);box.append(card);
   });
