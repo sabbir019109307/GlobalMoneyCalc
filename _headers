@@ -6,3 +6,6 @@
 /account.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: private, no-store
+
+/*
+  Cache-Control: no-cache
