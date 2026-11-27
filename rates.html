@@ -109,6 +109,8 @@ function setLang(next){
 selector.addEventListener("change",()=>setLang(selector.value));
 document.getElementById("year").textContent=new Date().getFullYear();
 setLang(lang);
+
+window.addEventListener("gmc:languagechange",function(event){var code=event.detail&&event.detail.language;if(supported.includes(code))setLang(code);});
 </script>
 <script>
 (function(){
